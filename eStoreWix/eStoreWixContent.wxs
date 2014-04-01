@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)\Config.wxi?>
+  <Fragment>
+    <DirectoryRef Id="ProductWeb.Content">
+      <!--Root Directory Files-->
+      <Component Id="cmpABA3B207763811E2A3025967F1F9204B" Guid="ABB45BA9-7638-11E2-9002-5967F1F9204B">
+        <File Id="filABC5054B763811E2BD025967F1F9204B" Source="$(var.ProductRootDir)\BrowseCategory.aspx" />
+      </Component>
+      <Component Id="cmpABD5AEED763811E2AA035967F1F9204B" Guid="ABE6588F-7638-11E2-9703-5967F1F9204B">
+        <File Id="filABF70231763811E285045967F1F9204B" Source="$(var.ProductRootDir)\BrowseDepartment.aspx" />
+      </Component>
+      <Component Id="cmpAC07ABD3763811E2B2045967F1F9204B" Guid="AC185575-7638-11E2-9F05-5967F1F9204B">
+        <File Id="filAC28FF17763811E28C055967F1F9204B" Source="$(var.ProductRootDir)\BrowseItem.aspx" />
+      </Component>
+      <Component Id="cmpAC39A8B9763811E2B9055967F1F9204B" Guid="AC4A525B-7638-11E2-A706-5967F1F9204B">
+        <File Id="filAC5AFBFC763811E294065967F1F9204B" Source="$(var.ProductRootDir)\Checkout1.aspx" />
+      </Component>
+      <Component Id="cmpAC6BA59E763811E281075967F1F9204B" Guid="AC7C4F40-7638-11E2-AE07-5967F1F9204B">
+        <File Id="filAC8CF8E2763811E29B085967F1F9204B" Source="$(var.ProductRootDir)\Checkout2.aspx" />
+      </Component>
+      <Component Id="cmpAC9DA284763811E289085967F1F9204B" Guid="ACAE4C26-7638-11E2-B608-5967F1F9204B">
+        <File Id="filACBEF5C8763811E2A3095967F1F9204B" Source="$(var.ProductRootDir)\Checkout3.aspx" />
+      </Component>
+      <Component Id="cmpACCF9F6A763811E290095967F1F9204B" Guid="ACE0490C-7638-11E2-BD0A-5967F1F9204B">
+        <File Id="filACF0F2AE763811E2AB0A5967F1F9204B" Source="$(var.ProductRootDir)\Checkout4.aspx" />
+      </Component>
+      <Component Id="cmpAD019C50763811E2980B5967F1F9204B" Guid="AD1245F2-7638-11E2-850B-5967F1F9204B">
+        <File Id="filAD22EF93763811E2B20B5967F1F9204B" Source="$(var.ProductRootDir)\Checkout5.aspx" />
+      </Component>
+      <Component Id="cmpAD339935763811E29F0C5967F1F9204B" Guid="AD4442D7-7638-11E2-8D0C-5967F1F9204B">
+        <File Id="filAD54EC79763811E2BA0D5967F1F9204B" Source="$(var.ProductRootDir)\ContactUs.aspx" />
+      </Component>
+      <Component Id="cmpAD65961B763811E2A70D5967F1F9204B" Guid="AD763FBD-7638-11E2-940E-5967F1F9204B">
+        <File Id="filAD86E95F763811E2810E5967F1F9204B" Source="$(var.ProductRootDir)\ContactUsSent.aspx" />
+      </Component>
+      <Component Id="cmpAD979301763811E2AF0E5967F1F9204B" Guid="ADA83CA3-7638-11E2-9C0F-5967F1F9204B">
+        <File Id="filADB8E645763811E2890F5967F1F9204B" Source="$(var.ProductRootDir)\Cvv.aspx" />
+      </Component>
+      <Component Id="cmpADC98FE7763811E2B6105967F1F9204B" Guid="ADDA3989-7638-11E2-A310-5967F1F9204B">
+        <File Id="filADEAE32A763811E291115967F1F9204B" Source="$(var.ProductRootDir)\Error.aspx" />
+      </Component>
+      <Component Id="cmpADFB8CCC763811E2BE115967F1F9204B" Guid="AE0C366E-7638-11E2-AB11-5967F1F9204B">
+        <File Id="filAE1CE010763811E298125967F1F9204B" Source="$(var.ProductRootDir)\FAQ.aspx" />
+      </Component>
+      <Component Id="cmpAE2D89B2763811E286125967F1F9204B" Guid="AE3E3354-7638-11E2-B313-5967F1F9204B">
+        <File Id="filAE4EDCF6763811E2A0135967F1F9204B" Source="$(var.ProductRootDir)\Global.asax" />
+      </Component>
+      <Component Id="cmpAE5F8698763811E28D145967F1F9204B" Guid="AE70303A-7638-11E2-BA14-5967F1F9204B">
+        <File Id="filAE80D9DC763811E2A8145967F1F9204B" Source="$(var.ProductRootDir)\Links.aspx" />
+      </Component>
+      <Component Id="cmpAE91837E763811E295155967F1F9204B" Guid="AEA22D20-7638-11E2-8215-5967F1F9204B">
+        <File Id="filAEB2D6C1763811E2AF165967F1F9204B" Source="$(var.ProductRootDir)\OrderProcessingError.aspx" />
+      </Component>
+      <Component Id="cmpAEC38063763811E29C165967F1F9204B" Guid="AED42A05-7638-11E2-8A17-5967F1F9204B">
+        <File Id="filAEE4D3A7763811E2B7175967F1F9204B" Source="$(var.ProductRootDir)\PageNotFound.aspx" />
+      </Component>
+      <Component Id="cmpAEF57D49763811E2A4175967F1F9204B" Guid="AF0626EB-7638-11E2-9118-5967F1F9204B">
+        <File Id="filAF16D08D763811E2BE185967F1F9204B" Source="$(var.ProductRootDir)\Policies.aspx" />
+      </Component>
+      <Component Id="cmpAF277A2F763811E2AC195967F1F9204B" Guid="AF3823D1-7638-11E2-9919-5967F1F9204B">
+        <File Id="filAF48CD73763811E2861A5967F1F9204B" Source="$(var.ProductRootDir)\Search.aspx" />
+      </Component>
+      <Component Id="cmpAF597715763811E2B31A5967F1F9204B" Guid="AF6A20B7-7638-11E2-A01A-5967F1F9204B">
+        <File Id="filAF7ACA59763811E28E1B5967F1F9204B" Source="$(var.ProductRootDir)\SecureXMLExample.aspx" />
+      </Component>
+      <Component Id="cmpAF8B73FA763811E2BB1B5967F1F9204B" Guid="AF9C1D9C-7638-11E2-A81C-5967F1F9204B">
+        <File Id="filAFACC73E763811E2951C5967F1F9204B" Source="$(var.ProductRootDir)\ShowMe.aspx" />
+      </Component>
+      <Component Id="cmpAFBD70E0763811E2821D5967F1F9204B" Guid="AFCE1A82-7638-11E2-B01D-5967F1F9204B">
+        <File Id="filAFDEC424763811E29D1D5967F1F9204B" Source="$(var.ProductRootDir)\Splash.aspx" />
+      </Component>
+      <Component Id="cmpAFEF6DC6763811E28A1E5967F1F9204B" Guid="B0001768-7638-11E2-B71E-5967F1F9204B">
+        <File Id="filB010C10A763811E2A41F5967F1F9204B" Source="$(var.ProductRootDir)\Testimonials.aspx" />
+      </Component>
+      <Component Id="cmpB0216AAC763811E2921F5967F1F9204B" Guid="B032144E-7638-11E2-BF1F-5967F1F9204B">
+        <File Id="filB042BDF0763811E2AC205967F1F9204B" Source="$(var.ProductRootDir)\ViewCart.aspx" />
+      </Component>
+      <Component Id="cmpB0536791763811E299205967F1F9204B" Guid="B0641133-7638-11E2-8621-5967F1F9204B">
+        <File Id="filB074BAD5763811E2B4215967F1F9204B" Source="$(var.ProductRootDir)\Web.config" />
+      </Component>
+      <!--Subdirectories-->
+      <Directory Id="dirB087C5D7763811E2B0225967F1F9204B" Name="App_Themes">
+        <Directory Id="dirB0986F79763811E29E225967F1F9204B" Name="Classic" />
+      </Directory>
+      <Directory Id="dirB0A9191B763811E28B235967F1F9204B" Name="bin" />
+      <Directory Id="dirB0BC241D763811E288235967F1F9204B" Name="Controls" />
+      <Directory Id="dirB0CCCDBF763811E2B5235967F1F9204B" Name="Home" />
+      <Directory Id="dirB0DD7761763811E2A2245967F1F9204B" Name="Icons" />
+      <Directory Id="dirB0EE2103763811E28F245967F1F9204B" Name="Images">
+        <Directory Id="dirB1012C05763811E28C255967F1F9204B" Name="Catalogue">
+        </Directory>
+        <Directory Id="dirB111D5A7763811E2B9255967F1F9204B" Name="System" />
+      </Directory>
+      <Directory Id="dirB1227F49763811E2A6265967F1F9204B" Name="js" />
+      <Directory Id="dirB13328EB763811E294265967F1F9204B" Name="MasterPages" />
+      <Directory Id="dirB143D28D763811E281275967F1F9204B" Name="Profile" />
+      <Directory Id="dirB1547C2F763811E2AE275967F1F9204B" Name="Stylesheets">
+        <Directory Id="dirB16525D1763811E29B275967F1F9204B" Name="humanity">
+        </Directory>
+      </Directory>
+      <Directory Id="dirB175CF73763811E288285967F1F9204B" Name="WishList" />
+    </DirectoryRef>
+  </Fragment>
+  <!--App_Themes\Classic directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB0986F79763811E29E225967F1F9204B">
+      <Component Id="cmpB1867915763811E2B6285967F1F9204B" Guid="B19722B7-7638-11E2-A329-5967F1F9204B">
+        <File Id="filB1A7CC59763811E290295967F1F9204B" Source="$(var.ProductRootDir)\App_Themes\Classic\ImageButton.skin" />
+      </Component>
+      <Component Id="cmpB1B875FB763811E2BD295967F1F9204B" Guid="B1C91F9C-7638-11E2-AA2A-5967F1F9204B">
+        <File Id="filB1D9C93E763811E2982A5967F1F9204B" Source="$(var.ProductRootDir)\App_Themes\Classic\Menu.skin" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <!--bin directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB0A9191B763811E28B235967F1F9204B">
+      <Component Id="cmpB1EA72E0763811E2852B5967F1F9204B" Guid="B1FB1C82-7638-11E2-B22B-5967F1F9204B">
+        <File Id="filB20BC624763811E29F2C5967F1F9204B" Source="$(var.ProductRootDir)\bin\eStoreBLL.dll" />
+      </Component>
+      <Component Id="cmpB21C6FC6763811E28C2C5967F1F9204B" Guid="B22D1968-7638-11E2-BA2C-5967F1F9204B">
+        <File Id="filB23DC30A763811E2A72D5967F1F9204B" Source="$(var.ProductRootDir)\bin\eStoreDAL.dll" />
+      </Component>
+      <Component Id="cmpB24E6CAC763811E2942D5967F1F9204B" Guid="B25F164E-7638-11E2-812E-5967F1F9204B">
+        <File Id="filB26FBFF0763811E2AE2E5967F1F9204B" Source="$(var.ProductRootDir)\bin\PhoenixConsulting.BusinessEntities.dll" />
+      </Component>
+      <Component Id="cmpB2806992763811E29C2F5967F1F9204B" Guid="B2911333-7638-11E2-892F-5967F1F9204B">
+        <File Id="filB2A1BCD5763811E2B62F5967F1F9204B" Source="$(var.ProductRootDir)\bin\PhoenixConsulting.Common.Enums.dll" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <!--Controls directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB0BC241D763811E288235967F1F9204B">
+      <Component Id="cmpB2B26677763811E2A3305967F1F9204B" Guid="B2C31019-7638-11E2-9030-5967F1F9204B">
+        <File Id="filB2D3B9BB763811E2BE315967F1F9204B" Source="$(var.ProductRootDir)\Controls\BottomMenu.ascx" />
+      </Component>
+      <Component Id="cmpB2E4635D763811E2AB315967F1F9204B" Guid="B2F50CFF-7638-11E2-9832-5967F1F9204B">
+        <File Id="filB305B6A1763811E285325967F1F9204B" Source="$(var.ProductRootDir)\Controls\CardTypeDDL.ascx" />
+      </Component>
+      <Component Id="cmpB3166043763811E2B2325967F1F9204B" Guid="B32709E5-7638-11E2-A033-5967F1F9204B">
+        <File Id="filB337B387763811E28D335967F1F9204B" Source="$(var.ProductRootDir)\Controls\CountryAndModeDDLs.ascx" />
+      </Component>
+      <Component Id="cmpB3485D29763811E2BA345967F1F9204B" Guid="B35906CA-7638-11E2-A734-5967F1F9204B">
+        <File Id="filB369B06C763811E294355967F1F9204B" Source="$(var.ProductRootDir)\Controls\CountryDDL.ascx" />
+      </Component>
+      <Component Id="cmpB37A5A0E763811E282355967F1F9204B" Guid="B38B03B0-7638-11E2-AF35-5967F1F9204B">
+        <File Id="filB39BAD52763811E29C365967F1F9204B" Source="$(var.ProductRootDir)\Controls\CurrencyDDL.ascx" />
+      </Component>
+      <Component Id="cmpB3AC56F4763811E289365967F1F9204B" Guid="B3BD0096-7638-11E2-B637-5967F1F9204B">
+        <File Id="filB3CDAA38763811E2A4375967F1F9204B" Source="$(var.ProductRootDir)\Controls\ExpiryMonthDDL.ascx" />
+      </Component>
+      <Component Id="cmpB3DE53DA763811E291385967F1F9204B" Guid="B3EEFD7C-7638-11E2-BE38-5967F1F9204B">
+        <File Id="filB3FFA71E763811E2AB385967F1F9204B" Source="$(var.ProductRootDir)\Controls\ExpiryYearDDL.ascx" />
+      </Component>
+      <Component Id="cmpB41050C0763811E298395967F1F9204B" Guid="B420FA62-7638-11E2-8639-5967F1F9204B">
+        <File Id="filB431A403763811E2B33A5967F1F9204B" Source="$(var.ProductRootDir)\Controls\ModeDDL.ascx" />
+      </Component>
+      <Component Id="cmpB4424DA5763811E2A03A5967F1F9204B" Guid="B452F747-7638-11E2-8D3B-5967F1F9204B">
+        <File Id="filB463A0E9763811E2BA3B5967F1F9204B" Source="$(var.ProductRootDir)\Controls\OrderHistoryDetailTable.ascx" />
+      </Component>
+      <Component Id="cmpB4744A8B763811E2A83B5967F1F9204B" Guid="B484F42D-7638-11E2-953C-5967F1F9204B">
+        <File Id="filB4959DCF763811E2823C5967F1F9204B" Source="$(var.ProductRootDir)\Controls\OrderHistoryTable.ascx" />
+      </Component>
+      <Component Id="cmpB4A64771763811E2AF3D5967F1F9204B" Guid="B4B6F113-7638-11E2-9C3D-5967F1F9204B">
+        <File Id="filB4C79AB5763811E28A3E5967F1F9204B" Source="$(var.ProductRootDir)\Controls\PaymentTypes.ascx" />
+      </Component>
+      <Component Id="cmpB4D84457763811E2B73E5967F1F9204B" Guid="B4E8EDF9-7638-11E2-A43E-5967F1F9204B">
+        <File Id="filB4F9979A763811E2913F5967F1F9204B" Source="$(var.ProductRootDir)\Controls\ProductColorDDL.ascx" />
+      </Component>
+      <Component Id="cmpB50A413C763811E2BE3F5967F1F9204B" Guid="B51AEADE-7638-11E2-AC40-5967F1F9204B">
+        <File Id="filB52B9480763811E299405967F1F9204B" Source="$(var.ProductRootDir)\Controls\ProductQuantityDDL.ascx" />
+      </Component>
+      <Component Id="cmpB53C3E22763811E286415967F1F9204B" Guid="B54CE7C4-7638-11E2-B341-5967F1F9204B">
+        <File Id="filB55D9166763811E2A0415967F1F9204B" Source="$(var.ProductRootDir)\Controls\ProductSizeDDL.ascx" />
+      </Component>
+      <Component Id="cmpB56E3B08763811E28E425967F1F9204B" Guid="B57EE4AA-7638-11E2-BB42-5967F1F9204B">
+        <File Id="filB58F8E4C763811E2A8435967F1F9204B" Source="$(var.ProductRootDir)\Controls\ReviewCartTable.ascx" />
+      </Component>
+      <Component Id="cmpB5A037EE763811E295435967F1F9204B" Guid="B5B0E190-7638-11E2-8244-5967F1F9204B">
+        <File Id="filB5C18B31763811E2B0445967F1F9204B" Source="$(var.ProductRootDir)\Controls\SameAddressDDL.ascx" />
+      </Component>
+      <Component Id="cmpB5D234D3763811E29D445967F1F9204B" Guid="B5E2DE75-7638-11E2-8A45-5967F1F9204B">
+        <File Id="filB5F38817763811E2B7455967F1F9204B" Source="$(var.ProductRootDir)\Controls\SavedSearchesTable.ascx" />
+      </Component>
+      <Component Id="cmpB60431B9763811E2A4465967F1F9204B" Guid="B614DB5B-7638-11E2-9246-5967F1F9204B">
+        <File Id="filB62584FD763811E2BF465967F1F9204B" Source="$(var.ProductRootDir)\Controls\ShoppingCartTable.ascx" />
+      </Component>
+      <Component Id="cmpB6362E9F763811E2AC475967F1F9204B" Guid="B646D841-7638-11E2-9947-5967F1F9204B">
+        <File Id="filB65781E3763811E286485967F1F9204B" Source="$(var.ProductRootDir)\Controls\StoreMenu.ascx" />
+      </Component>
+      <Component Id="cmpB6682B85763811E2B4485967F1F9204B" Guid="B678D527-7638-11E2-A149-5967F1F9204B">
+        <File Id="filB6897EC8763811E28E495967F1F9204B" Source="$(var.ProductRootDir)\Controls\TopMenu.ascx" />
+      </Component>
+      <Component Id="cmpB69A286A763811E2BB495967F1F9204B" Guid="B6AAD20C-7638-11E2-A84A-5967F1F9204B">
+        <File Id="filB6BB7BAE763811E2964A5967F1F9204B" Source="$(var.ProductRootDir)\Controls\WishListTable.ascx" />
+      </Component>
+      <Component Id="cmpB6CC2550763811E2834B5967F1F9204B" Guid="B6DCCEF2-7638-11E2-B04B-5967F1F9204B">
+        <File Id="filB6ED7894763811E29D4C5967F1F9204B" Source="$(var.ProductRootDir)\Controls\YesNoDDL.ascx" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <!--Home directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB0CCCDBF763811E2B5235967F1F9204B">
+      <Component Id="cmpB6FE2236763811E28A4C5967F1F9204B" Guid="B70ECBD8-7638-11E2-B84C-5967F1F9204B">
+        <File Id="filB71F757A763811E2A54D5967F1F9204B" Source="$(var.ProductRootDir)\Home\activate.aspx" />
+      </Component>
+      <Component Id="cmpB7301F1C763811E2924D5967F1F9204B" Guid="B740C8BE-7638-11E2-BF4E-5967F1F9204B">
+        <File Id="filB751725F763811E2AC4E5967F1F9204B" Source="$(var.ProductRootDir)\Home\Register.aspx" />
+      </Component>
+      <Component Id="cmpB7621C01763811E29A4F5967F1F9204B" Guid="B772C5A3-7638-11E2-874F-5967F1F9204B">
+        <File Id="filB7836F45763811E2B44F5967F1F9204B" Source="$(var.ProductRootDir)\Home\RemindPassword.aspx" />
+      </Component>
+      <Component Id="cmpB79418E7763811E2A1505967F1F9204B" Guid="B7A4C289-7638-11E2-8E50-5967F1F9204B">
+        <File Id="filB7B56C2B763811E2BC515967F1F9204B" Source="$(var.ProductRootDir)\Home\Web.config" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <!--Icons directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB0DD7761763811E2A2245967F1F9204B">
+      <Component Id="cmpB7C615CD763811E2A9515967F1F9204B" Guid="B7D6BF6F-7638-11E2-9652-5967F1F9204B">
+        <File Id="filB7E76911763811E283525967F1F9204B" Source="$(var.ProductRootDir)\Icons\eStoreLogo.ico" />
+      </Component>
+      <Component Id="cmpB7F812B3763811E2B0525967F1F9204B" Guid="B808BC55-7638-11E2-9E53-5967F1F9204B">
+        <File Id="filB81965F6763811E28B535967F1F9204B" Source="$(var.ProductRootDir)\Icons\eStoreLogo_small.ico" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <!--Images\System directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB111D5A7763811E2B9255967F1F9204B">
+      <Component Id="cmpB82A0F98763811E2B8545967F1F9204B" Guid="B83AB93A-7638-11E2-A554-5967F1F9204B">
+        <File Id="filB84B62DC763811E292555967F1F9204B" Source="$(var.ProductRootDir)\Images\System\AddToCart.gif" />
+      </Component>
+      <Component Id="cmpB85C0C7E763811E280555967F1F9204B" Guid="B86CB620-7638-11E2-AD55-5967F1F9204B">
+        <File Id="filB87D5FC2763811E29A565967F1F9204B" Source="$(var.ProductRootDir)\Images\System\AddToWishList.gif" />
+      </Component>
+      <Component Id="cmpB88E0964763811E287565967F1F9204B" Guid="B89EB306-7638-11E2-B457-5967F1F9204B">
+        <File Id="filB8AF5CA8763811E2A2575967F1F9204B" Source="$(var.ProductRootDir)\Images\System\AmexCard.gif" />
+      </Component>
+      <Component Id="cmpB8C0064A763811E28F585967F1F9204B" Guid="B8D0AFEC-7638-11E2-BC58-5967F1F9204B">
+        <File Id="filB8E1598E763811E2A9585967F1F9204B" Source="$(var.ProductRootDir)\Images\System\ContinueShopping.gif" />
+      </Component>
+      <Component Id="cmpB8F2032F763811E296595967F1F9204B" Guid="B902ACD1-7638-11E2-8459-5967F1F9204B">
+        <File Id="filB9135673763811E2B15A5967F1F9204B" Source="$(var.ProductRootDir)\Images\System\CVVAmex.jpg" />
+      </Component>
+      <Component Id="cmpB9240015763811E29E5A5967F1F9204B" Guid="B934A9B7-7638-11E2-8B5B-5967F1F9204B">
+        <File Id="filB9455359763811E2B85B5967F1F9204B" Source="$(var.ProductRootDir)\Images\System\CVVMasterVisa.jpg" />
+      </Component>
+      <Component Id="cmpB955FCFB763811E2A65B5967F1F9204B" Guid="B966A69D-7638-11E2-935C-5967F1F9204B">
+        <File Id="filB977503F763811E2805C5967F1F9204B" Source="$(var.ProductRootDir)\Images\System\Delete.gif" />
+      </Component>
+      <Component Id="cmpB987F9E1763811E2AD5D5967F1F9204B" Guid="B998A383-7638-11E2-9A5D-5967F1F9204B">
+        <File Id="filB9A94D25763811E2885E5967F1F9204B" Source="$(var.ProductRootDir)\Images\System\es_logo.gif" />
+      </Component>
+      <Component Id="cmpB9B9F6C6763811E2B55E5967F1F9204B" Guid="B9CAA068-7638-11E2-A25E-5967F1F9204B">
+        <File Id="filB9DB4A0A763811E28F5F5967F1F9204B" Source="$(var.ProductRootDir)\Images\System\giftwrapping.gif" />
+      </Component>
+      <Component Id="cmpB9EBF3AC763811E2BC5F5967F1F9204B" Guid="B9FC9D4E-7638-11E2-AA60-5967F1F9204B">
+        <File Id="filBA0D46F0763811E297605967F1F9204B" Source="$(var.ProductRootDir)\Images\System\GoButton.gif" />
+      </Component>
+      <Component Id="cmpBA1DF092763811E284615967F1F9204B" Guid="BA2E9A34-7638-11E2-B161-5967F1F9204B">
+        <File Id="filBA3F43D6763811E29E615967F1F9204B" Source="$(var.ProductRootDir)\Images\System\icon_del.gif" />
+      </Component>
+      <Component Id="cmpBA4FED78763811E28C625967F1F9204B" Guid="BA60971A-7638-11E2-B962-5967F1F9204B">
+        <File Id="filBA7140BC763811E2A6635967F1F9204B" Source="$(var.ProductRootDir)\Images\System\icon_digg.gif" />
+      </Component>
+      <Component Id="cmpBA81EA5D763811E293635967F1F9204B" Guid="BA9293FF-7638-11E2-8064-5967F1F9204B">
+        <File Id="filBAA33DA1763811E2AE645967F1F9204B" Source="$(var.ProductRootDir)\Images\System\icon_email.gif" />
+      </Component>
+      <Component Id="cmpBAB3E743763811E29B645967F1F9204B" Guid="BAC490E5-7638-11E2-8865-5967F1F9204B">
+        <File Id="filBAD53A87763811E2B5655967F1F9204B" Source="$(var.ProductRootDir)\Images\System\icon_google.gif" />
+      </Component>
+      <Component Id="cmpBAE5E429763811E2A2665967F1F9204B" Guid="BAF68DCB-7638-11E2-9066-5967F1F9204B">
+        <File Id="filBB07376D763811E2BD665967F1F9204B" Source="$(var.ProductRootDir)\Images\System\icon_reddit.gif" />
+      </Component>
+      <Component Id="cmpBB17E10F763811E2AA675967F1F9204B" Guid="BB288AB1-7638-11E2-9767-5967F1F9204B">
+        <File Id="filBB393453763811E284685967F1F9204B" Source="$(var.ProductRootDir)\Images\System\MasterCard.gif" />
+      </Component>
+      <Component Id="cmpBB49DDF4763811E2B2685967F1F9204B" Guid="BB5A8796-7638-11E2-9F69-5967F1F9204B">
+        <File Id="filBB6B3138763811E28C695967F1F9204B" Source="$(var.ProductRootDir)\Images\System\PayPal.gif" />
+      </Component>
+      <Component Id="cmpBB7BDADA763811E2B9695967F1F9204B" Guid="BB8C847C-7638-11E2-A66A-5967F1F9204B">
+        <File Id="filBB9D2E1E763811E2946A5967F1F9204B" Source="$(var.ProductRootDir)\Images\System\sb_tl.gif" />
+      </Component>
+      <Component Id="cmpBBADD7C0763811E2816B5967F1F9204B" Guid="BBBE8162-7638-11E2-AE6B-5967F1F9204B">
+        <File Id="filBBCF2B04763811E29B6C5967F1F9204B" Source="$(var.ProductRootDir)\Images\System\sb_tr.gif" />
+      </Component>
+      <Component Id="cmpBBDFD4A6763811E2886C5967F1F9204B" Guid="BBF07E48-7638-11E2-B66C-5967F1F9204B">
+        <File Id="filBC0127EA763811E2A36D5967F1F9204B" Source="$(var.ProductRootDir)\Images\System\SecureCheckOut.gif" />
+      </Component>
+      <Component Id="cmpBC11D18B763811E2906D5967F1F9204B" Guid="BC227B2D-7638-11E2-BD6E-5967F1F9204B">
+        <File Id="filBC3324CF763811E2AA6E5967F1F9204B" Source="$(var.ProductRootDir)\Images\System\SecureShopping.gif" />
+      </Component>
+      <Component Id="cmpBC43CE71763811E2986F5967F1F9204B" Guid="BC547813-7638-11E2-856F-5967F1F9204B">
+        <File Id="filBC6521B5763811E2B26F5967F1F9204B" Source="$(var.ProductRootDir)\Images\System\SloganImageKids.jpg" />
+      </Component>
+      <Component Id="cmpBC75CB57763811E29F705967F1F9204B" Guid="BC8674F9-7638-11E2-8C70-5967F1F9204B">
+        <File Id="filBC971E9B763811E2BA715967F1F9204B" Source="$(var.ProductRootDir)\Images\System\spacer.gif" />
+      </Component>
+      <Component Id="cmpBCA7C83D763811E2A7715967F1F9204B" Guid="BCB871DF-7638-11E2-9472-5967F1F9204B">
+        <File Id="filBCC91B81763811E281725967F1F9204B" Source="$(var.ProductRootDir)\Images\System\spinningred.gif" />
+      </Component>
+      <Component Id="cmpBCD9C523763811E2AE725967F1F9204B" Guid="BCEA6EC4-7638-11E2-9C73-5967F1F9204B">
+        <File Id="filBCFB1866763811E289735967F1F9204B" Source="$(var.ProductRootDir)\Images\System\SplashImage.jpg" />
+      </Component>
+      <Component Id="cmpBD0BC208763811E2B6745967F1F9204B" Guid="BD1C6BAA-7638-11E2-A374-5967F1F9204B">
+        <File Id="filBD2D154C763811E290755967F1F9204B" Source="$(var.ProductRootDir)\Images\System\SplashImage2.gif" />
+      </Component>
+      <Component Id="cmpBD3DBEEE763811E2BE755967F1F9204B" Guid="BD4E6890-7638-11E2-AB75-5967F1F9204B">
+        <File Id="filBD5F1232763811E298765967F1F9204B" Source="$(var.ProductRootDir)\Images\System\titleLogo.gif" />
+      </Component>
+      <Component Id="cmpBD6FBBD4763811E285765967F1F9204B" Guid="BD806576-7638-11E2-B277-5967F1F9204B">
+        <File Id="filBD910F18763811E2A0775967F1F9204B" Source="$(var.ProductRootDir)\Images\System\Update.gif" />
+      </Component>
+      <Component Id="cmpBDA1B8BA763811E28D785967F1F9204B" Guid="BDB2625B-7638-11E2-BA78-5967F1F9204B">
+        <File Id="filBDC30BFD763811E2A7785967F1F9204B" Source="$(var.ProductRootDir)\Images\System\ViewDetails.gif" />
+      </Component>
+      <Component Id="cmpBDD3B59F763811E294795967F1F9204B" Guid="BDE45F41-7638-11E2-8279-5967F1F9204B">
+        <File Id="filBDF508E3763811E2AF7A5967F1F9204B" Source="$(var.ProductRootDir)\Images\System\VisaCard.gif" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <!--js directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB1227F49763811E2A6265967F1F9204B">
+      <Component Id="cmpBE05B285763811E29C7A5967F1F9204B" Guid="BE165C27-7638-11E2-897B-5967F1F9204B">
+        <File Id="filBE2705C9763811E2B67B5967F1F9204B" Source="$(var.ProductRootDir)\js\jquery-1.9.0.min.js" />
+      </Component>
+      <Component Id="cmpBE37AF6B763811E2A47B5967F1F9204B" Guid="BE48590D-7638-11E2-917C-5967F1F9204B">
+        <File Id="filBE5902AF763811E2BE7C5967F1F9204B" Source="$(var.ProductRootDir)\js\jquery-ui-1.10.0.custom.min.js" />
+      </Component>
+      <Component Id="cmpBE69AC51763811E2AB7D5967F1F9204B" Guid="BE7A55F2-7638-11E2-987D-5967F1F9204B">
+        <File Id="filBE8AFF94763811E2867E5967F1F9204B" Source="$(var.ProductRootDir)\js\multizoom.js" />
+      </Component>
+      <Component Id="cmpBE9BA936763811E2B37E5967F1F9204B" Guid="BEAC52D8-7638-11E2-A07E-5967F1F9204B">
+        <File Id="filBEBCFC7A763811E28D7F5967F1F9204B" Source="$(var.ProductRootDir)\js\multizoom.min.js" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <!--MasterPages directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB13328EB763811E294265967F1F9204B">
+      <Component Id="cmpBECDA61C763811E2BA7F5967F1F9204B" Guid="BEDE4FBE-7638-11E2-A900-5967F1F9204B">
+        <File Id="filBEEEF960763811E296005967F1F9204B" Source="$(var.ProductRootDir)\MasterPages\CheckOutMaster.Master" />
+      </Component>
+      <Component Id="cmpBEFFA302763811E283015967F1F9204B" Guid="BF104CA4-7638-11E2-B001-5967F1F9204B">
+        <File Id="filBF20F646763811E29D015967F1F9204B" Source="$(var.ProductRootDir)\MasterPages\eStoreMaster.Master" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <!--Profile directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB143D28D763811E281275967F1F9204B">
+      <Component Id="cmpBF319FE8763811E28B025967F1F9204B" Guid="BF424989-7638-11E2-B802-5967F1F9204B">
+        <File Id="filBF52F32B763811E2A5035967F1F9204B" Source="$(var.ProductRootDir)\Profile\AccountAddress.aspx" />
+      </Component>
+      <Component Id="cmpBF639CCD763811E292035967F1F9204B" Guid="BF74466F-7638-11E2-BF03-5967F1F9204B">
+        <File Id="filBF84F011763811E2AD045967F1F9204B" Source="$(var.ProductRootDir)\Profile\AccountInfo.aspx" />
+      </Component>
+      <Component Id="cmpBF9599B3763811E29A045967F1F9204B" Guid="BFA64355-7638-11E2-8705-5967F1F9204B">
+        <File Id="filBFB6ECF7763811E2B4055967F1F9204B" Source="$(var.ProductRootDir)\Profile\AddSavedSearch.aspx" />
+      </Component>
+      <Component Id="cmpBFC79699763811E2A1065967F1F9204B" Guid="BFD8403B-7638-11E2-8F06-5967F1F9204B">
+        <File Id="filBFE8E9DD763811E2BC065967F1F9204B" Source="$(var.ProductRootDir)\Profile\ChangeEmailPassword.aspx" />
+      </Component>
+      <Component Id="cmpBFF9937F763811E2A9075967F1F9204B" Guid="C00A3D20-7638-11E2-9607-5967F1F9204B">
+        <File Id="filC01AE6C2763811E283085967F1F9204B" Source="$(var.ProductRootDir)\Profile\ContactPreference.aspx" />
+      </Component>
+      <Component Id="cmpC02B9064763811E2B1085967F1F9204B" Guid="C03C3A06-7638-11E2-9E09-5967F1F9204B">
+        <File Id="filC04CE3A8763811E28B095967F1F9204B" Source="$(var.ProductRootDir)\Profile\Login.aspx" />
+      </Component>
+      <Component Id="cmpC05D8D4A763811E2B8095967F1F9204B" Guid="C06E36EC-7638-11E2-A50A-5967F1F9204B">
+        <File Id="filC07EE08E763811E2930A5967F1F9204B" Source="$(var.ProductRootDir)\Profile\LogOut.aspx" />
+      </Component>
+      <Component Id="cmpC08F8A30763811E2800B5967F1F9204B" Guid="C0A033D2-7638-11E2-AD0B-5967F1F9204B">
+        <File Id="filC0B0DD74763811E29A0C5967F1F9204B" Source="$(var.ProductRootDir)\Profile\OrderHistory.aspx" />
+      </Component>
+      <Component Id="cmpC0C18716763811E2880C5967F1F9204B" Guid="C0D230B8-7638-11E2-B50C-5967F1F9204B">
+        <File Id="filC0E2DA59763811E2A20D5967F1F9204B" Source="$(var.ProductRootDir)\Profile\OrderHistoryDetail.aspx" />
+      </Component>
+      <Component Id="cmpC0F383FB763811E28F0D5967F1F9204B" Guid="C1042D9D-7638-11E2-BC0E-5967F1F9204B">
+        <File Id="filC114D73F763811E2AA0E5967F1F9204B" Source="$(var.ProductRootDir)\Profile\SavedSearches.aspx" />
+      </Component>
+      <Component Id="cmpC12580E1763811E2970F5967F1F9204B" Guid="C1362A83-7638-11E2-840F-5967F1F9204B">
+        <File Id="filC146D425763811E2B10F5967F1F9204B" Source="$(var.ProductRootDir)\Profile\Web.config" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <!--Stylesheets directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB1547C2F763811E2AE275967F1F9204B">
+      <Component Id="cmpC1577DC7763811E29E105967F1F9204B" Guid="C1682769-7638-11E2-8C10-5967F1F9204B">
+        <File Id="filC178D10B763811E2B9115967F1F9204B" Source="$(var.ProductRootDir)\Stylesheets\multizoom.css" />
+      </Component>
+      <Component Id="cmpC1897AAD763811E2A6115967F1F9204B" Guid="C19A244F-7638-11E2-9312-5967F1F9204B">
+        <File Id="filC1AACDF0763811E280125967F1F9204B" Source="$(var.ProductRootDir)\Stylesheets\PP_style.css" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <!--Stylesheets\humanity directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB16525D1763811E29B275967F1F9204B">
+      <Component Id="cmpC1BB7792763811E2AE125967F1F9204B" Guid="C1CC2134-7638-11E2-9B13-5967F1F9204B">
+        <File Id="filC1DCCAD6763811E288135967F1F9204B" Source="$(var.ProductRootDir)\Stylesheets\humanity\jquery-ui-1.10.0.custom.min.css" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <!--WishList directory-->
+  <Fragment>
+    <DirectoryRef Id="dirB175CF73763811E288285967F1F9204B">
+      <Component Id="cmpC1ED7478763811E2B5145967F1F9204B" Guid="C1FE1E1A-7638-11E2-A214-5967F1F9204B">
+        <File Id="filC20EC7BC763811E290155967F1F9204B" Source="$(var.ProductRootDir)\WishList\Web.config" />
+      </Component>
+      <Component Id="cmpC21F715E763811E2BD155967F1F9204B" Guid="C2301B00-7638-11E2-AA15-5967F1F9204B">
+        <File Id="filC240C4A2763811E297165967F1F9204B" Source="$(var.ProductRootDir)\WishList\WishList.aspx" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="ProductWeb.Content">
+      <ComponentRef Id="cmpABA3B207763811E2A3025967F1F9204B" />
+      <ComponentRef Id="cmpABD5AEED763811E2AA035967F1F9204B" />
+      <ComponentRef Id="cmpAC07ABD3763811E2B2045967F1F9204B" />
+      <ComponentRef Id="cmpAC39A8B9763811E2B9055967F1F9204B" />
+      <ComponentRef Id="cmpAC6BA59E763811E281075967F1F9204B" />
+      <ComponentRef Id="cmpAC9DA284763811E289085967F1F9204B" />
+      <ComponentRef Id="cmpACCF9F6A763811E290095967F1F9204B" />
+      <ComponentRef Id="cmpAD019C50763811E2980B5967F1F9204B" />
+      <ComponentRef Id="cmpAD339935763811E29F0C5967F1F9204B" />
+      <ComponentRef Id="cmpAD65961B763811E2A70D5967F1F9204B" />
+      <ComponentRef Id="cmpAD979301763811E2AF0E5967F1F9204B" />
+      <ComponentRef Id="cmpADC98FE7763811E2B6105967F1F9204B" />
+      <ComponentRef Id="cmpADFB8CCC763811E2BE115967F1F9204B" />
+      <ComponentRef Id="cmpAE2D89B2763811E286125967F1F9204B" />
+      <ComponentRef Id="cmpAE5F8698763811E28D145967F1F9204B" />
+      <ComponentRef Id="cmpAE91837E763811E295155967F1F9204B" />
+      <ComponentRef Id="cmpAEC38063763811E29C165967F1F9204B" />
+      <ComponentRef Id="cmpAEF57D49763811E2A4175967F1F9204B" />
+      <ComponentRef Id="cmpAF277A2F763811E2AC195967F1F9204B" />
+      <ComponentRef Id="cmpAF597715763811E2B31A5967F1F9204B" />
+      <ComponentRef Id="cmpAF8B73FA763811E2BB1B5967F1F9204B" />
+      <ComponentRef Id="cmpAFBD70E0763811E2821D5967F1F9204B" />
+      <ComponentRef Id="cmpAFEF6DC6763811E28A1E5967F1F9204B" />
+      <ComponentRef Id="cmpB0216AAC763811E2921F5967F1F9204B" />
+      <ComponentRef Id="cmpB0536791763811E299205967F1F9204B" />
+      <ComponentRef Id="cmpB1867915763811E2B6285967F1F9204B" />
+      <ComponentRef Id="cmpB1B875FB763811E2BD295967F1F9204B" />
+      <ComponentRef Id="cmpB1EA72E0763811E2852B5967F1F9204B" />
+      <ComponentRef Id="cmpB21C6FC6763811E28C2C5967F1F9204B" />
+      <ComponentRef Id="cmpB24E6CAC763811E2942D5967F1F9204B" />
+      <ComponentRef Id="cmpB2806992763811E29C2F5967F1F9204B" />
+      <ComponentRef Id="cmpB2B26677763811E2A3305967F1F9204B" />
+      <ComponentRef Id="cmpB2E4635D763811E2AB315967F1F9204B" />
+      <ComponentRef Id="cmpB3166043763811E2B2325967F1F9204B" />
+      <ComponentRef Id="cmpB3485D29763811E2BA345967F1F9204B" />
+      <ComponentRef Id="cmpB37A5A0E763811E282355967F1F9204B" />
+      <ComponentRef Id="cmpB3AC56F4763811E289365967F1F9204B" />
+      <ComponentRef Id="cmpB3DE53DA763811E291385967F1F9204B" />
+      <ComponentRef Id="cmpB41050C0763811E298395967F1F9204B" />
+      <ComponentRef Id="cmpB4424DA5763811E2A03A5967F1F9204B" />
+      <ComponentRef Id="cmpB4744A8B763811E2A83B5967F1F9204B" />
+      <ComponentRef Id="cmpB4A64771763811E2AF3D5967F1F9204B" />
+      <ComponentRef Id="cmpB4D84457763811E2B73E5967F1F9204B" />
+      <ComponentRef Id="cmpB50A413C763811E2BE3F5967F1F9204B" />
+      <ComponentRef Id="cmpB53C3E22763811E286415967F1F9204B" />
+      <ComponentRef Id="cmpB56E3B08763811E28E425967F1F9204B" />
+      <ComponentRef Id="cmpB5A037EE763811E295435967F1F9204B" />
+      <ComponentRef Id="cmpB5D234D3763811E29D445967F1F9204B" />
+      <ComponentRef Id="cmpB60431B9763811E2A4465967F1F9204B" />
+      <ComponentRef Id="cmpB6362E9F763811E2AC475967F1F9204B" />
+      <ComponentRef Id="cmpB6682B85763811E2B4485967F1F9204B" />
+      <ComponentRef Id="cmpB69A286A763811E2BB495967F1F9204B" />
+      <ComponentRef Id="cmpB6CC2550763811E2834B5967F1F9204B" />
+      <ComponentRef Id="cmpB6FE2236763811E28A4C5967F1F9204B" />
+      <ComponentRef Id="cmpB7301F1C763811E2924D5967F1F9204B" />
+      <ComponentRef Id="cmpB7621C01763811E29A4F5967F1F9204B" />
+      <ComponentRef Id="cmpB79418E7763811E2A1505967F1F9204B" />
+      <ComponentRef Id="cmpB7C615CD763811E2A9515967F1F9204B" />
+      <ComponentRef Id="cmpB7F812B3763811E2B0525967F1F9204B" />
+      <ComponentRef Id="cmpB82A0F98763811E2B8545967F1F9204B" />
+      <ComponentRef Id="cmpB85C0C7E763811E280555967F1F9204B" />
+      <ComponentRef Id="cmpB88E0964763811E287565967F1F9204B" />
+      <ComponentRef Id="cmpB8C0064A763811E28F585967F1F9204B" />
+      <ComponentRef Id="cmpB8F2032F763811E296595967F1F9204B" />
+      <ComponentRef Id="cmpB9240015763811E29E5A5967F1F9204B" />
+      <ComponentRef Id="cmpB955FCFB763811E2A65B5967F1F9204B" />
+      <ComponentRef Id="cmpB987F9E1763811E2AD5D5967F1F9204B" />
+      <ComponentRef Id="cmpB9B9F6C6763811E2B55E5967F1F9204B" />
+      <ComponentRef Id="cmpB9EBF3AC763811E2BC5F5967F1F9204B" />
+      <ComponentRef Id="cmpBA1DF092763811E284615967F1F9204B" />
+      <ComponentRef Id="cmpBA4FED78763811E28C625967F1F9204B" />
+      <ComponentRef Id="cmpBA81EA5D763811E293635967F1F9204B" />
+      <ComponentRef Id="cmpBAB3E743763811E29B645967F1F9204B" />
+      <ComponentRef Id="cmpBAE5E429763811E2A2665967F1F9204B" />
+      <ComponentRef Id="cmpBB17E10F763811E2AA675967F1F9204B" />
+      <ComponentRef Id="cmpBB49DDF4763811E2B2685967F1F9204B" />
+      <ComponentRef Id="cmpBB7BDADA763811E2B9695967F1F9204B" />
+      <ComponentRef Id="cmpBBADD7C0763811E2816B5967F1F9204B" />
+      <ComponentRef Id="cmpBBDFD4A6763811E2886C5967F1F9204B" />
+      <ComponentRef Id="cmpBC11D18B763811E2906D5967F1F9204B" />
+      <ComponentRef Id="cmpBC43CE71763811E2986F5967F1F9204B" />
+      <ComponentRef Id="cmpBC75CB57763811E29F705967F1F9204B" />
+      <ComponentRef Id="cmpBCA7C83D763811E2A7715967F1F9204B" />
+      <ComponentRef Id="cmpBCD9C523763811E2AE725967F1F9204B" />
+      <ComponentRef Id="cmpBD0BC208763811E2B6745967F1F9204B" />
+      <ComponentRef Id="cmpBD3DBEEE763811E2BE755967F1F9204B" />
+      <ComponentRef Id="cmpBD6FBBD4763811E285765967F1F9204B" />
+      <ComponentRef Id="cmpBDA1B8BA763811E28D785967F1F9204B" />
+      <ComponentRef Id="cmpBDD3B59F763811E294795967F1F9204B" />
+      <ComponentRef Id="cmpBE05B285763811E29C7A5967F1F9204B" />
+      <ComponentRef Id="cmpBE37AF6B763811E2A47B5967F1F9204B" />
+      <ComponentRef Id="cmpBE69AC51763811E2AB7D5967F1F9204B" />
+      <ComponentRef Id="cmpBE9BA936763811E2B37E5967F1F9204B" />
+      <ComponentRef Id="cmpBECDA61C763811E2BA7F5967F1F9204B" />
+      <ComponentRef Id="cmpBEFFA302763811E283015967F1F9204B" />
+      <ComponentRef Id="cmpBF319FE8763811E28B025967F1F9204B" />
+      <ComponentRef Id="cmpBF639CCD763811E292035967F1F9204B" />
+      <ComponentRef Id="cmpBF9599B3763811E29A045967F1F9204B" />
+      <ComponentRef Id="cmpBFC79699763811E2A1065967F1F9204B" />
+      <ComponentRef Id="cmpBFF9937F763811E2A9075967F1F9204B" />
+      <ComponentRef Id="cmpC02B9064763811E2B1085967F1F9204B" />
+      <ComponentRef Id="cmpC05D8D4A763811E2B8095967F1F9204B" />
+      <ComponentRef Id="cmpC08F8A30763811E2800B5967F1F9204B" />
+      <ComponentRef Id="cmpC0C18716763811E2880C5967F1F9204B" />
+      <ComponentRef Id="cmpC0F383FB763811E28F0D5967F1F9204B" />
+      <ComponentRef Id="cmpC12580E1763811E2970F5967F1F9204B" />
+      <ComponentRef Id="cmpC1577DC7763811E29E105967F1F9204B" />
+      <ComponentRef Id="cmpC1897AAD763811E2A6115967F1F9204B" />
+      <ComponentRef Id="cmpC1BB7792763811E2AE125967F1F9204B" />
+      <ComponentRef Id="cmpC1ED7478763811E2B5145967F1F9204B" />
+      <ComponentRef Id="cmpC21F715E763811E2BD155967F1F9204B" />
+    </ComponentGroup>
+  </Fragment>
+</Wix>

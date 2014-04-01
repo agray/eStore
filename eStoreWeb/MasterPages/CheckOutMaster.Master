@@ -1,0 +1,42 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CheckOutMaster.master.cs" Inherits="eStoreWeb.CheckOutMaster" %>
+<%@ Import Namespace="System.Data" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <title>PetsPlayground</title>
+    <link href="../Stylesheets/PP_style.css" rel="stylesheet" type="text/css" />
+    <link rel="SHORTCUT ICON" href="../Icons/eStoreLogo_small.ico" type="image/x-icon" />
+</head>
+<body>
+    <div id="DivCentrePage">
+        <form id="ASPNetForm" runat="server">
+            <div id="DivBanner">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="text-align:left" colspan="2">
+	                        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
+                            </asp:ScriptManager>
+                            <asp:HyperLink ID="HomeLink" runat="server" ImageUrl="~/Images/System/titleLogo.gif" 
+                                           NavigateUrl="http://www.petsplayground.com.au" Target="_self">
+                            </asp:HyperLink>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td style="text-align:center">&nbsp;</td>
+                  </tr>
+                </table>
+            </div>
+            <div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            
+        </form>
+    </div>
+</body>
+</html>

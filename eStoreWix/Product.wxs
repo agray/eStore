@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension">
+  <?include $(sys.CURRENTDIR)\Config.wxi?>
+  <Product Id="C2563104-7638-11E2-A416-5967F1F9204B" Name="$(var.ProductName)" Language="1033" Version="1.0.0.0" Manufacturer="Pheonix Systems" UpgradeCode="b6b32a5a-0a7b-492a-9c32-c4c773635fdf">
+    <Package InstallerVersion="200" InstallPrivileges="elevated" InstallScope="perMachine" Platform="x86" Compressed="yes" Description="$(var.ProductName)" />
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ROOT_DRIVE" Name="root">
+        <Directory Id="IISMain" Name="Inetpub">
+          <Directory Id="WWWMain" Name="wwwroot">
+            <Directory Id="ProductWeb.Content" Name="$(var.ProductName)" />
+            <Component Id="$(var.ProductName)_productcomponent" Guid="C266DAA6-7638-11E2-9117-5967F1F9204B">
+              <iis:WebAppPool Id="$(var.ProductName)_webapppool" Name="$(var.ProductName)_webapppool" />
+              <CreateFolder />
+            </Component>
+            <Component Id="$(var.ProductName)_websitecomponent" Guid="C2778448-7638-11E2-BE17-5967F1F9204B">
+              <iis:WebSite Id="$(var.ProductName)_website" Description="$(var.ProductName) Website" Directory="ProductWeb.Content" WebApplication="$(var.ProductName)_webapp">
+                <iis:WebAddress Id="$(var.ProductName)_webAddress" IP="127.0.0.1" Port="80" />
+                <iis:WebDirProperties Id="$(var.ProductName)_webdirprops" DefaultDocuments="Default.aspx" Script="yes" Read="yes" Write="yes" />
+              </iis:WebSite>
+              <CreateFolder />
+            </Component>
+            <Component Id="Manual" Guid="C2882DEA-7638-11E2-AB18-5967F1F9204B">
+              <File Id="Manual" Name="readme.doc" DiskId="1" Source="readme.doc" KeyPath="yes">
+                <Shortcut Id="startmenuManual" Directory="ProgramMenuDir" Name="Instruction Manual" Advertise="yes" />
+              </File>
+            </Component>
+            <Component Id="WebShortcut" Guid="C298D78C-7638-11E2-9818-5967F1F9204B">
+              <File Id="$(var.ProductName).txt" Name="$(var.ProductName).url" Vital="yes" KeyPath="yes" Source="$(var.ProductName).txt">
+                <Shortcut Id="WebShortcut" Directory="$(var.ProductName)ProgramMenuDir" IconIndex="0" Hotkey="0" Name="$(var.ProductName)" WorkingDirectory="INTERNETEXPLORER" Advertise="yes" Icon="eStoreLogo.ico">
+                  <Icon Id="eStoreLogo.ico" SourceFile="$(sys.CURRENTDIR)..\$(var.ProductName)Web\Icons\eStoreLogo.ico" />
+                </Shortcut>
+              </File>
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="PheonixSystems">
+          <Component Id="ProgramMenuDir" Guid="C2A9812E-7638-11E2-8619-5967F1F9204B">
+            <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+            <RegistryValue Root="HKCU" Key="SOFTWARE\PheonixSystems\$(var.ProductName)" Type="string" Value="" KeyPath="yes" />
+          </Component>
+          <Directory Id="$(var.ProductName)ProgramMenuDir" Name="eStoreAdmin">
+            <Component Id="$(var.ProductName)ProgramMenuDir" Guid="C2BA2AD0-7638-11E2-B319-5967F1F9204B">
+              <RemoveFolder Id="$(var.ProductName)ProgramMenuDir" On="uninstall" />
+              <RegistryValue Root="HKCU" Key="SOFTWARE\PheonixSystems\$(var.ProductName)" Type="string" Value="" KeyPath="yes" />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+    <iis:WebApplication Id="$(var.ProductName)_webapp" Name="$(var.ProductName)_site" WebAppPool="$(var.ProductName)_webapppool" />
+    <Feature Id="$(var.ProductName)Complete" Title="$(var.ProductName) Website" Level="1">
+      <ComponentGroupRef Id="ProductWeb.Content" />
+      <ComponentGroupRef Id="$(var.ProductName)_productcomponentref" />
+      <ComponentRef Id="ProgramMenuDir" />
+      <ComponentRef Id="$(var.ProductName)ProgramMenuDir" />
+      <ComponentRef Id="WebShortcut" />
+      <ComponentRef Id="Manual" />
+    </Feature>
+    <Feature Id="Documentation" Title="Documentation" Description="The user manual." Level="1000">
+      <ComponentRef Id="ProgramMenuDir" />
+      <ComponentRef Id="Manual" />
+    </Feature>
+    <ComponentGroup Id="$(var.ProductName)_productcomponentref">
+      <ComponentRef Id="$(var.ProductName)_productcomponent" />
+      <ComponentRef Id="$(var.ProductName)_websitecomponent" />
+    </ComponentGroup>
+    <UIRef Id="WixUI_Mondo" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+    <CustomAction Id="Assign_ROOT_DRIVE" Property="ROOT_DRIVE" Value="C:\" />
+    <UI>
+      <InstallUISequence>
+        <Custom Action="Assign_ROOT_DRIVE" Before="CostInitialize">
+        </Custom>
+      </InstallUISequence>
+    </UI>
+    <InstallExecuteSequence>
+      <Custom Action="Assign_ROOT_DRIVE" Before="CostInitialize">
+      </Custom>
+    </InstallExecuteSequence>
+  </Product>
+</Wix>

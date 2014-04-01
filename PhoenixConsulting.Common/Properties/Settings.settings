@@ -1,0 +1,34 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="phoenixconsulting.Common.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FromEmailAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">customerservice@petsplayground.com.au</Value>
+    </Setting>
+    <Setting Name="OrderConfirmationSalutation" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Hi </Value>
+    </Setting>
+    <Setting Name="OrderConfirmationOpening" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Thank you for your order.
+
+</Value>
+    </Setting>
+    <Setting Name="OrderConfirmationClosing" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Regards,
+
+</Value>
+    </Setting>
+    <Setting Name="ModeExpressAirMail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="ModeAirMail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">9</Value>
+    </Setting>
+    <Setting Name="AustralianCurrencyID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="AustraliaCountryID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

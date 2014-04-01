@@ -1,0 +1,816 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{91BB4614-89CA-4D38-95C0-AF65FCA839D6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>eStoreWeb</RootNamespace>
+    <AssemblyName>eStoreWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <DebugSymbols>false</DebugSymbols>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
+    <Reference Include="NLog.Extended, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\PaymentTypes.ascx" />
+    <Content Include="Controls\StoreMenu.ascx" />
+    <Content Include="Images\Catalogue\Zoomable\268.gif" />
+    <Content Include="Images\Catalogue\Zoomable\269.gif" />
+    <Content Include="Images\Catalogue\Zoomable\270.gif" />
+    <Content Include="Images\Catalogue\Zoomable\271.gif" />
+    <Content Include="Images\Catalogue\Zoomable\272.gif" />
+    <Content Include="Images\Catalogue\Zoomable\273.gif" />
+    <Content Include="Images\Catalogue\Zoomable\274.gif" />
+    <Content Include="Images\Catalogue\Zoomable\275.gif" />
+    <Content Include="Images\Catalogue\Zoomable\276.gif" />
+    <Content Include="Images\Catalogue\Zoomable\277.gif" />
+    <Content Include="Images\Catalogue\Zoomable\278.gif" />
+    <Content Include="Images\Catalogue\Zoomable\279.gif" />
+    <Content Include="Images\Catalogue\Zoomable\280.gif" />
+    <Content Include="Images\Catalogue\Zoomable\281.gif" />
+    <Content Include="Images\Catalogue\Zoomable\282.gif" />
+    <Content Include="Images\Catalogue\Zoomable\284.gif" />
+    <Content Include="Images\Catalogue\Zoomable\285.gif" />
+    <Content Include="Images\Catalogue\Zoomable\286.gif" />
+    <Content Include="Images\Catalogue\Zoomable\287.gif" />
+    <Content Include="Images\Catalogue\Zoomable\288.gif" />
+    <Content Include="Images\Catalogue\Zoomable\289.gif" />
+    <Content Include="Images\Catalogue\Zoomable\290.gif" />
+    <Content Include="Images\Catalogue\Zoomable\291.gif" />
+    <Content Include="Images\Catalogue\Zoomable\292.gif" />
+    <Content Include="Images\Catalogue\Zoomable\293.gif" />
+    <Content Include="Images\Catalogue\Zoomable\294.gif" />
+    <Content Include="Images\Catalogue\Zoomable\295.gif" />
+    <Content Include="Images\Catalogue\Zoomable\296.gif" />
+    <Content Include="Images\Catalogue\Zoomable\297.gif" />
+    <Content Include="Images\Catalogue\Zoomable\298.gif" />
+    <Content Include="Images\Catalogue\Zoomable\299.gif" />
+    <Content Include="Images\Catalogue\Zoomable\300.gif" />
+    <Content Include="Images\Catalogue\Zoomable\301.gif" />
+    <Content Include="Images\Catalogue\Zoomable\302.gif" />
+    <Content Include="Images\Catalogue\Zoomable\303.gif" />
+    <Content Include="Images\Catalogue\Zoomable\304.gif" />
+    <Content Include="Images\Catalogue\Zoomable\305.gif" />
+    <Content Include="Images\Catalogue\Zoomable\306.gif" />
+    <Content Include="Images\Catalogue\Zoomable\307.gif" />
+    <Content Include="Images\Catalogue\Zoomable\308.gif" />
+    <Content Include="Images\Catalogue\Zoomable\344.gif" />
+    <Content Include="Images\Catalogue\Zoomable\345.gif" />
+    <Content Include="Images\Catalogue\Zoomable\349.gif" />
+    <Content Include="Images\Catalogue\Zoomable\350.gif" />
+    <Content Include="Images\Catalogue\Zoomable\351.gif" />
+    <Content Include="Images\Catalogue\Zoomable\353.gif" />
+    <Content Include="Images\Catalogue\Zoomable\354.gif" />
+    <Content Include="Images\Catalogue\Zoomable\427.gif" />
+    <Content Include="Images\Catalogue\Zoomable\428.gif" />
+    <Content Include="Images\Catalogue\Zoomable\431.jpg" />
+    <Content Include="Images\Catalogue\Zoomable\432.gif" />
+    <Content Include="Images\Catalogue\Zoomable\433.gif" />
+    <Content Include="Images\Catalogue\Zoomable\434.gif" />
+    <Content Include="Images\Catalogue\Zoomable\435.gif" />
+    <Content Include="Images\Catalogue\Zoomable\436.gif" />
+    <Content Include="Images\Catalogue\Zoomable\437.gif" />
+    <Content Include="Images\Catalogue\Zoomable\438.gif" />
+    <Content Include="Images\Catalogue\Zoomable\439.gif" />
+    <Content Include="Images\Catalogue\Zoomable\440.gif" />
+    <Content Include="Images\Catalogue\Zoomable\441.gif" />
+    <Content Include="Images\Catalogue\Zoomable\443.gif" />
+    <Content Include="Images\Catalogue\Zoomable\444.gif" />
+    <Content Include="Images\Catalogue\Zoomable\445.gif" />
+    <Content Include="Images\Catalogue\Zoomable\446.gif" />
+    <Content Include="Images\Catalogue\Zoomable\447.gif" />
+    <Content Include="Images\Catalogue\Zoomable\448.gif" />
+    <Content Include="Images\Catalogue\Zoomable\450.gif" />
+    <Content Include="Images\Catalogue\Zoomable\451.gif" />
+    <Content Include="Images\Catalogue\Zoomable\452.gif" />
+    <Content Include="Images\Catalogue\Zoomable\453.gif" />
+    <Content Include="Images\Catalogue\Zoomable\454.gif" />
+    <Content Include="Images\Catalogue\Zoomable\455.gif" />
+    <Content Include="Images\Catalogue\Zoomable\456.gif" />
+    <Content Include="Images\Catalogue\Zoomable\457.gif" />
+    <Content Include="Images\Catalogue\Zoomable\458.gif" />
+    <Content Include="Images\Catalogue\Zoomable\459.gif" />
+    <Content Include="Images\Catalogue\Zoomable\460.gif" />
+    <Content Include="Images\Catalogue\Zoomable\461.gif" />
+    <Content Include="Images\Catalogue\Zoomable\462.gif" />
+    <Content Include="Images\Catalogue\Zoomable\463.gif" />
+    <Content Include="Images\Catalogue\Zoomable\464.gif" />
+    <Content Include="Images\Catalogue\Zoomable\465.gif" />
+    <Content Include="Images\Catalogue\Zoomable\466.gif" />
+    <Content Include="Images\Catalogue\Zoomable\467.gif" />
+    <Content Include="Images\Catalogue\Zoomable\468.gif" />
+    <Content Include="Images\Catalogue\Zoomable\469.gif" />
+    <Content Include="Images\Catalogue\Zoomable\470.gif" />
+    <Content Include="Images\Catalogue\Zoomable\471.gif" />
+    <Content Include="Images\Catalogue\Zoomable\472.gif" />
+    <Content Include="Images\Catalogue\Zoomable\473.gif" />
+    <Content Include="Images\Catalogue\Zoomable\474.gif" />
+    <Content Include="Images\Catalogue\Zoomable\475.gif" />
+    <Content Include="Images\Catalogue\Zoomable\476.gif" />
+    <Content Include="Images\Catalogue\Zoomable\477.gif" />
+    <Content Include="Images\Catalogue\Zoomable\478.gif" />
+    <Content Include="Images\Catalogue\Zoomable\479.gif" />
+    <Content Include="Images\Catalogue\Zoomable\480.gif" />
+    <Content Include="Images\Catalogue\Zoomable\481.gif" />
+    <Content Include="Images\Catalogue\Zoomable\482.gif" />
+    <Content Include="Images\Catalogue\Zoomable\483.gif" />
+    <Content Include="Images\Catalogue\Zoomable\491.gif" />
+    <Content Include="Images\Catalogue\Zoomable\492.gif" />
+    <Content Include="Images\Catalogue\Zoomable\493.gif" />
+    <Content Include="Images\Catalogue\Zoomable\494.gif" />
+    <Content Include="Images\Catalogue\Zoomable\495.gif" />
+    <Content Include="Images\Catalogue\Zoomable\496.gif" />
+    <Content Include="Images\Catalogue\Zoomable\497.gif" />
+    <Content Include="Images\Catalogue\Zoomable\498.gif" />
+    <Content Include="Images\Catalogue\Zoomable\503.gif" />
+    <Content Include="Images\Catalogue\Zoomable\505.gif" />
+    <Content Include="Images\Catalogue\Zoomable\516.gif" />
+    <Content Include="Images\Catalogue\Zoomable\517.jpg" />
+    <Content Include="Images\System\AddToCart.gif" />
+    <Content Include="Images\System\AddToWishList.gif" />
+    <Content Include="Images\System\AmexCard.gif" />
+    <Content Include="Images\System\ContinueShopping.gif" />
+    <Content Include="Images\System\CVVAmex.jpg" />
+    <Content Include="Images\System\CVVMasterVisa.jpg" />
+    <Content Include="Images\System\Delete.gif" />
+    <Content Include="Images\System\es_logo.gif" />
+    <Content Include="Images\System\es_logo.png" />
+    <Content Include="Images\System\giftwrapping.gif" />
+    <Content Include="Images\System\GoButton.gif" />
+    <Content Include="Images\System\icon_del.gif" />
+    <Content Include="Images\System\icon_digg.gif" />
+    <Content Include="Images\System\icon_email.gif" />
+    <Content Include="Images\System\icon_google.gif" />
+    <Content Include="Images\System\icon_reddit.gif" />
+    <Content Include="Images\System\MasterCard.gif" />
+    <Content Include="Images\System\PayPal.gif" />
+    <Content Include="Images\System\sb_tl.gif" />
+    <Content Include="Images\System\sb_tr.gif" />
+    <Content Include="Images\System\SecureCheckOut.gif" />
+    <Content Include="Images\System\SecureShopping.gif" />
+    <Content Include="Images\System\SloganImageKids.jpg" />
+    <Content Include="Images\System\spacer.gif" />
+    <Content Include="Images\System\spinningred.gif" />
+    <Content Include="Images\System\SplashImage.jpg" />
+    <Content Include="Images\System\SplashImage2.gif" />
+    <Content Include="Images\System\titleLogo.gif" />
+    <Content Include="Images\System\Update.gif" />
+    <Content Include="Images\System\ViewDetails.gif" />
+    <Content Include="Images\System\VisaCard.gif" />
+    <Content Include="js\jquery-1.9.0.min.js" />
+    <Content Include="js\jquery-ui-1.10.0.custom.min.js" />
+    <Content Include="js\multizoom.js" />
+    <Content Include="js\multizoom.min.js" />
+    <Content Include="Profile\ContactPreference.aspx" />
+    <Content Include="Stylesheets\humanity\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Stylesheets\humanity\images\ui-bg_glass_100_f5f0e5_1x400.png" />
+    <Content Include="Stylesheets\humanity\images\ui-bg_glass_25_cb842e_1x400.png" />
+    <Content Include="Stylesheets\humanity\images\ui-bg_glass_70_ede4d4_1x400.png" />
+    <Content Include="Stylesheets\humanity\images\ui-bg_highlight-hard_100_f4f0ec_1x100.png" />
+    <Content Include="Stylesheets\humanity\images\ui-bg_highlight-hard_65_fee4bd_1x100.png" />
+    <Content Include="Stylesheets\humanity\images\ui-bg_highlight-hard_75_f5f5b5_1x100.png" />
+    <Content Include="Stylesheets\humanity\images\ui-bg_inset-soft_100_f4f0ec_1x100.png" />
+    <Content Include="Stylesheets\humanity\images\ui-icons_c47a23_256x240.png" />
+    <Content Include="Stylesheets\humanity\images\ui-icons_cb672b_256x240.png" />
+    <Content Include="Stylesheets\humanity\images\ui-icons_f08000_256x240.png" />
+    <Content Include="Stylesheets\humanity\images\ui-icons_f35f07_256x240.png" />
+    <Content Include="Stylesheets\humanity\images\ui-icons_ff7519_256x240.png" />
+    <Content Include="Stylesheets\humanity\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Stylesheets\humanity\jquery-ui-1.10.0.custom.min.css" />
+    <Content Include="Stylesheets\multizoom.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\BaseDDL.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ModeDDL.ascx.cs">
+      <DependentUpon>ModeDDL.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ModeDDL.ascx.designer.cs">
+      <DependentUpon>ModeDDL.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PaymentTypes.ascx.cs">
+      <DependentUpon>PaymentTypes.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\PaymentTypes.ascx.designer.cs">
+      <DependentUpon>PaymentTypes.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SavedSearchesTable.ascx.cs">
+      <DependentUpon>SavedSearchesTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\SavedSearchesTable.ascx.designer.cs">
+      <DependentUpon>SavedSearchesTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OrderHistoryDetailTable.ascx.cs">
+      <DependentUpon>OrderHistoryDetailTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\OrderHistoryDetailTable.ascx.designer.cs">
+      <DependentUpon>OrderHistoryDetailTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OrderHistoryTable.ascx.cs">
+      <DependentUpon>OrderHistoryTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\OrderHistoryTable.ascx.designer.cs">
+      <DependentUpon>OrderHistoryTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StoreMenu.ascx.cs">
+      <DependentUpon>StoreMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\StoreMenu.ascx.designer.cs">
+      <DependentUpon>StoreMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WishListTable.ascx.cs">
+      <DependentUpon>WishListTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\WishListTable.ascx.designer.cs">
+      <DependentUpon>WishListTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\YesNoDDL.ascx.cs">
+      <DependentUpon>YesNoDDL.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\YesNoDDL.ascx.designer.cs">
+      <DependentUpon>YesNoDDL.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EventArgs\SelectedIndexChangedEventArgs.cs" />
+    <Compile Include="Home\activate.aspx.cs">
+      <DependentUpon>activate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home\activate.aspx.designer.cs">
+      <DependentUpon>activate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Home\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Home\RemindPassword.aspx.cs">
+      <DependentUpon>RemindPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home\RemindPassword.aspx.designer.cs">
+      <DependentUpon>RemindPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPages\CheckOutMaster.Master.cs">
+      <DependentUpon>CheckOutMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPages\CheckOutMaster.Master.designer.cs">
+      <DependentUpon>CheckOutMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Checkout5.aspx.cs">
+      <DependentUpon>Checkout5.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout5.aspx.designer.cs">
+      <DependentUpon>Checkout5.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BottomMenu.ascx.cs">
+      <DependentUpon>BottomMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\BottomMenu.ascx.designer.cs">
+      <DependentUpon>BottomMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CardTypeDDL.ascx.cs">
+      <DependentUpon>CardTypeDDL.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\CardTypeDDL.ascx.designer.cs">
+      <DependentUpon>CardTypeDDL.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CountryAndModeDDLs.ascx.cs">
+      <DependentUpon>CountryAndModeDDLs.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\CountryAndModeDDLs.ascx.designer.cs">
+      <DependentUpon>CountryAndModeDDLs.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CountryDDL.ascx.cs">
+      <DependentUpon>CountryDDL.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\CountryDDL.ascx.designer.cs">
+      <DependentUpon>CountryDDL.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CurrencyDDL.ascx.cs">
+      <DependentUpon>CurrencyDDL.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\CurrencyDDL.ascx.designer.cs">
+      <DependentUpon>CurrencyDDL.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ExpiryMonthDDL.ascx.cs">
+      <DependentUpon>ExpiryMonthDDL.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ExpiryMonthDDL.ascx.designer.cs">
+      <DependentUpon>ExpiryMonthDDL.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ExpiryYearDDL.ascx.cs">
+      <DependentUpon>ExpiryYearDDL.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ExpiryYearDDL.ascx.designer.cs">
+      <DependentUpon>ExpiryYearDDL.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProductColorDDL.ascx.cs">
+      <DependentUpon>ProductColorDDL.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ProductColorDDL.ascx.designer.cs">
+      <DependentUpon>ProductColorDDL.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProductQuantityDDL.ascx.cs">
+      <DependentUpon>ProductQuantityDDL.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ProductQuantityDDL.ascx.designer.cs">
+      <DependentUpon>ProductQuantityDDL.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProductSizeDDL.ascx.cs">
+      <DependentUpon>ProductSizeDDL.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ProductSizeDDL.ascx.designer.cs">
+      <DependentUpon>ProductSizeDDL.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReviewCartTable.ascx.cs">
+      <DependentUpon>ReviewCartTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ReviewCartTable.ascx.designer.cs">
+      <DependentUpon>ReviewCartTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ShoppingCartTable.ascx.cs">
+      <DependentUpon>ShoppingCartTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ShoppingCartTable.ascx.designer.cs">
+      <DependentUpon>ShoppingCartTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TopMenu.ascx.cs">
+      <DependentUpon>TopMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\TopMenu.ascx.designer.cs">
+      <DependentUpon>TopMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="OrderProcessingError.aspx.cs">
+      <DependentUpon>OrderProcessingError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderProcessingError.aspx.designer.cs">
+      <DependentUpon>OrderProcessingError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventArgs\CurrencyChangedEventArgs.cs" />
+    <Compile Include="CVV.aspx.cs">
+      <DependentUpon>CVV.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CVV.aspx.designer.cs">
+      <DependentUpon>CVV.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPages\eStoreMaster.Master.cs">
+      <DependentUpon>eStoreMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPages\eStoreMaster.Master.designer.cs">
+      <DependentUpon>eStoreMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="PageNotFound.aspx.cs">
+      <DependentUpon>PageNotFound.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PageNotFound.aspx.designer.cs">
+      <DependentUpon>PageNotFound.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\AccountAddress.aspx.cs">
+      <DependentUpon>AccountAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\AccountAddress.aspx.designer.cs">
+      <DependentUpon>AccountAddress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\AccountInfo.aspx.cs">
+      <DependentUpon>AccountInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\AccountInfo.aspx.designer.cs">
+      <DependentUpon>AccountInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\AddSavedSearch.aspx.cs">
+      <DependentUpon>AddSavedSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\AddSavedSearch.aspx.designer.cs">
+      <DependentUpon>AddSavedSearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\ChangeEmailPassword.aspx.cs">
+      <DependentUpon>ChangeEmailPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\ChangeEmailPassword.aspx.designer.cs">
+      <DependentUpon>ChangeEmailPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\ContactPreference.aspx.cs">
+      <DependentUpon>ContactPreference.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\ContactPreference.aspx.designer.cs">
+      <DependentUpon>ContactPreference.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\LogOut.aspx.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\LogOut.aspx.designer.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\OrderHistory.aspx.cs">
+      <DependentUpon>OrderHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\OrderHistory.aspx.designer.cs">
+      <DependentUpon>OrderHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\OrderHistoryDetail.aspx.cs">
+      <DependentUpon>OrderHistoryDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\OrderHistoryDetail.aspx.designer.cs">
+      <DependentUpon>OrderHistoryDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\SavedSearches.aspx.cs">
+      <DependentUpon>SavedSearches.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\SavedSearches.aspx.designer.cs">
+      <DependentUpon>SavedSearches.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ShowMe.aspx.cs">
+      <DependentUpon>ShowMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowMe.aspx.designer.cs">
+      <DependentUpon>ShowMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Checkout1.aspx.cs">
+      <DependentUpon>Checkout1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout1.aspx.designer.cs">
+      <DependentUpon>Checkout1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Checkout2.aspx.cs">
+      <DependentUpon>Checkout2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout2.aspx.designer.cs">
+      <DependentUpon>Checkout2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Checkout3.aspx.cs">
+      <DependentUpon>Checkout3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout3.aspx.designer.cs">
+      <DependentUpon>Checkout3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Checkout4.aspx.cs">
+      <DependentUpon>Checkout4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout4.aspx.designer.cs">
+      <DependentUpon>Checkout4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Policies.aspx.cs">
+      <DependentUpon>Policies.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Policies.aspx.designer.cs">
+      <DependentUpon>Policies.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FAQ.aspx.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FAQ.aspx.designer.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Links.aspx.cs">
+      <DependentUpon>Links.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Links.aspx.designer.cs">
+      <DependentUpon>Links.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Testimonials.aspx.cs">
+      <DependentUpon>Testimonials.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Testimonials.aspx.designer.cs">
+      <DependentUpon>Testimonials.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContactUs.aspx.cs">
+      <DependentUpon>ContactUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContactUs.aspx.designer.cs">
+      <DependentUpon>ContactUs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContactUsSent.aspx.cs">
+      <DependentUpon>ContactUsSent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContactUsSent.aspx.designer.cs">
+      <DependentUpon>ContactUsSent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Splash.aspx.cs">
+      <DependentUpon>Splash.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Splash.aspx.designer.cs">
+      <DependentUpon>Splash.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BrowseCategory.aspx.cs">
+      <DependentUpon>BrowseCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrowseCategory.aspx.designer.cs">
+      <DependentUpon>BrowseCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BrowseDepartment.aspx.cs">
+      <DependentUpon>BrowseDepartment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrowseDepartment.aspx.designer.cs">
+      <DependentUpon>BrowseDepartment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BrowseItem.aspx.cs">
+      <DependentUpon>BrowseItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrowseItem.aspx.designer.cs">
+      <DependentUpon>BrowseItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ThemeConfig\ThemeModule.cs">
+    </Compile>
+    <Compile Include="ViewCart.aspx.cs">
+      <DependentUpon>ViewCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewCart.aspx.designer.cs">
+      <DependentUpon>ViewCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WishList\WishList.aspx.cs">
+      <DependentUpon>WishList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WishList\WishList.aspx.designer.cs">
+      <DependentUpon>WishList.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\phoenixconsulting.BusinessEntities.Helpers\phoenixconsulting.BusinessEntities.Helpers.csproj">
+      <Project>{AFC8C8EB-3194-4B64-BDC5-0379EDD01071}</Project>
+      <Name>phoenixconsulting.BusinessEntities.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\phoenixconsulting.BusinessEntities\phoenixconsulting.BusinessEntities.csproj">
+      <Project>{10B32D9A-9045-4CA1-81E7-92A2E2F14C26}</Project>
+      <Name>phoenixconsulting.BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\phoenixconsulting.Common.Enums\phoenixconsulting.Common.Enums.csproj">
+      <Project>{03F77ADB-5863-4E25-BBBE-85A7B0FD33D1}</Project>
+      <Name>phoenixconsulting.Common.Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\phoenixconsulting.Common\phoenixconsulting.Common.csproj">
+      <Project>{297CA970-DC02-44E8-9709-C40F9C9DA24E}</Project>
+      <Name>phoenixconsulting.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\phoenixconsulting.CultureServices\phoenixconsulting.CultureServices.csproj">
+      <Project>{D05A155C-0444-4858-AC4E-E9436A758671}</Project>
+      <Name>phoenixconsulting.CultureServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\phoenixconsulting.MembershipProvider\phoenixconsulting.MembershipProvider.csproj">
+      <Project>{3F625F84-26C4-469B-A639-0CF2240BB972}</Project>
+      <Name>phoenixconsulting.MembershipProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\phoenixconsulting.PaymentService.PayPal\phoenixconsulting.PaymentService.PayPal.csproj">
+      <Project>{A3F01281-32DF-4F80-B1D4-2E99AFBA5E6D}</Project>
+      <Name>phoenixconsulting.PaymentService.PayPal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\phoenixconsulting.PaymentService\phoenixconsulting.PaymentService.csproj">
+      <Project>{7C45B29D-6833-4975-AF70-665F809BB595}</Project>
+      <Name>phoenixconsulting.PaymentService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eStoreBLL\eStoreBLL.csproj">
+      <Project>{9A91D288-B615-4BB0-98D2-15D789B2A5C2}</Project>
+      <Name>eStoreBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eStoreDAL\eStoreDAL.csproj">
+      <Project>{A613EC99-DF83-4D91-AFC7-AD986A2DDAE7}</Project>
+      <Name>eStoreDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Checkout5.aspx" />
+    <Content Include="Controls\BottomMenu.ascx" />
+    <Content Include="Controls\CardTypeDDL.ascx" />
+    <Content Include="Controls\ModeDDL.ascx" />
+    <Content Include="Controls\SavedSearchesTable.ascx" />
+    <Content Include="Controls\CountryAndModeDDLs.ascx" />
+    <Content Include="Controls\CountryDDL.ascx" />
+    <Content Include="Controls\CurrencyDDL.ascx" />
+    <Content Include="Controls\ExpiryMonthDDL.ascx" />
+    <Content Include="Controls\ExpiryYearDDL.ascx" />
+    <Content Include="Controls\OrderHistoryDetailTable.ascx" />
+    <Content Include="Controls\OrderHistoryTable.ascx" />
+    <Content Include="Controls\ProductColorDDL.ascx" />
+    <Content Include="Controls\ProductQuantityDDL.ascx" />
+    <Content Include="Controls\ProductSizeDDL.ascx" />
+    <Content Include="Controls\ReviewCartTable.ascx" />
+    <Content Include="Controls\ShoppingCartTable.ascx" />
+    <Content Include="Controls\TopMenu.ascx" />
+    <Content Include="Controls\WishListTable.ascx" />
+    <Content Include="Controls\YesNoDDL.ascx" />
+    <Content Include="Home\activate.aspx" />
+    <Content Include="Home\Register.aspx" />
+    <Content Include="Home\RemindPassword.aspx" />
+    <Content Include="Icons\eStoreLogo.ico" />
+    <Content Include="Icons\eStoreLogo_small.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="OrderProcessingError.aspx" />
+    <Content Include="CVV.aspx" />
+    <Content Include="MasterPages\eStoreMaster.Master" />
+    <Content Include="PageNotFound.aspx" />
+    <Content Include="Stylesheets\PP_style.css" />
+    <Content Include="MasterPages\CheckOutMaster.Master" />
+    <Content Include="Checkout1.aspx" />
+    <Content Include="Checkout2.aspx" />
+    <Content Include="Checkout3.aspx" />
+    <Content Include="Checkout4.aspx" />
+    <Content Include="Policies.aspx" />
+    <Content Include="FAQ.aspx" />
+    <Content Include="Links.aspx" />
+    <Content Include="Profile\AccountAddress.aspx" />
+    <Content Include="Profile\AccountInfo.aspx" />
+    <Content Include="Profile\AddSavedSearch.aspx" />
+    <Content Include="Profile\ChangeEmailPassword.aspx" />
+    <Content Include="Profile\Login.aspx" />
+    <Content Include="Profile\LogOut.aspx" />
+    <Content Include="Profile\OrderHistory.aspx" />
+    <Content Include="Profile\OrderHistoryDetail.aspx" />
+    <Content Include="Profile\SavedSearches.aspx" />
+    <Content Include="SecureXMLExample.aspx" />
+    <Content Include="ShowMe.aspx" />
+    <Content Include="Testimonials.aspx" />
+    <Content Include="Error.aspx" />
+    <Content Include="ContactUs.aspx" />
+    <Content Include="ContactUsSent.aspx" />
+    <Content Include="Search.aspx" />
+    <Content Include="Splash.aspx" />
+    <Content Include="BrowseCategory.aspx" />
+    <Content Include="BrowseDepartment.aspx" />
+    <Content Include="BrowseItem.aspx" />
+    <Content Include="ViewCart.aspx" />
+    <Content Include="App_Themes\Classic\Menu.skin" />
+    <Content Include="App_Themes\Classic\ImageButton.skin" />
+    <Content Include="Home\Web.config" />
+    <Content Include="Profile\Web.config" />
+    <Content Include="WishList\WishList.aspx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="WishList\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="App_GlobalResources\" />
+    <Folder Include="Images\Catalogue\Large\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  -->
+  <Target Name="AfterBuild" DependsOnTargets="AssignTargetPaths;Compile;ResolveKeySource" Inputs="$(MSBuildAllProjects);@(IntermediateAssembly)" Outputs="$(OutputPath)$(_SGenDllName)">
+    <!-- Delete the file because I can't figure out how to force the SGen task. -->
+    <Delete Files="$(TargetDir)$(TargetName).XmlSerializers.dll" ContinueOnError="true" />
+    <SGen BuildAssemblyName="$(TargetFileName)" BuildAssemblyPath="$(OutputPath)" References="@(ReferencePath)" ShouldGenerateSerializer="true" UseProxyTypes="false" KeyContainer="$(KeyContainerName)" KeyFile="$(KeyOriginatorFile)" DelaySign="$(DelaySign)" ToolPath="$(SGenToolPath)">
+      <Output TaskParameter="SerializationAssembly" ItemName="SerializationAssembly" />
+    </SGen>
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4678</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/eStoreWeb</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

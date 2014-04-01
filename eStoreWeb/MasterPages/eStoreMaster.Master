@@ -1,0 +1,169 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Codebehind="eStoreMaster.Master.cs" Inherits="eStoreWeb.eStoreMaster" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="eStoreWeb" %>
+<%@ Import Namespace="com.phoenixconsulting.culture" %>
+<%@ Import Namespace="phoenixconsulting.common.handlers" %>
+
+<%@ Register Src="~/Controls/TopMenu.ascx" TagPrefix="eStore" TagName="TopMenu" %>
+<%@ Register Src="~/Controls/BottomMenu.ascx" TagPrefix="eStore" TagName="BottomMenu" %>
+<%@ Register Src="~/Controls/CurrencyDDL.ascx" TagPrefix="currency" TagName="CurrencyDDL" %>
+<%@ Register Src="~/Controls/PaymentTypes.ascx" TagPrefix="payment" TagName="Types" %>
+<%@ Register Src="~/Controls/StoreMenu.ascx" TagPrefix="store" TagName="Menu" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>PetsPlayground</title>
+    <script type="text/javascript" src="~/js/jquery-1.9.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Stylesheets/PP_style.css"/>
+    <link rel="SHORTCUT ICON" type="image/x-icon" href="~/Icons/eStoreLogo_small.ico"/>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div id="DivCentrePage">
+        <form id="aspnetForm" runat="server">
+            <div id="DivBanner">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="text-align:left" colspan="2">
+	                        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
+                            </asp:ScriptManager>
+                            <asp:HyperLink ID="HomeLink" runat="server" ImageUrl="~/Images/System/titleLogo.gif" 
+                                           NavigateUrl="http://www.petsplayground.com.au" Target="_self">
+                            </asp:HyperLink>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="center">
+                            <asp:LoginView ID="MasterLoginView" runat="server">
+                                <LoggedInTemplate>
+                                    <asp:Substitution ID="LoginNameSubstitution" runat="server" 
+                                                      MethodName="LoginText"
+                                                      EnableViewState="true" />
+                                    [<asp:LoginStatus ID="MasterLoginStatus" runat="server"
+	                                                  LogoutAction="Redirect" 
+	                                                  LogoutPageUrl="~/Splash.aspx"
+	                                                  LogoutText="log out" />]
+                                 </LoggedInTemplate>
+                                 <AnonymousTemplate>
+	                                 Welcome [<asp:HyperLink ID="LoginHyperlink" runat="server" 
+	                                                         Text="member login"
+	                                                         NavigateUrl="~/Profile/AccountInfo.aspx" />]
+                                </AnonymousTemplate>
+                            </asp:LoginView>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <eStore:TopMenu ID="TopMenu" runat="server" />
+            <table width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td valign="top">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                    <td valign="top">
+                        <div class="DivSideBar">
+                            <table cellpadding="0" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <asp:HyperLink runat="server" 
+                                                           NavigateUrl="~/ViewCart.aspx" 
+                                                           Text="VIEW CART" />
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div style="clear:both;">
+                                                <asp:UpdatePanel ID="NavCurrencyPanel" runat="server" 
+                                                                 UpdateMode="Conditional" 
+                                                                 ChildrenAsTriggers="False">
+                                                    <ContentTemplate>
+                                                        <div style="clear: both">            
+                                                                    Select your currency:
+                                                                    <br/>
+                                                                    <currency:CurrencyDDL ID="currencyDDL" runat="server" />
+                                                                    <asp:ImageButton ID="NavCart_GoButton" runat="server" 
+                                                                                     ImageAlign="top" 
+                                                                                     style="border-width: 0px; height: 22px; width: 22px;" 
+                                                                                     AlternateText="Go" ImageUrl="~/Images/System/GoButton.gif"/>
+                                                                
+                                                        </div>
+                                                        <div style="clear: both">
+                                                            <span style="float: left">Items Total:</span>
+                                                            <span style="float: right">
+                                                                <asp:Label ID="NavCart_ItemsTotalLabel" runat="server"><%=SessionHandler.Instance.CurrencyValue%>&nbsp;<%=CultureService.getConvertedPrice((SessionHandler.Instance.TotalCost - SessionHandler.Instance.TotalShipping).ToString(), SessionHandler.Instance.CurrencyXRate, SessionHandler.Instance.CurrencyValue)%></asp:Label>
+                                                            </span>
+                                                        </div>
+                                                        <div style="clear: both">
+                                                            <span style="float: left">Shipping:</span>
+                                                            <span style="float: right">
+                                                                <asp:Label ID="NavCart_ShippingTotalLabel" runat="server"><%=SessionHandler.Instance.CurrencyValue%>&nbsp;<%=CultureService.getConvertedPrice(SessionHandler.Instance.TotalShipping.ToString(), SessionHandler.Instance.CurrencyXRate, SessionHandler.Instance.CurrencyValue)%></asp:Label>
+                                                            </span>
+                                                        </div>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="DivSideBar">
+                            <table cellpadding="0" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>DEPARTMENTS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h1>Search</h1>
+                                            <ul>
+                                                <li>
+                                                    <asp:Panel ID="NavSearchPanel" runat="server"  
+                                                               DefaultButton="NavCatalogue_GoButton">
+                                                            <asp:TextBox ID="SearchQueryTextBox" runat="server" 
+                                                                         MaxLength="20" 
+                                                                         Width="110" />
+                                                            <asp:ImageButton ID="NavCatalogue_GoButton" runat="server" 
+                                                                             ImageAlign="top" 
+                                                                             AlternateText="Go" 
+                                                                             style="border-width:0px;height:22px;width:22px;"
+                                                                             ImageUrl="~/Images/System/GoButton.gif"
+                                                                             OnClick="GoButton_Click"/>
+                                                    </asp:Panel>
+                                                </li>
+                                            </ul>
+                                            <store:Menu ID="StoreMenu" runat="server" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <payment:Types ID="paymentsTypes" runat="server" />
+                    </td>
+                </tr>
+            </table>
+            <eStore:BottomMenu ID="BottomMenu" runat="server" />
+                
+            <asp:ObjectDataSource ID="CurrenciesODS" runat="server" 
+                                  TypeName="eStoreBLL.CurrenciesBLL"
+                                  OldValuesParameterFormatString="original_{0}" 
+                                  SelectMethod="getCurrencies"
+                                  EnableCaching="True"
+                                  CacheDuration="3600"
+                                  CacheExpirationPolicy="Absolute">
+            </asp:ObjectDataSource>
+        </form>
+    </div>
+</body>
+</html>

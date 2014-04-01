@@ -1,0 +1,58 @@
+﻿#region Licence
+/*
+ * The MIT License
+ *
+ * Copyright (c) 2008-2013, Andrew Gray
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+#endregion
+using System;
+using System.Data;
+using System.Diagnostics.CodeAnalysis;
+using System.Web.UI.WebControls;
+using phoenixconsulting.common.handlers;
+using phoenixconsulting.common.navigation;
+
+namespace eStoreWeb.Controls {
+    public partial class SavedSearchesTable : BaseDDL {
+        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        protected void savedSearchesItemLV_ItemCommand(object source, CommandEventArgs e) {
+            if(!string.IsNullOrEmpty(e.CommandArgument.ToString())) {
+                if(e.CommandName.Equals("delete")) {
+                    int ID = Int32.Parse(e.CommandArgument.ToString());
+                    SavedSearchesODS.DeleteParameters.Add(new Parameter("original_ID", DbType.Int32, ID.ToString()));
+                } else {
+                   SessionHandler.Instance.SearchString = e.CommandArgument.ToString();
+                    GoTo.Instance.SearchPage();
+                }
+            }
+        }
+
+        protected void AddSavedSearch(object sender, EventArgs e) {
+            GoTo.Instance.AddSavedSearchPage();
+        }
+
+        protected void SavedSearchODS_Selecting(object sender, ObjectDataSourceSelectingEventArgs e) {
+            e.InputParameters["userID"] = getUserID(Page);
+        }
+    }
+}

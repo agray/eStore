@@ -1,0 +1,55 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="eStoreWeb.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="diggURLPrefix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://digg.com/submit?phase=2&amp;url=</Value>
+    </Setting>
+    <Setting Name="googleURLPrefix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.google.com/bookmarks/mark?op=edit&amp;output=popup&amp;bkmk=</Value>
+    </Setting>
+    <Setting Name="emailURLPrefix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mailto:?subject=</Value>
+    </Setting>
+    <Setting Name="ModeAirMail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">9</Value>
+    </Setting>
+    <Setting Name="ModeExpressAirMail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="AustralianCurrencyID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="CustomCacheDuration" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">7200</Value>
+    </Setting>
+    <Setting Name="CCAuthTarget" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">CCAuth.aspx?pageid=process&amp;server=test&amp;requestType=payment&amp;ID=</Value>
+    </Setting>
+    <Setting Name="ContactUsMailTo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ContactUs@PetsPlayground.com.au</Value>
+    </Setting>
+    <Setting Name="FromEmailAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">customerservice@petsplayground.com.au</Value>
+    </Setting>
+    <Setting Name="OrderConfirmationSalutation" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Hi </Value>
+    </Setting>
+    <Setting Name="OrderConfirmationClosing" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Regards,
+
+</Value>
+    </Setting>
+    <Setting Name="OrderConfirmationOpening" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Thank you for your order.
+
+    </Value>
+    </Setting>
+    <Setting Name="deliciousURLPrefix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.delicious.com/post?url=</Value>
+    </Setting>
+    <Setting Name="redditURLPrefix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.reddit.com/submit?url=</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
