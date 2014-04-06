@@ -63,8 +63,9 @@ namespace eStoreDAL {
 
         private void Initialise(string storedProcName) {
             _conn.Open();
-            _command.CommandType = CommandType.StoredProcedure;
             _command = new SqlCommand(storedProcName, _conn);
+            _command.CommandType = CommandType.StoredProcedure;
+            
         }
 
         private void AddParameter(string name, int param) {

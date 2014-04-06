@@ -68,6 +68,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL.cs">
+      <DependentUpon>DAL.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DAL.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
