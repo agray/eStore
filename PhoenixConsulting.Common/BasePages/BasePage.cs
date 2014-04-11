@@ -108,7 +108,9 @@ namespace phoenixconsulting.common.basepages {
         private void addMetaTag(string name, ArrayList al, int itemIndex){
             HtmlMeta h = new HtmlMeta();
             h.Name = name;
-            h.Content = ((string[])al[0])[itemIndex];
+            if(al != null) {
+                h.Content = ((string[])al[0])[itemIndex];
+            }
             Page.Header.Controls.Add(h);
         }
 
