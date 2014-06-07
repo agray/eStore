@@ -2,8 +2,13 @@
 
 https://agray@github.com/agray/estore.git
 
-	-  Overriding principles: Don't Repeat Yourself. Eliminate technical debt everywhere. Keep maintainability as close to 10/10 as possible. Refactor where necessary.
-	
+	-  Overriding principles: Don't Repeat Yourself. Eliminate technical debt everywhere. Keep maintainability as close to 10/10 as possible. Refactor where necessary.  
+
+[![Support us][gittip-image]][gittip-url]  
+
+## Like what you see?
+[Support us via gittip](https://www.gittip.com/agray/)  
+
 ##Roadmap
 	- Entity Framework! Replace Object DataSources with Entity Datasources whereever possible.
 	- Remove tables for divs like Departments/ManageDepartments from Admin site across this site (Andre nudge nudge)
@@ -22,4 +27,7 @@ https://agray@github.com/agray/estore.git
     - Review [dashCommerce](https://github.com/dashcommerce/dashcommerce)
     - Review nopCommerce](www.nopcommerce.com/)
     - Review [Passport Style](http://www.passportstyle.com)
-    - Review [goodsie](http://www.goodsie.com)
+    - Review [goodsie](http://www.goodsie.com)  
+
+[gittip-image]: http://img.shields.io/gittip/agray.svg  
+[gittip-url]: https://www.gittip.com/agray/  
