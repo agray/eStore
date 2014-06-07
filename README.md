@@ -1,8 +1,10 @@
 # Readme
 
-https://agray@github.com/agray/estore.git
-
-	-  Overriding principles: Don't Repeat Yourself. Eliminate technical debt everywhere. Keep maintainability as close to 10/10 as possible. Refactor where necessary.  
+##Overriding principles
+- Don't Repeat Yourself.  
+- Eliminate technical debt everywhere.  
+- Keep maintainability as close to 10/10 as possible.  
+- Refactor where necessary.  
 
 [![Support us][gittip-image]][gittip-url]  
 
@@ -10,15 +12,15 @@ https://agray@github.com/agray/estore.git
 [Support us via gittip](https://www.gittip.com/agray/)  
 
 ##Roadmap
-	- Entity Framework! Replace Object DataSources with Entity Datasources whereever possible.
-	- Remove tables for divs like Departments/ManageDepartments from Admin site across this site (Andre nudge nudge)
-	- Upgrade to latest stable version of JQuery UI (Andre)
-	- Smush all images as part of build
-	- Sell digital goods. Example: www.themodernman.com
+- Entity Framework! Replace Object DataSources with Entity Datasources whereever possible.
+- Remove tables for divs like Departments/ManageDepartments from Admin site across this site (Andre nudge nudge)
+- Upgrade to latest stable version of JQuery UI (Andre)
+- Smush all images as part of build
+- Sell digital goods. Example: www.themodernman.com
     - Multistore!  Keep multiple stores separate.
     - User definable layouts like http://goodsie.com/design. .NET themes and web.config rewrite.
 	
-	- Gateway processing error checking...is there enough?
+- Gateway processing error checking...is there enough?
     - Refactor CountryAndModeDDLs control into two controls
 	- Copy bookdepository.com "watch people shop"
     - Copy TheCuffShop Customer just bought
