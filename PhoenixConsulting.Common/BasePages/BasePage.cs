@@ -26,6 +26,7 @@
 using System;
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -33,7 +34,6 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using eStoreBLL;
-using eStoreDAL;
 using phoenixconsulting.common.handlers;
 using PhoenixConsulting.Common.Properties;
 
@@ -51,17 +51,17 @@ namespace phoenixconsulting.common.basepages {
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         public void SetCurrencyByCountry(int countryId) {
-            CurrenciesBLL currTableAdapter = new CurrenciesBLL();
-            DAL.CurrencyRow row = currTableAdapter.getCurrencyByBillingCountry(countryId)[0];
-            SessionHandler.Instance.SetCurrency(row.Value, row.ExchangeRate, row.ID.ToString());
+            var currTableAdapter = new CurrenciesBLL();
+            var row = currTableAdapter.getCurrencyByBillingCountry(countryId)[0];
+            SessionHandler.Instance.SetCurrency(row.Value, row.ExchangeRate, row.ID.ToString(CultureInfo.InvariantCulture));
         }
 
         #region ListUtils
-        public static bool isEmpty(ListView list) {
+        public static bool IsEmpty(ListView list) {
             return list.Items.Count == 0;
         }
 
-        public static bool isEmpty(FormView form) {
+        public static bool IsEmpty(FormView form) {
             return form.DataItemCount == 0;
         }
         #endregion
@@ -74,40 +74,39 @@ namespace phoenixconsulting.common.basepages {
         #endregion
 
         #region metaTagsUtils
-        protected void setDepartmentMetaTags(int ID) {
-            DepartmentsBLL departmentBLL = new DepartmentsBLL();
-            ArrayList al = departmentBLL.getSEODetails(ID);
+        protected void SetDepartmentMetaTags(int id) {
+            var departmentBll = new DepartmentsBLL();
+            var al = departmentBll.getSEODetails(id);
 
-            addMetaTagSet(al);
+            AddMetaTagSet(al);
         }
 
 
-        protected void setCategoryMetaTags(int ID) {
-            CategoriesBLL categoryBLL = new CategoriesBLL();
-            ArrayList al = categoryBLL.getSEODetails(ID);
+        protected void SetCategoryMetaTags(int id) {
+            var categoryBll = new CategoriesBLL();
+            var al = categoryBll.getSEODetails(id);
 
-            addMetaTagSet(al);
+            AddMetaTagSet(al);
         }
 
-        protected void setProductMetaTags(int ID) {
-            ProductsBLL productBLL = new ProductsBLL();
-            ArrayList al = productBLL.getSEODetails(ID);
+        protected void SetProductMetaTags(int id) {
+            var productBll = new ProductsBLL();
+            var al = productBll.GetSeoDetails(id);
 
-            addMetaTagSet(al);
+            AddMetaTagSet(al);
         }
 
-        private void addMetaTagSet(ArrayList al){
+        private void AddMetaTagSet(ArrayList al){
             try {
-                addMetaTag("description", al, 0);
-                addMetaTag("keywords", al, 1);
+                AddMetaTag("description", al, 0);
+                AddMetaTag("keywords", al, 1);
             } catch(ArgumentOutOfRangeException atmex) {
                 Console.WriteLine(atmex.Message);
             }
         }
 
-        private void addMetaTag(string name, ArrayList al, int itemIndex){
-            HtmlMeta h = new HtmlMeta();
-            h.Name = name;
+        private void AddMetaTag(string name, ArrayList al, int itemIndex){
+            var h = new HtmlMeta {Name = name};
             if(al != null) {
                 h.Content = ((string[])al[0])[itemIndex];
             }
@@ -117,8 +116,8 @@ namespace phoenixconsulting.common.basepages {
         #endregion
 
         #region AuthenticationUtils
-        protected bool isLoggedIn() {
-            return Page.User.Identity.Name != "";
+        protected bool IsLoggedIn() {
+            return Page.User.Identity.Name != string.Empty;
         }
         #endregion
 
@@ -126,30 +125,30 @@ namespace phoenixconsulting.common.basepages {
         //*****************************************
         //  Custom Validator Methods
         //*****************************************
-        public static bool validateInt(string s) {
+        public static bool ValidateInt(string s) {
             int throwaway;
             return int.TryParse(s, out throwaway);
         }
 
-        public static bool validateString(string s) {
+        public static bool ValidateString(string s) {
             return true;
         }
 
-        public static bool validateDouble(string s) {
+        public static bool ValidateDouble(string s) {
             double throwaway;
             return double.TryParse(s, out throwaway);
         }
 
-        public static bool validateURL(string s) {
-            Regex objPattern = new Regex("((https?|ftp|gopher|http|telnet|file|notes|ms-help):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\.&]*)");
+        public static bool ValidateUrl(string s) {
+            var objPattern = new Regex("((https?|ftp|gopher|http|telnet|file|notes|ms-help):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\.&]*)");
             return objPattern.IsMatch(s);
         }
-        public static bool validateEmail(string s) {
-            Regex objPattern = new Regex("\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
+        public static bool ValidateEmail(string s) {
+            var objPattern = new Regex("\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
             return objPattern.IsMatch(s);
         }
 
-        public static bool validateLength(string s, int length) {
+        public static bool ValidateLength(string s, int length) {
             return s.Length <= length;
         }
         #endregion
@@ -201,33 +200,33 @@ namespace phoenixconsulting.common.basepages {
         //*****************************************
         //  Core HTTP Methods
         //*****************************************
-        public static string mapPath(string path) {
-            return getCurrentContext().Server.MapPath(path);
+        public static string MapThePath(string path) {
+            return GetCurrentContext().Server.MapPath(path);
         }
 
-        protected static HttpContext getCurrentContext() {
+        protected static HttpContext GetCurrentContext() {
             return HttpContext.Current;
         }
 
-        protected static HttpRequest getRequest() {
-            return getCurrentContext().Request;
+        protected static HttpRequest GetRequest() {
+            return GetCurrentContext().Request;
         }
 
         public static string GetCurrentPath() {
-            return getRequest().Url.AbsolutePath;
+            return GetRequest().Url.AbsolutePath;
         }
 
-        public static string GetURL() {
-            return getRequest().Url.GetLeftPart(UriPartial.Authority);
+        public static string GetUrl() {
+            return GetRequest().Url.GetLeftPart(UriPartial.Authority);
         }
 
         public static string GetCurrentPageName() {
-            FileInfo oInfo = new FileInfo(GetCurrentPath());
+            var oInfo = new FileInfo(GetCurrentPath());
             return oInfo.Name;
         }
 
         public static string CurrentUserName() {
-            return getCurrentContext().User.Identity.Name;
+            return GetCurrentContext().User.Identity.Name;
         }
         #endregion
     }

@@ -22,14 +22,14 @@ namespace eStoreTests {
         [Test]
         public void CanGetSetShoppingCart() {
             using(new HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
-                DTItem cartItemIn = new DTItem(1, 3, 10, "Product for CanGetSetShoppingCart Unit Test", "Images\\300.gif", 100, 10, 1, 0, 100,
+                var cartItemIn = new DTItem(1, 3, 10, "Product for CanGetSetShoppingCart Unit Test", "Images\\300.gif", 100, 10, 1, 0, 100,
                                                10, "Red", 10, "Large");
-                ArrayList listIn = new ArrayList();
+                var listIn = new ArrayList();
                 listIn.Add(cartItemIn);
 
                 SessionHandler.Instance.ShoppingCart = listIn;
-                ArrayList listOut = SessionHandler.Instance.ShoppingCart;
-                DTItem cartItemOut = (DTItem)listOut[0];
+                var listOut = SessionHandler.Instance.ShoppingCart;
+                var cartItemOut = (DTItem)listOut[0];
 
                 Assert.AreEqual("Product for CanGetSetShoppingCart Unit Test", cartItemOut.ProductDetails, "Was not able to retrieve session variable.");
             }
@@ -516,10 +516,10 @@ namespace eStoreTests {
         [Test]
         public void CanGetSetCartDataSet() {
             using(new HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
-                DataSet dsIn = new DataSet();
-                DataTable dtIn = new DataTable();
-                DataSet dsOut = new DataSet();
-                DataTable dtOut = new DataTable();
+                var dsIn = new DataSet();
+                var dtIn = new DataTable();
+                var dsOut = new DataSet();
+                var dtOut = new DataTable();
                 dtIn.ExtendedProperties.Add("testKey23", "value23");
                 dsIn.DataSetName = "Test";
                 dsIn.Tables.Add(dtIn);

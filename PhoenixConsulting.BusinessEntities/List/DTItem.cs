@@ -66,7 +66,7 @@ namespace phoenixconsulting.businessentities.list {
             SizeId = sizeId;
             SizeName = sizeName;
 
-            double price = productOnSale == 0 ? productPrice : productDiscountPrice;
+            var price = productOnSale == 0 ? productPrice : productDiscountPrice;
             Subtotal = productQuantity * price;
         }
         #endregion

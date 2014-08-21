@@ -54,17 +54,17 @@ namespace eStoreWeb {
             } else {
                 SessionHandler.Instance.DepartmentId = RequestHandler.Instance.DepartmentID;
                 //Get Department Name
-                string depName = getDepartmentName();
+                var depName = GetDepartmentName();
                 HeaderNameLabel.Text = depName;
                 Page.Title = depName;
             }
-            setDepartmentMetaTags(int.Parse(Request.QueryString.Get("DepID")));
+            SetDepartmentMetaTags(int.Parse(Request.QueryString.Get("DepID")));
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        private string getDepartmentName() {
-            DepartmentsBLL depTableAdapter = new DepartmentsBLL();
+        private string GetDepartmentName() {
+            var depTableAdapter = new DepartmentsBLL();
             try {
                 return depTableAdapter.getDepartmentByID(RequestHandler.Instance.DepartmentID)[0]["Name"].ToString();
             } catch(Exception) {

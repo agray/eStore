@@ -30,7 +30,7 @@ using eStoreWeb.Controls;
 
 namespace eStoreWeb.WishList {
     public partial class WishList : BasePage {
-        protected WishListTable wlTable; 
+        protected WishListTable WlTable; 
 
         protected void Page_Init(object sender, EventArgs e) {
             //Wire up the event (CurrencyChanged) to the event handler (CurrencyChangedFromMasterPage) 
@@ -38,9 +38,9 @@ namespace eStoreWeb.WishList {
         }
         
         private void CurrencyChangedFromMasterPage(object sender, CurrencyChangedEventArgs e) {
-            string currencyValue = e.CurrencyValue;
-            wlTable = WishListTable;
-            wlTable.PriceLabel1 = "Price(" + currencyValue + ")";
+            var currencyValue = e.CurrencyValue;
+            WlTable = WishListTable;
+            WlTable.PriceLabel1 = "Price(" + currencyValue + ")";
 
             GoTo.Instance.WishListPage();
         }

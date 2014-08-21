@@ -60,7 +60,7 @@ namespace SeleniumTests {
             selenium.Click("ctl00_ContentPlaceHolder1_NextButton");
             testUtil.WaitForPageToLoad(selenium, "6000");
 
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_ContentPlaceHolder1_EmailTextBoxRFV\" style=\"color: Red; display: none;\">Required Field</span>"));
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_ContentPlaceHolder1_EmailTextBoxREV\" style=\"color: Red; display: inline;\">Invalid Email Address</span>"));
             testUtil.AssertCheckout1RequiredFieldRedLabels(selenium, "inline");

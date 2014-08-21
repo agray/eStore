@@ -38,10 +38,10 @@ namespace eStoreWeb.Profile {
             if(!Page.IsPostBack) {
                 billingCountryDDL.DataBind();
                 shippingCountryDDL.DataBind();
-                Guid userID = BaseUserControl.getUserID(this);
+                var userID = BaseUserControl.getUserID(this);
 
-                CustomerAddressBLL ca = new CustomerAddressBLL();
-                DTAddress[] addresses = ca.getCustomerAddresses(userID);
+                var ca = new CustomerAddressBLL();
+                var addresses = ca.getCustomerAddresses(userID);
 
                 setFields(addresses);
 
@@ -199,8 +199,8 @@ namespace eStoreWeb.Profile {
         }
 
         protected void SaveChanges(object sender, EventArgs e) {
-            Guid userID = BaseUserControl.getUserID(this);
-            CustomerAddressBLL ca = new CustomerAddressBLL();
+            var userID = BaseUserControl.getUserID(this);
+            var ca = new CustomerAddressBLL();
             ca.saveAddresses(userID,
                              int.Parse(AddressCountLabel.Text),
                              new DTAddress(IntParseOrZero(BillingAddressIDLabel.Text.ToString()),

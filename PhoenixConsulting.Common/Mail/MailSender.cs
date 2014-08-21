@@ -23,6 +23,7 @@
  * THE SOFTWARE.
  */
 #endregion
+
 using System;
 using System.Net;
 using System.Net.Mail;
@@ -31,9 +32,9 @@ using NLog;
 using phoenixconsulting.common.handlers;
 using phoenixconsulting.common.logging;
 
-namespace com.phoenixconsulting.common.mail {
+namespace PhoenixConsulting.Common.Mail {
     public class MailSender : Page {
-        private static Logger errorLogger = LogManager.GetLogger("ErrorLogger");
+        private static readonly Logger ErrorLogger = LogManager.GetLogger("ErrorLogger");
 
         //******************************************
         // Utility Mail Sending Functions
@@ -45,27 +46,23 @@ namespace com.phoenixconsulting.common.mail {
         public static void SendMail(MailMessage msg) {
 
             try {
-                SmtpClient smtp = new SmtpClient(ApplicationHandler.Instance.SMTPServer, 587); //was "iinet.net.au", 25
-                smtp.EnableSsl = true;
-                NetworkCredential cred = new NetworkCredential("domaintransformations@gmail.com",
-                                                               "serenity");
+                var smtp = new SmtpClient(ApplicationHandler.Instance.SMTPServer, 587) {EnableSsl = true}; //was "iinet.net.au", 25
+                var cred = new NetworkCredential("domaintransformations@gmail.com", "serenity");
 
                 smtp.Credentials = cred;
                 smtp.Send(msg);
-                LoggerUtil.auditLog(NLog.LogLevel.Info,
+                LoggerUtil.AuditLog(LogLevel.Info,
                                 AuditEventType.MAILSEND_SUCCESS,
                                 "StoreSite",
                                 null,
                                 msg.Priority.ToString(), msg.To.ToString(), msg.Subject, null, null);
             } catch(Exception ex) {
-                errorLogger.Error("Unable to send mail! " + ex.Message);
-                LoggerUtil.auditLog(NLog.LogLevel.Info,
+                ErrorLogger.Error("Unable to send mail! " + ex.Message);
+                LoggerUtil.AuditLog(LogLevel.Info,
                                 AuditEventType.MAILSEND_FAILED,
                                 "StoreSite",
                                 null,
                                 msg.Priority.ToString(), msg.To.ToString(), msg.Subject, null, null);
-            } finally {
-                msg = null;
             }
         }
     }

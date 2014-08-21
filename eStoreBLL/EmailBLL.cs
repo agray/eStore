@@ -34,7 +34,7 @@ namespace eStoreBLL {
                              string subject,
                              string message)
         {
-            int rowsAffected = (int)BLLAdapter.Instance.EmailAdapter.AddEmail(customerName, emailAddress, subject, message);
+            var rowsAffected = (int)BLLAdapter.Instance.EmailAdapter.AddEmail(customerName, emailAddress, subject, message);
             return rowsAffected == 1;
         }
     }

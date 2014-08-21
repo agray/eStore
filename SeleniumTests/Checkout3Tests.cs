@@ -39,7 +39,7 @@ namespace SeleniumTests {
             testUtil.EnterCheckOut1DataAndSubmit(selenium);
             testUtil.EnterCheckOut2DataAndSubmit(selenium);
 
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("3. Enter your payment details"));
             Assert.IsTrue(htmlSource.Contains("value=\"CC\" checked=\"checked\" type=\"radio\">"));
         }
@@ -147,7 +147,7 @@ namespace SeleniumTests {
 
             testUtil.MoveToPopUp(selenium, "2000");
 
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(selenium.GetTitle().Equals("What is CVV"));
             Assert.IsTrue(htmlSource.Contains("<h1>Card Verification Value (CVV)</h1>"));
             Assert.IsTrue(htmlSource.Contains("<h2>Visa Card and Master Card</h2>"));

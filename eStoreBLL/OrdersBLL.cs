@@ -42,7 +42,7 @@ namespace eStoreBLL {
 
         [DataObjectMethodAttribute(DataObjectMethodType.Insert, true)]
         public int addOrder(string emailAddress, string billingFirstName, string billingLastName, string billingAddress, string billingSuburbCity, string billingStateProvinceRegion, string billingZipPostcode, int billingCountryID, string shippingFirstName, string shippingLastName, string shippingAddress, string shippingSuburbCity, string shippingStateProvinceRegion, string shippingZipPostcode, int shippingCountryID, int shippingModeID, double shippingCost, string orderDetailXML, string orderComments, string giftTagComments, double totalCost, Guid userID) {
-            int orderID = (int)BLLAdapter.Instance.OrderAdapter.AddOrder(emailAddress, billingFirstName, billingLastName, billingAddress, 
+            var orderID = (int)BLLAdapter.Instance.OrderAdapter.AddOrder(emailAddress, billingFirstName, billingLastName, billingAddress, 
                                                      billingSuburbCity, billingStateProvinceRegion, 
                                                      billingZipPostcode, billingCountryID, shippingFirstName, 
                                                      shippingLastName, shippingAddress, shippingSuburbCity, 

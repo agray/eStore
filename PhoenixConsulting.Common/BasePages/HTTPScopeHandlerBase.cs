@@ -36,19 +36,19 @@ namespace phoenixconsulting.common.basepages {
         #region HTTP Scopes
 
         protected HttpApplicationState ApplicationState {
-            get { return getCurrentContext().Application; }
+            get { return GetCurrentContext().Application; }
         }
 
         protected HttpSessionState SessionState {
-            get { return getCurrentContext().Session; }
+            get { return GetCurrentContext().Session; }
         }
 
         protected HttpRequest RequestObject {
-            get { return getCurrentContext().Request; }
+            get { return GetCurrentContext().Request; }
         }
 
         protected HttpResponse ResponseObject {
-            get { return getCurrentContext().Response; }
+            get { return GetCurrentContext().Response; }
         }
 
         #endregion
@@ -103,43 +103,43 @@ namespace phoenixconsulting.common.basepages {
         #region Getters
 
         protected int getInt(string variableName, HTTPScope scope) {
-            object check = getScopedValue(variableName, scope);
+            var check = getScopedValue(variableName, scope);
             return (int)returnVal(check, typeof(int));
         }
 
         protected string getString(string variableName, HTTPScope scope) {
-            object check = getScopedValue(variableName, scope);
+            var check = getScopedValue(variableName, scope);
             return (string)returnVal(check, typeof(string));
         }
 
         protected double getDouble(string variableName, HTTPScope scope) {
-            object check = getScopedValue(variableName, scope);
+            var check = getScopedValue(variableName, scope);
             //Check for null first
             return check == null ? 0 : (double)check;
         }
 
         protected bool getBool(string variableName, HTTPScope scope) {
-            object check = getScopedValue(variableName, scope);
+            var check = getScopedValue(variableName, scope);
             return (bool)returnVal(check, typeof(bool));
         }
 
         protected ArrayList getArrayList(string variableName, HTTPScope scope) {
-            object check = getScopedValue(variableName, scope);
+            var check = getScopedValue(variableName, scope);
             return (ArrayList)returnVal(check, typeof(ArrayList));
         }
 
         protected DataSet getDataSet(string variableName, HTTPScope scope) {
-            object check = getScopedValue(variableName, scope);
+            var check = getScopedValue(variableName, scope);
             return (DataSet)returnVal(check, typeof(DataSet));
         }
 
         protected GetExpressCheckoutDetailsResponseType getECDResponseType(string variableName, HTTPScope scope) {
-            object check = getScopedValue(variableName, scope);
+            var check = getScopedValue(variableName, scope);
             return (GetExpressCheckoutDetailsResponseType)returnVal(check, typeof(GetExpressCheckoutDetailsResponseType));
         }
 
         protected GetExpressCheckoutDetailsResponseDetailsType getECDResponseDetailsType(string variableName, HTTPScope scope) {
-            object check = getScopedValue(variableName, scope);
+            var check = getScopedValue(variableName, scope);
             return (GetExpressCheckoutDetailsResponseDetailsType)returnVal(check, typeof(GetExpressCheckoutDetailsResponseDetailsType));
         }
 

@@ -119,7 +119,7 @@ namespace Subtext.TestLibrary {
 
             SetHttpRuntimeInternals();
 
-            string query = ExtractQueryStringPart(url);
+            var query = ExtractQueryStringPart(url);
 
             if(formVariables != null)
                 _formVars.Add(formVariables);
@@ -169,15 +169,15 @@ namespace Subtext.TestLibrary {
         }
 
         private static void InitializeApplication() {
-            Type appFactoryType = Type.GetType("System.Web.HttpApplicationFactory, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
-            object appFactory = ReflectionHelper.GetStaticFieldValue<object>("_theApplicationFactory", appFactoryType);
+            var appFactoryType = Type.GetType("System.Web.HttpApplicationFactory, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+            var appFactory = ReflectionHelper.GetStaticFieldValue<object>("_theApplicationFactory", appFactoryType);
             ReflectionHelper.SetPrivateInstanceFieldValue("_state", appFactory, HttpContext.Current.Application);
         }
 
         private void InitializeSession() {
             HttpContext.Current = new HttpContext(workerRequest);
             HttpContext.Current.Items.Clear();
-            HttpSessionState session = (HttpSessionState)ReflectionHelper.Instantiate(typeof(HttpSessionState), new Type[] { typeof(IHttpSessionState) }, new FakeHttpSessionState());
+            var session = (HttpSessionState)ReflectionHelper.Instantiate(typeof(HttpSessionState), new Type[] { typeof(IHttpSessionState) }, new FakeHttpSessionState());
 
             HttpContext.Current.Items.Add("AspSession", session);
         }
@@ -474,7 +474,7 @@ namespace Subtext.TestLibrary {
             if(search.Length > original.Length || search.Length == 0)
                 return original;
 
-            int searchIndex = original.IndexOf(search, 0, StringComparison.InvariantCultureIgnoreCase);
+            var searchIndex = original.IndexOf(search, 0, StringComparison.InvariantCultureIgnoreCase);
 
             if(searchIndex < 0)
                 return original;
@@ -561,7 +561,7 @@ namespace Subtext.TestLibrary {
         private SimulatedHttpRequest workerRequest;
 
         private static string ExtractQueryStringPart(Uri url) {
-            string query = url.Query ?? string.Empty;
+            var query = url.Query ?? string.Empty;
             if(query.StartsWith("?"))
                 return query.Substring(1);
             return query;
@@ -571,19 +571,19 @@ namespace Subtext.TestLibrary {
             //We cheat by using reflection.
 
             // get singleton property value
-            HttpRuntime runtime = ReflectionHelper.GetStaticFieldValue<HttpRuntime>("_theRuntime", typeof(HttpRuntime));
+            var runtime = ReflectionHelper.GetStaticFieldValue<HttpRuntime>("_theRuntime", typeof(HttpRuntime));
 
             // set app path property value
             ReflectionHelper.SetPrivateInstanceFieldValue("_appDomainAppPath", runtime, PhysicalApplicationPath);
             // set app virtual path property value
-            string vpathTypeName = "System.Web.VirtualPath, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
-            object virtualPath = ReflectionHelper.Instantiate(vpathTypeName, new Type[] { typeof(string) }, new object[] { ApplicationPath });
+            var vpathTypeName = "System.Web.VirtualPath, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
+            var virtualPath = ReflectionHelper.Instantiate(vpathTypeName, new Type[] { typeof(string) }, new object[] { ApplicationPath });
             ReflectionHelper.SetPrivateInstanceFieldValue("_appDomainAppVPath", runtime, virtualPath);
 
             // set codegen dir property value
             ReflectionHelper.SetPrivateInstanceFieldValue("_codegenDir", runtime, PhysicalApplicationPath);
 
-            HostingEnvironment environment = GetHostingEnvironment();
+            var environment = GetHostingEnvironment();
             ReflectionHelper.SetPrivateInstanceFieldValue("_appPhysicalPath", environment, PhysicalApplicationPath);
             ReflectionHelper.SetPrivateInstanceFieldValue("_appVirtualPath", environment, virtualPath);
             ReflectionHelper.SetPrivateInstanceFieldValue("_configMapPath", environment, new ConfigMapPath(this));
@@ -608,7 +608,7 @@ namespace Subtext.TestLibrary {
             s = s.Replace(@"\", "/");
 
             //Reduce multiple slashes in row to single.
-            string normalized = Regex.Replace(s, "(/)/+", "$1");
+            var normalized = Regex.Replace(s, "(/)/+", "$1");
             //Strip left.
             normalized = StripPrecedingSlashes(normalized);
             //Strip right.
@@ -658,7 +658,7 @@ namespace Subtext.TestLibrary {
             }
 
             public string MapPath(string siteID, string path) {
-                string page = StripPrecedingSlashes(RightAfter(path, _requestSimulation.ApplicationPath));
+                var page = StripPrecedingSlashes(RightAfter(path, _requestSimulation.ApplicationPath));
                 return Path.Combine(_requestSimulation.PhysicalApplicationPath, page.Replace("/", @"\"));
             }
 

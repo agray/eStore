@@ -33,7 +33,7 @@ namespace phoenixconsulting.common.navigation {
         }
 
         public static void handleNavigationRedirect(Uri referringPage) {
-            ShoppingCart sc = new ShoppingCart();
+            var sc = new ShoppingCart();
             if(SessionHandler.Instance.CartDataSet == null || sc.IsEmptyList()) {
                 GoTo.Instance.HomePage();
             } else {

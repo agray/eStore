@@ -47,13 +47,13 @@ namespace eStoreWeb {
         }
 
         protected void SaveSearch(object sender, EventArgs e) {
-            if(isLoggedIn() && SessionHandler.Instance.SearchString != String.Empty) {
+            if(IsLoggedIn() && SessionHandler.Instance.SearchString != String.Empty) {
                 //Session still active
-                UserBLL userBLL = new UserBLL();
-                string foundUserID = userBLL.getUserIDByEmail(Page.User.Identity.Name, "eStore");
+                var userBll = new UserBLL();
+                var foundUserId = userBll.getUserIDByEmail(Page.User.Identity.Name, "eStore");
 
-                SavedSearchBLL ss = new SavedSearchBLL();
-                ss.addSavedSearch(new Guid(foundUserID),
+                var ss = new SavedSearchBLL();
+                ss.addSavedSearch(new Guid(foundUserId),
                                   SavedSearchTextBox.Text,
                                   SessionHandler.Instance.SearchString);
             } else {
@@ -65,7 +65,7 @@ namespace eStoreWeb {
             if(SearchResultsList.Items.Count > 0) {
                 PagerUtils.SetPageDetails(SearchResultsList);
             }
-            LoggerUtil.auditLog(NLog.LogLevel.Info,
+            LoggerUtil.AuditLog(NLog.LogLevel.Info,
                                 AuditEventType.KEYWORD_SEARCH,
                                 "StoreSite",
                                 null, null, null, null, null, null);

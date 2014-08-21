@@ -10,10 +10,10 @@
     <asp:UpdatePanel ID="SearchUpdatePanel" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div id="DivMain">
-                <asp:HyperLink ID="HomeHyperlink" runat="server" NavigateUrl="~/">Home</asp:HyperLink>
+                <asp:HyperLink ID="HomeHyperlink" runat="server" NavigateUrl="~/Splash.aspx">Home</asp:HyperLink>
                 <hr />
                 <h1>Search results for <%=SessionHandler.Instance.SearchString%></h1>
-                <%if(isLoggedIn()) { %>
+                <%if(IsLoggedIn()) { %>
                     <table>
                         <tr>
                             <th>Name:</th>
@@ -89,7 +89,7 @@
                             <div class="ProductFields">
                                 <asp:HyperLink ID="HyperLink1" 
                                     NavigateUrl='<%#"BrowseItem.aspx?ProdID=" + Eval("ID") + "&CatID=" + Eval("CatID") + "&DepID=" + Eval("DepID")%>' 
-                                    runat="server"><asp:Image ID="Image1" ImageUrl="~/Images/ViewDetails.gif"  runat="server" 
+                                    runat="server"><asp:Image ID="Image1" ImageUrl="~/Images/System/ViewDetails.gif"  runat="server" 
                                     AlternateText="View Details" BorderWidth="0" BorderStyle="None" /></asp:HyperLink>
                             </div>
                         </td>

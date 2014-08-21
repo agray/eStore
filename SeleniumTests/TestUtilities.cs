@@ -77,7 +77,7 @@ namespace SeleniumTests {
             //if(currency.Equals("EUR")) {
             //    Console.WriteLine("symbol: " + symbol);
             //}
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_NavCart_ItemsTotalLabel\">" + currency + "&nbsp;" + symbol + total + "</span>"));
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_NavCart_ShippingTotalLabel\">" + currency + "&nbsp;" + symbol + shipping + "</span>"));
         }
@@ -85,13 +85,13 @@ namespace SeleniumTests {
         public void AssertViewCartTableFigures(ISelenium selenium, string symbol, string total, string shipping) {
             //Console.WriteLine("<td style=\"text-align: right;\">" + symbol + shipping + "</td>");
             //Console.WriteLine("<td style=\"text-align: right; height: 25px;\">" + symbol + total + "</td>");
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("<td style=\"text-align: right;\">" + symbol + shipping + "</td>"));
             Assert.IsTrue(htmlSource.Contains("<td style=\"text-align: right; height: 25px;\">" + symbol + total + "</td>"));
         }
 
         public void AssertViewCartLabels(ISelenium selenium, string symbol, string totalLabel, string priceHeading) {
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(!symbol.Equals("") ? htmlSource.Contains(symbol) : htmlSource.Contains(","));
             Assert.IsTrue(htmlSource.Contains(totalLabel));
             Assert.IsTrue(htmlSource.Contains("Total Price(<span>" + priceHeading + "</span>)"));
@@ -158,7 +158,7 @@ namespace SeleniumTests {
         }
 
         public void AssertDepartments(ISelenium selenium, string currency, string symbol) {
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("<span class=\"CategoryName\">Grooming</span>"));
             Assert.IsTrue(htmlSource.Contains("<span class=\"CategoryName\">BathTime</span>"));
             //Assert.IsTrue(htmlSource.Contains("<span class=\"CategoryName\">Snakes</span>"));
@@ -297,7 +297,7 @@ namespace SeleniumTests {
         }
 
         public void AssertCheckout1RequiredFieldRedLabels(ISelenium selenium, string display) {
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_ContentPlaceHolder1_CustomerFirstNameTextBoxRFV\" style=\"color: Red; display: " + display + ";\">Required Field</span>"));
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_ContentPlaceHolder1_CustomerLastNameTextBoxRFV\" style=\"color: Red; display: " + display + ";\">Required Field</span>"));
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_ContentPlaceHolder1_CustomerAddressTextBoxRFV\" style=\"color: Red; display: " + display + ";\">Required Field</span>"));
@@ -307,7 +307,7 @@ namespace SeleniumTests {
         }
 
         public void AssertCheckout2RequiredFieldRedLabels(ISelenium selenium, string display) {
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_ContentPlaceHolder1_ShippingFirstNameTextBoxRFV\" style=\"color: Red; display: " + display + ";\">Required Field</span>"));
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_ContentPlaceHolder1_ShippingLastNameTextBoxRFV\" style=\"color: Red; display: " + display + ";\">Required Field</span>"));
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_ContentPlaceHolder1_ShippingAddressTextBoxRFV\" style=\"color: Red; display: " + display + ";\">Required Field</span>"));
@@ -317,7 +317,7 @@ namespace SeleniumTests {
         }
 
         public void AssertCheckout3RequiredFieldRedLabels(ISelenium selenium) {
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_ContentPlaceHolder1_CardholderTextBoxRequiredFieldValidator\" style=\"color: Red; display: inline;\">Required Field</span>"));
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_ContentPlaceHolder1_CardTypeDropDownListRequiredFieldValidator\" style=\"color: Red; display: inline;\">Required Field</span>"));
             Assert.IsTrue(htmlSource.Contains("<span id=\"ctl00_ContentPlaceHolder1_CardNumberTextBoxRequiredFieldValidator\" style=\"color: Red; display: inline;\">Required Field</span>"));

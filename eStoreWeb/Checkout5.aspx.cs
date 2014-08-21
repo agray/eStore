@@ -31,7 +31,7 @@ using phoenixconsulting.common.navigation;
 namespace eStoreWeb {
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-    public partial class checkout5 : BasePage {
+    public partial class Checkout5 : BasePage {
         protected void Page_Load(object sender, EventArgs e) {
             CameFrom.handleNavigationRedirect(Request.UrlReferrer);
 

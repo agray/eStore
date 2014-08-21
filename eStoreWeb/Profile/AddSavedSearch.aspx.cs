@@ -31,12 +31,12 @@ using phoenixconsulting.common.navigation;
 namespace eStoreWeb.Profile {
     public partial class AddSavedSearch : BasePage {
         protected void SaveSearch(object sender, EventArgs e) {
-            if(isLoggedIn()) {
+            if(IsLoggedIn()) {
                 //Session still active
-                UserBLL userBLL = new UserBLL();
-                string foundUserID = userBLL.getUserIDByEmail(Page.User.Identity.Name, "eStore");
+                var userBLL = new UserBLL();
+                var foundUserID = userBLL.getUserIDByEmail(Page.User.Identity.Name, "eStore");
 
-                SavedSearchBLL ss = new SavedSearchBLL();
+                var ss = new SavedSearchBLL();
                 ss.addSavedSearch(new Guid(foundUserID), NameTextBox.Text, CriteriaTextBox.Text);
                 GoTo.Instance.SavedSearchPage();
             } else {

@@ -40,7 +40,7 @@ namespace eStoreWeb.Controls {
         }
 
         protected void cartShipMode_DataBound(object sender, EventArgs e) {
-            ShoppingCart sc = new ShoppingCart();
+            var sc = new ShoppingCart();
             if(String.IsNullOrEmpty(SessionHandler.Instance.ShippingMode)) {
                 SetModeDefault();
             } else if(IsAustralia(SessionHandler.Instance.ShippingCountry)) {
@@ -84,8 +84,8 @@ namespace eStoreWeb.Controls {
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
         protected void cartShipCountry_SelectedIndexChanged(object sender, EventArgs e) {
-            ShoppingCart sc = new ShoppingCart();
-            DropDownList DDL = (DropDownList)sender;
+            var sc = new ShoppingCart();
+            var DDL = (DropDownList)sender;
             resetMode(IsAustralia((DDL.SelectedValue))
                           ? Settings.Default.ModeExpressAirMail
                           : Settings.Default.ModeAirMail);
@@ -97,7 +97,7 @@ namespace eStoreWeb.Controls {
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
         protected void cartShipMode_SelectedIndexChanged(object sender, EventArgs e) {
-            ShoppingCart sc = new ShoppingCart();
+            var sc = new ShoppingCart();
             SessionHandler.Instance.ShippingMode = cartShipMode.Text;
 
             if(IsAustralia(SessionHandler.Instance.ShippingCountry)) {

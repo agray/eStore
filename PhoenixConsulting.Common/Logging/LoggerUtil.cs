@@ -24,7 +24,6 @@
  */
 #endregion
 using System;
-using System.Collections.Specialized;
 using System.Security.Principal;
 using System.Text;
 using System.Web.UI;
@@ -33,12 +32,12 @@ using NLog;
 
 namespace phoenixconsulting.common.logging {
     public class LoggerUtil : Page {
-        private static Logger auditLogger = LogManager.GetLogger("AuditLogger");
+        private static readonly Logger AuditLogger = LogManager.GetLogger("AuditLogger");
 
         //****************************
         // AUDIT LOGGER HELPER METHODS
         //****************************
-        public static void auditLog(LogLevel ll,
+        public static void AuditLog(LogLevel ll,
                                     AuditEventType eventType,
                                     string site,
                                     string userName,
@@ -47,21 +46,21 @@ namespace phoenixconsulting.common.logging {
                                     string data4,
                                     string status,
                                     string exMsg) {
-            LogEventInfo lei = createEventInfoObject(ll,
-                                                     (int)eventType + 1000,
-                                                     site,
-                                                     (int)eventType,
-                                                     DateTime.Now,
-                                                     DateTime.Now,
-                                                     userName,
-                                                     data2, data3, data4, status, exMsg);
-            auditLogger.Log(lei);
+            var lei = CreateEventInfoObject(ll,
+                                            (int)eventType + 1000,
+                                            site,
+                                            (int)eventType,
+                                            DateTime.Now,
+                                            DateTime.Now,
+                                            userName,
+                                            data2, data3, data4, status, exMsg);
+            AuditLogger.Log(lei);
         }
 
-        private static LogEventInfo createEventInfoObject(LogLevel ll,
+        private static LogEventInfo CreateEventInfoObject(LogLevel ll,
                                                           int errorNum,
                                                           string storeName,
-                                                          int typeID,
+                                                          int typeId,
                                                           DateTime createdDate,
                                                           DateTime endDate,
                                                           string userName,
@@ -70,10 +69,10 @@ namespace phoenixconsulting.common.logging {
                                                           string data4,
                                                           string status,
                                                           string longData) {
-            LogEventInfo eventInfo = new LogEventInfo(ll, auditLogger.Name, "");
+            var eventInfo = new LogEventInfo(ll, AuditLogger.Name, "");
             eventInfo.Properties["ErrorNum"] = errorNum;
             eventInfo.Properties["StoreName"] = storeName;
-            eventInfo.Properties["TypeID"] = typeID;
+            eventInfo.Properties["TypeID"] = typeId;
             eventInfo.Properties["CreatedDate"] = createdDate;
             eventInfo.Properties["EndDate"] = endDate;
             eventInfo.Properties["Data1"] = userName;
@@ -88,50 +87,53 @@ namespace phoenixconsulting.common.logging {
         //***********************
         // MULTIPLE ITEM METHODS
         //***********************
-        public static string getText(string[] fieldNames, FormViewInsertedEventArgs e, string objectType) {
-            return getObjectValues(fieldNames, e, " inserted ", objectType);
+        public static string GetText(string[] fieldNames, FormViewInsertedEventArgs e, string objectType) {
+            return GetObjectValues(fieldNames, e, " inserted ", objectType);
         }
 
-        public static string getText(string[] fieldNames, FormViewUpdatedEventArgs e, string objectType) {
-            return getObjectValues(fieldNames, e, " updated ", objectType);
+        public static string GetText(string[] fieldNames, FormViewUpdatedEventArgs e, string objectType) {
+            return GetObjectValues(fieldNames, e, " updated ", objectType);
         }
 
-        public static string getText(string[] fieldNames, FormViewDeletedEventArgs e, string objectType) {
-            return getObjectValues(fieldNames, e, " deleted ", objectType);
+        public static string GetText(string[] fieldNames, FormViewDeletedEventArgs e, string objectType) {
+            return GetObjectValues(fieldNames, e, " deleted ", objectType);
         }
 
 
         //***********************
         // SINGLE ITEM METHODS
         //***********************
-        public static string getText(FormViewInsertedEventArgs e, string objectType) {
-            return getObjectValue(e, " inserted ", objectType);
+        public static string GetText(FormViewInsertedEventArgs e, string objectType) {
+            return GetObjectValue(e, " inserted ", objectType);
         }
 
-        public static string getText(FormViewUpdatedEventArgs e, string objectType) {
-            return getObjectValue(e, " updated ", objectType);
+        public static string GetText(FormViewUpdatedEventArgs e, string objectType) {
+            return GetObjectValue(e, " updated ", objectType);
         }
 
-        public static string getText(FormViewDeletedEventArgs e, string objectType) {
-            return getObjectValue(e, " deleted ", objectType);
+        public static string GetText(FormViewDeletedEventArgs e, string objectType) {
+            return GetObjectValue(e, " deleted ", objectType);
         }
         
         //***********************
         // PRIVATE METHODS
         //***********************
-        private static string getObjectValues(string[] fieldNames, EventArgs e, string mode, string objectType) {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("User " + WindowsIdentity.GetCurrent().Name + mode + objectType + ":\n");
+        private static string GetObjectValues(string[] fieldNames, EventArgs e, string mode, string objectType) {
+            var sb = new StringBuilder();
+            var windowsIdentity = WindowsIdentity.GetCurrent();
+            if(windowsIdentity != null) {
+                sb.Append("User " + windowsIdentity.Name + mode + objectType + ":\n");
+            }
 
             switch(mode) {
                 case " inserted ":
-                    for(int i = 0; i < fieldNames.Length; i++) {
+                    for(var i = 0; i < fieldNames.Length; i++) {
                         sb.Append(fieldNames[i] + ": " + ((FormViewInsertedEventArgs)e).Values[i] + "\n");
                     }
                     break;
                 case " updated ":
                     sb.Append("New Values:\n");
-                    for(int i = 0; i < fieldNames.Length; i++) {
+                    for(var i = 0; i < fieldNames.Length; i++) {
                         sb.Append(fieldNames[i] + ": " + ((FormViewUpdatedEventArgs)e).NewValues[i] + "\n");
                     }
                     break;
@@ -142,7 +144,7 @@ namespace phoenixconsulting.common.logging {
                 //break;
                 case " deleted ":
                     if(((FormViewDeletedEventArgs)e).Values.Count != 0) {
-                        for(int i = 0; i < fieldNames.Length; i++) {
+                        for(var i = 0; i < fieldNames.Length; i++) {
                             sb.Append(fieldNames[i] + ": " + ((FormViewDeletedEventArgs)e).Values[i] + "\n");
                         }
                     } else {
@@ -154,38 +156,44 @@ namespace phoenixconsulting.common.logging {
             return sb.ToString();
         }
 
-        private static string getObjectValue(EventArgs e, string mode, string objectType) {
-            StringBuilder sb = new StringBuilder("User " + WindowsIdentity.GetCurrent().Name + mode + objectType + " ");
+        private static string GetObjectValue(EventArgs e, string mode, string objectType) {
+            var windowsIdentity = WindowsIdentity.GetCurrent();
+            if(windowsIdentity != null) {
+                var sb = new StringBuilder("User " + windowsIdentity.Name + mode + objectType + " ");
 
-            switch(mode) {
-                case " inserted ":
-                    sb.Append(((FormViewInsertedEventArgs)e).Values[0]);
-                    break;
-                case " updated ":
-                    sb.Append(((FormViewUpdatedEventArgs)e).OldValues[0] + " to " + ((FormViewUpdatedEventArgs)e).NewValues[0]);
-                    break;
-                case " deleted ":
-                    sb.Append(((FormViewDeletedEventArgs)e).Values[0]);
-                    break;
+                switch(mode) {
+                    case " inserted ":
+                        sb.Append(((FormViewInsertedEventArgs)e).Values[0]);
+                        break;
+                    case " updated ":
+                        sb.Append(((FormViewUpdatedEventArgs)e).OldValues[0] + " to " + ((FormViewUpdatedEventArgs)e).NewValues[0]);
+                        break;
+                    case " deleted ":
+                        sb.Append(((FormViewDeletedEventArgs)e).Values[0]);
+                        break;
+                }
+
+                return sb.ToString();
             }
-
-            return sb.ToString();
+            return null;
         }
 
+/*
         private static string GetOldAndNewValues(string[] fieldNames,
                                                  OrderedDictionary newValues,
                                                  OrderedDictionary oldValues) {
             // Iterate through the new and old values. Display the
             // values on the page.
-            StringBuilder sb = new StringBuilder("");
+            var sb = new StringBuilder("");
 
             //for(int i = 0; i < fieldNames.Length; i++) {
-            for(int i = 0; i < oldValues.Count; i++) {
+            for(var i = 0; i < oldValues.Count; i++) {
                 sb.Append(fieldNames[i] + ": " +
                           "Old Value=" + oldValues[i] +
                           ", New Value=" + newValues[i] + "\n");
             }
             return sb.ToString();
         }
+*/
     }
 }

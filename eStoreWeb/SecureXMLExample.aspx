@@ -136,9 +136,9 @@ public void setMessage()
 
 public void processXMLmessage()
 {
-	HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create(strURL);
-	ASCIIEncoding encoding = new ASCIIEncoding();
-	Byte[] byte1 = encoding.GetBytes(message);
+	var myRequest = (HttpWebRequest)WebRequest.Create(strURL);
+	var encoding = new ASCIIEncoding();
+	var byte1 = encoding.GetBytes(message);
 
     myRequest.Method = "POST";
 	myRequest.ContentType="application/x-www-form-urlencoded";
@@ -154,14 +154,14 @@ public void processXMLmessage()
     try
     {
         //Get the data as an HttpWebResponse object
-        HttpWebResponse resp = (HttpWebResponse)myRequest.GetResponse();	
+        var resp = (HttpWebResponse)myRequest.GetResponse();	
         
 		//Convert the data into a string (assumes that you are requesting text)
-        StreamReader sr = new StreamReader(resp.GetResponseStream());
-        XmlTextReader xmlreader = new XmlTextReader(sr);
+        var sr = new StreamReader(resp.GetResponseStream());
+        var xmlreader = new XmlTextReader(sr);
         
         xmlreader.WhitespaceHandling = WhitespaceHandling.None;
-        XmlDocument myXMLdocument = new XmlDocument();
+        var myXMLdocument = new XmlDocument();
         myXMLdocument.Load(xmlreader);
 		
         XmlNodeList myNodeList;
@@ -170,7 +170,7 @@ public void processXMLmessage()
         sr.Close();
         xmlreader.Close();
         
-        for (int counter = 1; counter < myNodeList.Count; counter++)
+        for (var counter = 1; counter < myNodeList.Count; counter++)
         {
             switch (myNodeList.Item(counter).Name.ToString())
             {

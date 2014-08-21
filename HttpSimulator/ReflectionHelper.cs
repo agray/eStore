@@ -14,7 +14,7 @@ namespace Subtext.TestLibrary {
         /// <param name="fieldName">Name of the member.</param>
         /// /// <param name="type">Type of the member.</param>
         public static T GetStaticFieldValue<T>(string fieldName, Type type) {
-            FieldInfo field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
+            var field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
             if(field != null) {
                 return (T)field.GetValue(type);
             }
@@ -27,8 +27,8 @@ namespace Subtext.TestLibrary {
         /// <param name="fieldName">Name of the member.</param>
         /// <param name="typeName"></param>
         public static T GetStaticFieldValue<T>(string fieldName, string typeName) {
-            Type type = Type.GetType(typeName, true);
-            FieldInfo field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
+            var type = Type.GetType(typeName, true);
+            var field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
             if(field != null) {
                 return (T)field.GetValue(type);
             }
@@ -42,7 +42,7 @@ namespace Subtext.TestLibrary {
         /// <param name="type"></param>
         /// <param name="value"></param>
         public static void SetStaticFieldValue<T>(string fieldName, Type type, T value) {
-            FieldInfo field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
+            var field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
             if(field == null)
                 throw new ArgumentException(string.Format("Could not find the private instance field '{0}'", fieldName));
 
@@ -56,8 +56,8 @@ namespace Subtext.TestLibrary {
         /// <param name="typeName"></param>
         /// <param name="value"></param>
         public static void SetStaticFieldValue<T>(string fieldName, string typeName, T value) {
-            Type type = Type.GetType(typeName, true);
-            FieldInfo field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
+            var type = Type.GetType(typeName, true);
+            var field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
             if(field == null)
                 throw new ArgumentException(string.Format("Could not find the private instance field '{0}'", fieldName));
 
@@ -70,7 +70,7 @@ namespace Subtext.TestLibrary {
         /// <param name="fieldName">Name of the member.</param>
         /// <param name="source">The object that contains the member.</param>
         public static T GetPrivateInstanceFieldValue<T>(string fieldName, object source) {
-            FieldInfo field = source.GetType().GetField(fieldName, BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+            var field = source.GetType().GetField(fieldName, BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
             if(field != null) {
                 return (T)field.GetValue(source);
             }
@@ -84,7 +84,7 @@ namespace Subtext.TestLibrary {
         /// <param name="source">The object that contains the member.</param>
         /// <param name="value">The value to set the member to.</param>
         public static void SetPrivateInstanceFieldValue(string memberName, object source, object value) {
-            FieldInfo field = source.GetType().GetField(memberName, BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+            var field = source.GetType().GetField(memberName, BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
             if(field == null)
                 throw new ArgumentException(string.Format("Could not find the private instance field '{0}'", memberName));
 
@@ -100,7 +100,7 @@ namespace Subtext.TestLibrary {
         }
 
         public static object Instantiate(Type type, Type[] constructorArgumentTypes, params object[] constructorParameterValues) {
-            ConstructorInfo constructor = type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, constructorArgumentTypes, null);
+            var constructor = type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, constructorArgumentTypes, null);
             return constructor.Invoke(constructorParameterValues);
         }
 
@@ -113,9 +113,9 @@ namespace Subtext.TestLibrary {
         /// <param name="parameters"></param>
         /// <returns></returns>
         public static TReturn InvokeNonPublicMethod<TReturn>(Type type, string methodName, params object[] parameters) {
-            Type[] paramTypes = Array.ConvertAll(parameters, new Converter<object, Type>(delegate(object o) { return o.GetType(); }));
+            var paramTypes = Array.ConvertAll(parameters, new Converter<object, Type>(delegate(object o) { return o.GetType(); }));
 
-            MethodInfo method = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Static, null, paramTypes, null);
+            var method = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Static, null, paramTypes, null);
             if(method == null)
                 throw new ArgumentException(string.Format("Could not find a method with the name '{0}'", methodName), "method");
 
@@ -123,9 +123,9 @@ namespace Subtext.TestLibrary {
         }
 
         public static TReturn InvokeNonPublicMethod<TReturn>(object source, string methodName, params object[] parameters) {
-            Type[] paramTypes = Array.ConvertAll(parameters, new Converter<object, Type>(delegate(object o) { return o.GetType(); }));
+            var paramTypes = Array.ConvertAll(parameters, new Converter<object, Type>(delegate(object o) { return o.GetType(); }));
 
-            MethodInfo method = source.GetType().GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance, null, paramTypes, null);
+            var method = source.GetType().GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance, null, paramTypes, null);
             if(method == null)
                 throw new ArgumentException(string.Format("Could not find a method with the name '{0}'", methodName), "method");
 
@@ -133,7 +133,7 @@ namespace Subtext.TestLibrary {
         }
 
         public static TReturn InvokeProperty<TReturn>(object source, string propertyName) {
-            PropertyInfo propertyInfo = source.GetType().GetProperty(propertyName);
+            var propertyInfo = source.GetType().GetProperty(propertyName);
             if(propertyInfo == null)
                 throw new ArgumentException(string.Format("Could not find a propertyName with the name '{0}'", propertyName), "propertyName");
 
@@ -141,7 +141,7 @@ namespace Subtext.TestLibrary {
         }
 
         public static TReturn InvokeNonPublicProperty<TReturn>(object source, string propertyName) {
-            PropertyInfo propertyInfo = source.GetType().GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Instance, null, typeof(TReturn), new Type[0], null);
+            var propertyInfo = source.GetType().GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Instance, null, typeof(TReturn), new Type[0], null);
             if(propertyInfo == null)
                 throw new ArgumentException(string.Format("Could not find a propertyName with the name '{0}'", propertyName), "propertyName");
 
@@ -149,7 +149,7 @@ namespace Subtext.TestLibrary {
         }
 
         public static object InvokeNonPublicProperty(object source, string propertyName) {
-            PropertyInfo propertyInfo = source.GetType().GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Instance);
+            var propertyInfo = source.GetType().GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Instance);
             if(propertyInfo == null)
                 throw new ArgumentException(string.Format("Could not find a propertyName with the name '{0}'", propertyName), "propertyName");
 

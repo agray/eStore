@@ -44,7 +44,7 @@ namespace eStoreWeb.Profile {
         }
 
         protected void Login_OnLoggingIn(object sender, EventArgs e) {
-            DTMembershipProvider dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
+            var dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
             if(Login1.UserName.Contains("@")) {
                 SessionHandler.Instance.LoginEmailAddress = Login1.UserName;
                 Login1.UserName = dtmp.GetUserNameByEmail(SessionHandler.Instance.LoginEmailAddress);
@@ -52,7 +52,7 @@ namespace eStoreWeb.Profile {
         }
 
         protected void Login_OnLoginError(object sender, EventArgs e) {
-            TextBox t = (TextBox)Login1.FindControl("UserName");
+            var t = (TextBox)Login1.FindControl("UserName");
             t.Text = string.Empty;
             FormsAuthentication.SignOut();
         }

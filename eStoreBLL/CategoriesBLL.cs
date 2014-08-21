@@ -51,7 +51,7 @@ namespace eStoreBLL {
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
         public ArrayList getSEODetails(int ID) {
-            return new DataReader().getCategorySEODetails(ID);
+            return new DataReader().GetCategorySeoDetails(ID);
         }
     }
 }

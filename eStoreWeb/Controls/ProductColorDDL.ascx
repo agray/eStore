@@ -8,12 +8,12 @@
 <asp:ObjectDataSource ID="ColorsODS" runat="server" 
                       TypeName="eStoreBLL.ColorsBLL"
                       OldValuesParameterFormatString="original_{0}" 
-                      SelectMethod="getColorsByProductID"
+                      SelectMethod="GetColorsByProductId"
                       EnableCaching="True"
                       CacheDuration="3600"
                       CacheExpirationPolicy="Absolute">
     <SelectParameters>
-        <asp:QueryStringParameter Name="productID" 
+        <asp:QueryStringParameter Name="productId" 
                                   QueryStringField="ProdID" 
                                   Type="Int32" />
     </SelectParameters>

@@ -31,13 +31,13 @@ using phoenixconsulting.common.handlers;
 namespace eStoreWeb.Home {
     public partial class Register : BasePage {
         protected void CreateUserWizard_CreatingUser(object sender, EventArgs e) {
-            TextBox FirstName = (TextBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("UserName");
-            TextBox LastName = (TextBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("LastName");
-            CheckBox ReceiveNewsletter = (CheckBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("ReceiveNewsletter");
+            var firstName = (TextBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("UserName");
+            var lastName = (TextBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("LastName");
+            var receiveNewsletter = (CheckBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("ReceiveNewsletter");
 
-            SessionHandler.Instance.LoginFirstName = FirstName.Text;
-            SessionHandler.Instance.LoginLastName = LastName.Text;
-            SessionHandler.Instance.LoginRequireNewsletter = ReceiveNewsletter.Checked;
+            SessionHandler.Instance.LoginFirstName = firstName.Text;
+            SessionHandler.Instance.LoginLastName = lastName.Text;
+            SessionHandler.Instance.LoginRequireNewsletter = receiveNewsletter.Checked;
         }
     }
 }

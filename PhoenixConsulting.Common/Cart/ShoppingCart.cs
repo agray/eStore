@@ -69,7 +69,7 @@ namespace phoenixconsulting.common.cart {
         public void CalculateTotals() {
             double totalWeight = 0;
             double totalSubTotals = 0;
-            int totalNumItems = 0;
+            var totalNumItems = 0;
 
             foreach(DTItem cartItem in itemList) {
                 totalWeight = totalWeight + cartItem.ProductWeight * cartItem.ProductQuantity;
@@ -89,7 +89,7 @@ namespace phoenixconsulting.common.cart {
                 return 0;
             }
 
-            double shippingRate = calculateShippingRate(totalweight);
+            var shippingRate = calculateShippingRate(totalweight);
 
             if(SessionHandler.Instance.ShippingCountry == Settings.Default.AustraliaCountryID) {
                 //Calculate Shipping for Australia
@@ -101,11 +101,11 @@ namespace phoenixconsulting.common.cart {
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         private double calculateShippingRate(double totalweight) {
-            int shipCountry = Int32.Parse(String.IsNullOrEmpty(SessionHandler.Instance.ShippingCountry) 
+            var shipCountry = Int32.Parse(String.IsNullOrEmpty(SessionHandler.Instance.ShippingCountry) 
                                               ? Settings.Default.AustraliaCountryID 
                                               : SessionHandler.Instance.ShippingCountry);
 
-            int shippingMode = Int32.Parse(String.IsNullOrEmpty(SessionHandler.Instance.ShippingMode) 
+            var shippingMode = Int32.Parse(String.IsNullOrEmpty(SessionHandler.Instance.ShippingMode) 
                                                ? Settings.Default.ModeAirMail 
                                                : SessionHandler.Instance.ShippingMode);
 

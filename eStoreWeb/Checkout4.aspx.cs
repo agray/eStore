@@ -24,8 +24,8 @@
  */
 #endregion
 using System;
-using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Web;
 using com.phoenixconsulting.culture;
 using eStoreBLL;
@@ -42,7 +42,7 @@ using PhoenixConsulting.PaymentService.PayPal.com.paypal.sandbox.www;
 namespace eStoreWeb {
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-    public partial class checkout4 : BasePage {
+    public partial class Checkout4 : BasePage {
         protected void Page_Load(object sender, EventArgs e) {
             CameFrom.handleNavigationRedirect(Request.UrlReferrer);
             
@@ -54,7 +54,7 @@ namespace eStoreWeb {
             //CultureService.SetCulture(SessionHandler.Instance.CurrencyValue);
 
             if(Request.QueryString["token"] != null) {
-                PayPalAPIUtil.GetExpressCheckoutDetails(Request, Page);
+                PayPalApiUtil.GetExpressCheckoutDetails(Request, Page);
             }
         }
 
@@ -63,19 +63,19 @@ namespace eStoreWeb {
         }
 
         protected void PlaceOrder(object sender, EventArgs e) {
-            int orderID = saveOrderToDatabase();
-            if(orderID == -1) {
+            var orderId = SaveOrderToDatabase();
+            if(orderId == -1) {
                 //Order did not get saved to the database correctly
                 //don't bother going to CC Processor
                 GoTo.Instance.OrderProcessingErrorPage();
             } else {
                 if(Request.QueryString["token"] != null) {
-                    ProcessPayPalPayment(orderID);
+                    ProcessPayPalPayment(orderId);
                 } else {
                     //Process CC Payment
                     //Submit CC Details to SecurePay for authorisation and update status of Order
-                    CreditCardPaymentProcessor ccProcessor = new CreditCardPaymentProcessor();
-                    ccProcessor.processPayment(orderID, HttpContext.Current.Request);
+                    var ccProcessor = new CreditCardPaymentProcessor();
+                    ccProcessor.processPayment(orderId, HttpContext.Current.Request);
                     GoTo.Instance.Checkout5Page();
                     //Response.Redirect("ShowMe.aspx");
                 }
@@ -84,19 +84,19 @@ namespace eStoreWeb {
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
-        private void ProcessPayPalPayment(int orderID) {
+        private void ProcessPayPalPayment(int orderId) {
             //string token = Request.QueryString["token"];
             //Submit Details to PayPal for completion
-            DoExpressCheckoutPaymentResponseType finalResponse = PayPalAPIUtil.CompletePayPalTransaction();
-            PaymentInfoType paymentInfo = finalResponse.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0];
+            var finalResponse = PayPalApiUtil.CompletePayPalTransaction();
+            var paymentInfo = finalResponse.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0];
 
-            updateOrder(orderID, paymentInfo, finalResponse);
+            UpdateOrder(orderId, paymentInfo, finalResponse);
 
-            if(isPPApproved(paymentInfo.PaymentStatus.ToString())) {
+            if(IsPpApproved(paymentInfo.PaymentStatus.ToString())) {
                 //Order Approved by PayPal. Update order in database.
                 SessionHandler.Instance.IsPaymentApproved = "Yes";
                 SessionHandler.Instance.PaymentResponseCode = "00";
-                LoggerUtil.auditLog(NLog.LogLevel.Info,
+                LoggerUtil.AuditLog(NLog.LogLevel.Info,
                                 AuditEventType.SUBMIT_PAYPAL_PAYMENT_SUCCESS,
                                 "StoreSite",
                                 null,
@@ -105,7 +105,7 @@ namespace eStoreWeb {
                 //PayPal payment declined. Update order in database.
                 SessionHandler.Instance.IsPaymentApproved = "No";
                 SessionHandler.Instance.PaymentResponseCode = paymentInfo.ReasonCode.ToString();
-                LoggerUtil.auditLog(NLog.LogLevel.Info,
+                LoggerUtil.AuditLog(NLog.LogLevel.Info,
                                 AuditEventType.SUBMIT_PAYPAL_PAYMENT_REJECTED,
                                 "StoreSite",
                                 null,
@@ -114,67 +114,54 @@ namespace eStoreWeb {
             GoTo.Instance.Checkout5Page();
         }
 
-        private void updateOrder(int orderID, 
-                                 PaymentInfoType paymentInfo, 
-                                 DoExpressCheckoutPaymentResponseType finalResponse) {
-            OrdersBLL order = new OrdersBLL();
-            if(paymentInfo.ReasonCode.ToString() != "none") {
-                order.updateOrderStatus(orderID,
-                                        Convert.ToInt32(paymentInfo.ReasonCode.ToString()),
-                                        paymentInfo.TransactionID,
-                                        paymentInfo.PaymentDate.ToString(),
-                                        finalResponse.Ack.ToString(),
-                                        finalResponse.CorrelationID,
-                                        finalResponse.Timestamp.ToString(),
-                                        CultureService.getLocalCultureDouble(paymentInfo.FeeAmount.Value),
-                                        paymentInfo.PaymentStatus.ToString(),
-                                        paymentInfo.ReasonCode.ToString(),
-                                        paymentInfo.PaymentDate.ToString());
-            } else {
-                order.updateOrderStatus(orderID,
-                                        0,
-                                        paymentInfo.TransactionID,
-                                        paymentInfo.PaymentDate.ToString(),
-                                        finalResponse.Ack.ToString(),
-                                        finalResponse.CorrelationID,
-                                        finalResponse.Timestamp.ToString(),
-                                        CultureService.getLocalCultureDouble(paymentInfo.FeeAmount.Value),
-                                        paymentInfo.PaymentStatus.ToString(),
-                                        paymentInfo.ReasonCode.ToString(),
-                                        paymentInfo.PaymentDate.ToString());
-            }
+        private static void UpdateOrder(int orderId, 
+                                        PaymentInfoType paymentInfo, 
+                                        AbstractResponseType finalResponse) {
+            var order = new OrdersBLL();
+            order.updateOrderStatus(orderId,
+                                    paymentInfo.ReasonCode.ToString() != "none" 
+                                        ? Convert.ToInt32(paymentInfo.ReasonCode.ToString()) 
+                                        : 0,
+                                    paymentInfo.TransactionID,
+                                    paymentInfo.PaymentDate.ToString(CultureInfo.InvariantCulture),
+                                    finalResponse.Ack.ToString(),
+                                    finalResponse.CorrelationID,
+                                    finalResponse.Timestamp.ToString(CultureInfo.InvariantCulture),
+                                    CultureService.getLocalCultureDouble(paymentInfo.FeeAmount.Value),
+                                    paymentInfo.PaymentStatus.ToString(),
+                                    paymentInfo.ReasonCode.ToString(),
+                                    paymentInfo.PaymentDate.ToString(CultureInfo.InvariantCulture));
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        private bool isPPApproved(string paymentStatus) {
+        private static bool IsPpApproved(string paymentStatus) {
             return paymentStatus.Equals("Completed");
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
-        private int saveOrderToDatabase() {
-            string userName = Page.User.Identity.Name;
-            Guid userID;
-            OrdersBLL order = new OrdersBLL();
-            ArrayList shoppingCart = default(ArrayList);
-            string orderDetailXML = CreateOrderDetailXML();
+        private int SaveOrderToDatabase() {
+            var userName = Page.User.Identity.Name;
+            Guid userId;
+            var order = new OrdersBLL();
+            var orderDetailXml = CreateOrderDetailXml();
             
-            shoppingCart = SessionHandler.Instance.ShoppingCart;
-            if(shoppingCart == null | shoppingCart.Count == 0 | !IsAllDataPopulated()) {
+            var shoppingCart = SessionHandler.Instance.ShoppingCart;
+            if(shoppingCart != null && false | shoppingCart.Count == 0 | !IsAllDataPopulated()) {
                 return -1;
             }
 
             if(string.IsNullOrEmpty(userName)) {
                 //user not logged in, try to find it by email
-                UserBLL userBLL = new UserBLL();
-                string foundUserID = userBLL.getUserIDByEmail(SessionHandler.Instance.BillingEmailAddress, "eStore");
-                userID = new Guid(foundUserID);
+                var userBll = new UserBLL();
+                var foundUserId = userBll.getUserIDByEmail(SessionHandler.Instance.BillingEmailAddress, "eStore");
+                userId = new Guid(foundUserId);
             } else {
                 //user is logged in
-                userID = BaseUserControl.getUserID(this);
+                userId = BaseUserControl.getUserID(this);
                 //DTMembershipProvider dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
                 //userID = dtmp.getLoggedInUserID(Page.User.Identity.Name);
             }
-            int orderID = order.addOrder(SessionHandler.Instance.BillingEmailAddress,
+            var orderId = order.addOrder(SessionHandler.Instance.BillingEmailAddress,
                                          SessionHandler.Instance.BillingFirstName,
                                          SessionHandler.Instance.BillingLastName,
                                          SessionHandler.Instance.BillingAddress,
@@ -190,13 +177,13 @@ namespace eStoreWeb {
                                          SessionHandler.Instance.ShippingPostcode,
                                          Int32.Parse(SessionHandler.Instance.ShippingCountry),
                                          Int32.Parse(SessionHandler.Instance.ShippingMode),
-                                         (double)SessionHandler.Instance.TotalShipping,
-                                         orderDetailXML.Replace(",", "."),
+                                         SessionHandler.Instance.TotalShipping,
+                                         orderDetailXml.Replace(",", "."),
                                          CommentTextBox.Text,
                                          GiftTagMessageTextBox.Text,
                                          SessionHandler.Instance.TotalCost,
-                                         userID);
-            return orderID;
+                                         userId);
+            return orderId;
         }
 
         //
@@ -221,42 +208,42 @@ namespace eStoreWeb {
                      String.IsNullOrEmpty(SessionHandler.Instance.ShippingPostcode) |
                      String.IsNullOrEmpty(SessionHandler.Instance.ShippingCountry) |
                      String.IsNullOrEmpty(SessionHandler.Instance.ShippingMode) |
-                     String.IsNullOrEmpty(SessionHandler.Instance.TotalShipping.ToString()));
+                     String.IsNullOrEmpty(SessionHandler.Instance.TotalShipping.ToString(CultureInfo.InvariantCulture)));
         }
 
         //
         //Returns an Order Detail XML document
         //
-        private static string CreateOrderDetailXML() {
+        private static string CreateOrderDetailXml() {
             //Header
-            string tempXML = "<root>";
-            ArrayList shoppingCart = SessionHandler.Instance.ShoppingCart;
+            var tempXml = "<root>";
+            var shoppingCart = SessionHandler.Instance.ShoppingCart;
 
             //Loop through Order Detail Records
             foreach(DTItem cartItem in shoppingCart) {
-                int ProdID = cartItem.ProductId;
-                int Quantity = cartItem.ProductQuantity;
-                double UnitPrice = cartItem.ProductOnSale == 1 ? cartItem.ProductDiscountPrice : cartItem.ProductPrice;
-                double Weight = cartItem.ProductWeight;
-                int ColorID = cartItem.ColorId;
-                int SizeID = cartItem.SizeId;
-                int CatID = cartItem.CategoryId;
-                int DeptID = cartItem.DepartmentId;
+                var prodId = cartItem.ProductId;
+                var quantity = cartItem.ProductQuantity;
+                var unitPrice = cartItem.ProductOnSale == 1 ? cartItem.ProductDiscountPrice : cartItem.ProductPrice;
+                var weight = cartItem.ProductWeight;
+                var colorId = cartItem.ColorId;
+                var sizeId = cartItem.SizeId;
+                var catId = cartItem.CategoryId;
+                var deptId = cartItem.DepartmentId;
 
-                tempXML = tempXML + "<OrderDetail OrderID=\"" +
+                tempXml = tempXml + "<OrderDetail OrderID=\"" +
                                     "REPLACEME" + "\"" +
-                                    " ProductID=\"" + ProdID + "\"" +
-                                    " Quantity=\"" + Quantity + "\"" +
-                                    " UnitPrice=\"" + UnitPrice + "\"" +
-                                    " ProductWeight=\"" + Weight + "\"" +
-                                    " ColorID=\"" + ColorID + "\"" +
-                                    " SizeID=\"" + SizeID + "\"" +
-                                    " CategoryID=\"" + CatID + "\"" +
-                                    " DepartmentID=\"" + DeptID + "\"" + "/>";
+                                    " ProductID=\"" + prodId + "\"" +
+                                    " Quantity=\"" + quantity + "\"" +
+                                    " UnitPrice=\"" + unitPrice + "\"" +
+                                    " ProductWeight=\"" + weight + "\"" +
+                                    " ColorID=\"" + colorId + "\"" +
+                                    " SizeID=\"" + sizeId + "\"" +
+                                    " CategoryID=\"" + catId + "\"" +
+                                    " DepartmentID=\"" + deptId + "\"" + "/>";
             }
             //Footer
-            tempXML = tempXML + "</root>";
-            return tempXML;
+            tempXml = tempXml + "</root>";
+            return tempXml;
         }
     }
 }

@@ -7,10 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using eStoreWeb.MasterPages;
+
 namespace eStoreWeb {
     
     
-    public partial class checkout4 {
+    public partial class Checkout4 {
         
         /// <summary>
         /// SecureShopping control.
@@ -99,9 +101,9 @@ namespace eStoreWeb {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new eStoreWeb.CheckOutMaster Master {
+        public new CheckOutMaster Master {
             get {
-                return ((eStoreWeb.CheckOutMaster)(base.Master));
+                return ((CheckOutMaster)(base.Master));
             }
         }
     }

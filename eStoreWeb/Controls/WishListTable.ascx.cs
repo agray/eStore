@@ -35,11 +35,11 @@ namespace eStoreWeb.Controls {
     public partial class WishListTable : BaseUserControl {
         public string PriceLabel1{
             get {
-                Label priceLabel = (Label)wishListItemLV.FindControl("PriceLabel");
+                var priceLabel = (Label)wishListItemLV.FindControl("PriceLabel");
                 return priceLabel.Text;
             }
             set {
-                Label priceLabel = (Label)wishListItemLV.FindControl("PriceLabel");
+                var priceLabel = (Label)wishListItemLV.FindControl("PriceLabel");
                 priceLabel.Text = value;
             }
         }
@@ -53,14 +53,14 @@ namespace eStoreWeb.Controls {
         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
         protected void wishListItemLV_ItemCommand(object source, CommandEventArgs e) {
             if(!string.IsNullOrEmpty(e.CommandArgument.ToString())) {
-                int ID = Int32.Parse(e.CommandArgument.ToString());
+                var ID = Int32.Parse(e.CommandArgument.ToString());
                 if(e.CommandName.Equals("delete")) {
                     //Remove Item from WishList
                     WishListHelper.deleteItem(ID);
                     GoTo.Instance.WishListPage();
                 } else {
                     //Add Item to Cart
-                    DTItem item = WishListHelper.CreateDTItem(ID);
+                    var item = WishListHelper.CreateDTItem(ID);
                     AddToCart(item);
                     GoTo.Instance.ViewCartPage();
                 }
@@ -70,9 +70,9 @@ namespace eStoreWeb.Controls {
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         protected void AddAllToCart(object sender, EventArgs e) {
             int ID;
-            foreach(ListViewDataItem listItem in wishListItemLV.Items) {
+            foreach(var listItem in wishListItemLV.Items) {
                 ID = int.Parse((((Label)listItem.FindControl("HiddenIDLabel")).Text));
-                DTItem item = WishListHelper.CreateDTItem(ID);
+                var item = WishListHelper.CreateDTItem(ID);
                 AddToCart(item);
             }
 
@@ -81,16 +81,16 @@ namespace eStoreWeb.Controls {
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         protected void UpdateQuantities(object sender, EventArgs e) {
-            foreach(ListViewDataItem item in wishListItemLV.Items) {
-                int quantity = int.Parse((((TextBox)item.FindControl("QuantityTextBox")).Text));
-                int ID = int.Parse((((Label)item.FindControl("HiddenIDLabel")).Text));
+            foreach(var item in wishListItemLV.Items) {
+                var quantity = int.Parse((((TextBox)item.FindControl("QuantityTextBox")).Text));
+                var ID = int.Parse((((Label)item.FindControl("HiddenIDLabel")).Text));
                 WishListHelper.updateQuantity(ID, quantity);
             }
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         private void AddToCart(DTItem listItem) {
-            ShoppingCart cart = new ShoppingCart();
+            var cart = new ShoppingCart();
             
             cart.AddItem(listItem);
         }

@@ -23,22 +23,18 @@
  * THE SOFTWARE.
  */
 #endregion
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Web.UI.WebControls;
 using eStoreBLL;
-using eStoreDAL;
 using eStoreWeb.Controls;
-using NLog;
 using phoenixconsulting.common;
 using phoenixconsulting.common.basepages;
 using phoenixconsulting.common.handlers;
 using phoenixconsulting.common.navigation;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Web.UI.WebControls;
 
 namespace eStoreWeb {
     partial class BrowseCategory : BasePage {
-        Logger logger = LogManager.GetLogger("TraceFileAndEventLogger");
-
         protected void Page_Init(object sender, EventArgs e) {
             if(RequestHandler.Instance.CategoryID == 0) {
                 CategoryList.DataSourceID = "";
@@ -47,8 +43,8 @@ namespace eStoreWeb {
             //Wire up the event (CurrencyChanged) to the event handler (CurrencyChangedFromMasterPage) 
             Master.CurrencyChanged += CurrencyChangedFromMasterPage;
 
-            setCategoryMetaTags(RequestHandler.Instance.CategoryID);
-            populateHeaderDetails();
+            SetCategoryMetaTags(RequestHandler.Instance.CategoryID);
+            PopulateHeaderDetails();
         }
 
         private void CurrencyChangedFromMasterPage(object sender, CurrencyChangedEventArgs e) {
@@ -78,11 +74,11 @@ namespace eStoreWeb {
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        private void populateHeaderDetails() {
-            CategoriesBLL catTableAdapter = new CategoriesBLL();
+        private void PopulateHeaderDetails() {
+            var catTableAdapter = new CategoriesBLL();
 
             try {
-                DAL.CategoryRow catRow = catTableAdapter.getCategoryByID(RequestHandler.Instance.CategoryID)[0];
+                var catRow = catTableAdapter.getCategoryByID(RequestHandler.Instance.CategoryID)[0];
                 DepartmentName_Breadcrumb.Text = catRow.DepName;
                 DepartmentName_Breadcrumb.NavigateUrl = "BrowseDepartment.aspx?DepID=" + catRow.DepID;
                 HeaderNameLabel.Text = catRow.Name;

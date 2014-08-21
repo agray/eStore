@@ -30,8 +30,8 @@ namespace phoenixconsulting.common {
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public class PagerUtils : Page {
         public static void SetPageDetails(ListView list) {
-            DataPager beforeList = (DataPager)list.FindControl("BeforeListDataPager");
-            DataPager afterList = (DataPager)list.FindControl("AfterListDataPager");
+            var beforeList = (DataPager)list.FindControl("BeforeListDataPager");
+            var afterList = (DataPager)list.FindControl("AfterListDataPager");
 
             if(IsOnePage(beforeList)) {
                 HidePagingControls(beforeList, afterList);
@@ -56,20 +56,20 @@ namespace phoenixconsulting.common {
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         private static void SetTotalProducts(int totalRowCount, Control list) {
-            Label topTotalProductsLabel = (Label)list.FindControl("TopTotalProductsReturnedLabel");
-            Label bottomTotalProductsLabel = (Label)list.FindControl("BottomTotalProductsReturnedLabel");
+            var topTotalProductsLabel = (Label)list.FindControl("TopTotalProductsReturnedLabel");
+            var bottomTotalProductsLabel = (Label)list.FindControl("BottomTotalProductsReturnedLabel");
 
             topTotalProductsLabel.Text = totalRowCount.ToString();
             bottomTotalProductsLabel.Text = totalRowCount.ToString();
         }
 
         private static void SetShowingLabel(int startRowIndex, ListView list) {
-            Label topShowingLabel = (Label)list.FindControl("TopShowingLabel");
-            Label bottomShowingLabel = (Label)list.FindControl("BottomShowingLabel");
+            var topShowingLabel = (Label)list.FindControl("TopShowingLabel");
+            var bottomShowingLabel = (Label)list.FindControl("BottomShowingLabel");
 
-            int startIndex = startRowIndex + 1;
-            int endIndex = startRowIndex + list.Items.Count;
-            string labelText = "(showing " + startIndex + " - " + endIndex + ")";
+            var startIndex = startRowIndex + 1;
+            var endIndex = startRowIndex + list.Items.Count;
+            var labelText = "(showing " + startIndex + " - " + endIndex + ")";
 
             labelText = list.Items.Count == 1 
                         ? " product " + labelText 
@@ -93,7 +93,7 @@ namespace phoenixconsulting.common {
         }
 
         public static bool IsLastPage(DataPager beforeList) {
-            double totalPages = Math.Ceiling((beforeList.TotalRowCount / (double)beforeList.PageSize));
+            var totalPages = Math.Ceiling((beforeList.TotalRowCount / (double)beforeList.PageSize));
             double pageSelected = beforeList.StartRowIndex / beforeList.PageSize + 1;
 
             return pageSelected == totalPages;

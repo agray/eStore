@@ -25,6 +25,7 @@
 #endregion
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Web.UI.WebControls;
 using com.phoenixconsulting.culture;
 using phoenixconsulting.common.basepages;
@@ -35,7 +36,7 @@ using phoenixconsulting.paymentservice.paypal;
 namespace eStoreWeb {
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-    public partial class checkout3 : BasePage {
+    public partial class Checkout3 : BasePage {
         protected void Page_Load(object sender, EventArgs e) {
             CameFrom.handleNavigationRedirect(Request.UrlReferrer);
 
@@ -44,17 +45,17 @@ namespace eStoreWeb {
             //    Response.Redirect(redirectPage);
             //}
             if(!Page.IsPostBack) {
-                populateForm();
+                PopulateForm();
             }
-            setNoteLabel();
+            SetNoteLabel();
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
-        private void setNoteLabel() {
+        private void SetNoteLabel() {
             if(!(IsAustralia(SessionHandler.Instance.BillingCountry))) {
                 NoteLabel.Text = "Note: All orders are processed in Australia dollars and are converted " +
                                  "into your local currency by your credit card provider. Your order for " +
-                                 CultureService.getConvertedPrice(SessionHandler.Instance.TotalCost.ToString(), SessionHandler.Instance.BillingXRate, SessionHandler.Instance.CurrencyValue) +
+                                 CultureService.getConvertedPrice(SessionHandler.Instance.TotalCost.ToString(CultureInfo.InvariantCulture), SessionHandler.Instance.BillingXRate, SessionHandler.Instance.CurrencyValue) +
                                  " will be processed as AUD " +
                                  CultureService.toLocalCulture(SessionHandler.Instance.TotalCost);
                 NoteLabel.Visible = true;
@@ -74,14 +75,14 @@ namespace eStoreWeb {
             SetPaymentSessionValues();
 
             if(PaymentMethodRadioButtonList.SelectedValue.Equals("PayPal")) {
-                PayPalAPIUtil.setupExpressCheckout(Request, Response);
+                PayPalApiUtil.SetupExpressCheckout(Request, Response);
             } else {
                 GoTo.Instance.Checkout4Page();
             }
             //}
         }
 
-        private void populateForm() {
+        private void PopulateForm() {
             CardholderTextBox.Text = SessionHandler.Instance.CardholderName;
             cardTypeDDL.Text = SessionHandler.Instance.CardType;
             CardNumberTextBox.Text = SessionHandler.Instance.CardNumber;
@@ -99,10 +100,10 @@ namespace eStoreWeb {
             SessionHandler.Instance.CCExpiryYear = ExpiryYearDDL.Text;
             SessionHandler.Instance.CCExpiryMonthItem = ExpiryMonthDDL.SelectedItem.Text;
             SessionHandler.Instance.CCExpiryYearItem = ExpiryYearDDL.SelectedItem.Text;
-            SessionHandler.Instance.PaymentType = getPaymentTypeImage();
+            SessionHandler.Instance.PaymentType = GetPaymentTypeImage();
         }
 
-        private string getPaymentTypeImage() {
+        private string GetPaymentTypeImage() {
             if(PaymentMethodRadioButtonList.SelectedValue.Equals("PayPal")) {
                 return PaymentMethodRadioButtonList.SelectedItem.Text;
             }
@@ -120,13 +121,13 @@ namespace eStoreWeb {
 
         protected void PaymentMethodRadioButtonList_SelectedIndexChanged(object sender, EventArgs e) {
             if(((RadioButtonList)sender).SelectedItem.Value == "PayPal") {
-                disableFieldsAndValidators();
+                DisableFieldsAndValidators();
             } else {
-                enableFieldsAndValidators();
+                EnableFieldsAndValidators();
             }
         }
 
-        private void enableFieldsAndValidators() {
+        private void EnableFieldsAndValidators() {
             //FIELDS
             CardholderTextBox.Enabled = true;
             cardTypeDDL.Enabled = true;
@@ -144,7 +145,7 @@ namespace eStoreWeb {
             ExpiryYearDDLRequiredFieldValidator.Enabled = true;
         }
 
-        private void disableFieldsAndValidators() {
+        private void DisableFieldsAndValidators() {
             //FIELDS
             CardholderTextBox.Enabled = false;
             cardTypeDDL.Enabled = false;

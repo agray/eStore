@@ -64,7 +64,7 @@ namespace SeleniumTests {
             testUtil.EnterCheckOutPages(selenium);
             testUtil.EnterCheckOut1DataAndSubmit(selenium);
 
-            string preExistingCountry = selenium.GetSelectedLabel("ctl00_ContentPlaceHolder1_countryDDL_CountryDropDownList");
+            var preExistingCountry = selenium.GetSelectedLabel("ctl00_ContentPlaceHolder1_countryDDL_CountryDropDownList");
 
             selenium.Select("ctl00_ContentPlaceHolder1_sameAddressDDL_YesNoDropDownList", "label=No");
             testUtil.WaitForPageToLoad(selenium, "3000");
@@ -85,13 +85,13 @@ namespace SeleniumTests {
             testUtil.EnterCheckOutPages(selenium);
             testUtil.EnterCheckOut1DataAndSubmit(selenium);
 
-            string preExistingFirstname = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingFirstNameTextBox");
-            string preExistingLastname = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingLastNameTextBox");
-            string preExistingAddress = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingAddressTextBox");
-            string preExistingSuburb = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingSuburbTextBox");
-            string preExistingState = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingStateTextBox");
-            string preExistingPostcode = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingPostcodeTextBox");
-            string preExistingCountry = selenium.GetSelectedLabel("ctl00_ContentPlaceHolder1_countryDDL_CountryDropDownList");
+            var preExistingFirstname = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingFirstNameTextBox");
+            var preExistingLastname = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingLastNameTextBox");
+            var preExistingAddress = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingAddressTextBox");
+            var preExistingSuburb = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingSuburbTextBox");
+            var preExistingState = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingStateTextBox");
+            var preExistingPostcode = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingPostcodeTextBox");
+            var preExistingCountry = selenium.GetSelectedLabel("ctl00_ContentPlaceHolder1_countryDDL_CountryDropDownList");
 
             selenium.Select("ctl00_ContentPlaceHolder1_sameAddressDDL_YesNoDropDownList", "label=No");
             testUtil.WaitForPageToLoad(selenium, "5000");
@@ -122,13 +122,13 @@ namespace SeleniumTests {
             testUtil.WaitForPageToLoad(selenium, "10000");
 
             //Remember Checkout2 Fields
-            string CO2Firstname = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingFirstNameTextBox");
-            string CO2Lastname = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingLastNameTextBox");
-            string CO2Address = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingAddressTextBox");
-            string CO2Suburb = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingSuburbTextBox");
-            string CO2State = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingStateTextBox");
-            string CO2Postcode = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingPostcodeTextBox");
-            string CO2Country = selenium.GetSelectedLabel("ctl00_ContentPlaceHolder1_countryDDL_CountryDropDownList");
+            var CO2Firstname = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingFirstNameTextBox");
+            var CO2Lastname = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingLastNameTextBox");
+            var CO2Address = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingAddressTextBox");
+            var CO2Suburb = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingSuburbTextBox");
+            var CO2State = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingStateTextBox");
+            var CO2Postcode = selenium.GetValue("ctl00_ContentPlaceHolder1_ShippingPostcodeTextBox");
+            var CO2Country = selenium.GetSelectedLabel("ctl00_ContentPlaceHolder1_countryDDL_CountryDropDownList");
 
             //Go back to Checkout1 Page
             selenium.Click("ctl00_ContentPlaceHolder1_BackButton");

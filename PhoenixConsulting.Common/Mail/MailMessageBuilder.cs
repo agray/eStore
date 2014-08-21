@@ -23,13 +23,14 @@
  * THE SOFTWARE.
  */
 #endregion
+
 using System;
 using System.Net.Mail;
 using System.Web.UI;
 using phoenixconsulting.common.handlers;
 using PhoenixConsulting.Common.Properties;
 
-namespace com.phoenixconsulting.common.mail {
+namespace PhoenixConsulting.Common.Mail {
     public class MailMessageBuilder : Page {
 
         //
@@ -37,7 +38,6 @@ namespace com.phoenixconsulting.common.mail {
         //
         public static void SendOrderConfirmationEmail() {
             MailSender.SendMail(CreateMailMessageObject(false,
-                                                        MailPriority.Normal,
                                                         Settings.Default.FromEmailAddress,
                                                         SessionHandler.Instance.BillingEmailAddress,
                                                         "Confirmation of your order",
@@ -54,7 +54,6 @@ namespace com.phoenixconsulting.common.mail {
         //
         public static void SendExceptionEmail(Exception ex) {
             MailSender.SendMail(CreateMailMessageObject(true,
-                                                        MailPriority.High,
                                                         ApplicationHandler.Instance.SystemEmailAddress,
                                                         ApplicationHandler.Instance.SupportEmail,
                                                         "Exception occurred in Customer Website",
@@ -64,7 +63,7 @@ namespace com.phoenixconsulting.common.mail {
                                                         "<b>Source:</b> " + ex.Source + "<br/><br/>" +
                                                         "<b>Method:</b> " + ex.TargetSite + "<br/><br/>" +
                                                         "<b>InnerException:</b> " + ex.InnerException + "<br/><br/>" +
-                                                        "<b>Exception String:</b> <pre>" + ex.ToString() + "</pre>" +
+                                                        "<b>Exception String:</b> <pre>" + ex + "</pre>" +
                                                         //"<b>Session Dump</b><br/>" +
                                                         //"<i>UserID: </i>" + SessionHandler.UserID + "<br/>" +
                                                         //"<i>User Name: </i>" + SessionHandler.UserName + "<br/>" +
@@ -84,7 +83,6 @@ namespace com.phoenixconsulting.common.mail {
                                                   string lastName,
                                                   string newPassword) {
             MailSender.SendMail(CreateMailMessageObject(true,
-                                                        MailPriority.Normal,
                                                         ApplicationHandler.Instance.SystemEmailAddress,
                                                         emailAddress,
                                                         ApplicationHandler.Instance.TradingName + " Website Password Reset",
@@ -119,7 +117,6 @@ namespace com.phoenixconsulting.common.mail {
                                                string lastName,
                                                string newPassword) {
             MailSender.SendMail(CreateMailMessageObject(true,
-                                                        MailPriority.Normal,
                                                         ApplicationHandler.Instance.SystemEmailAddress,
                                                         emailAddress,
                                                         ApplicationHandler.Instance.TradingName + " Website Account Information",
@@ -151,7 +148,6 @@ namespace com.phoenixconsulting.common.mail {
         //
         public static void SendPayPalExceptionEmail(string exceptions) {
             MailSender.SendMail(CreateMailMessageObject(true,
-                                                        MailPriority.High,
                                                         ApplicationHandler.Instance.SystemEmailAddress,
                                                         ApplicationHandler.Instance.SupportEmail,
                                                         "Exception occurred in Customer Website",
@@ -172,8 +168,8 @@ namespace com.phoenixconsulting.common.mail {
         //
         // Construct MailMessage object
         //
-        private static MailMessage CreateMailMessageObject(bool isHtml, MailPriority priority, string from, string to, string subject, string body) {
-            MailMessage oMsg = new MailMessage();
+        private static MailMessage CreateMailMessageObject(bool isHtml, string from, string to, string subject, string body) {
+            var oMsg = new MailMessage();
 
             oMsg.IsBodyHtml = isHtml;
             oMsg.From = new MailAddress(from);

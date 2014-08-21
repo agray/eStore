@@ -34,15 +34,15 @@ namespace eStoreDAL {
         private readonly SqlConnection _conn = new SqlConnection(Settings.Default.eStoreConnectionString);
         private SqlCommand _command;
 
-        public ArrayList getDepartmentSEODetails(int depId) {
+        public ArrayList GetDepartmentSeoDetails(int depId) {
             return GetData("uspDepartmentGetSEODetailsByID", "@ID", depId);
         }
         
-        public ArrayList getCategorySEODetails(int catId) {
+        public ArrayList GetCategorySeoDetails(int catId) {
             return GetData("uspCategoryGetSEODetailsByID", "@ID", catId);
         }
 
-        public ArrayList getProductSEODetails(int prodId) {
+        public ArrayList GetProductSeoDetails(int prodId) {
             return GetData("uspProductGetSEODetailsByID", "@ID", prodId);
         }
 
@@ -63,9 +63,7 @@ namespace eStoreDAL {
 
         private void Initialise(string storedProcName) {
             _conn.Open();
-            _command = new SqlCommand(storedProcName, _conn);
-            _command.CommandType = CommandType.StoredProcedure;
-            
+            _command = new SqlCommand(storedProcName, _conn) {CommandType = CommandType.StoredProcedure};
         }
 
         private void AddParameter(string name, int param) {
@@ -73,11 +71,10 @@ namespace eStoreDAL {
         }
 
         private ArrayList BuildArrayList() {
-            ArrayList al = new ArrayList();
-            SqlDataReader reader = _command.ExecuteReader();
-            while (reader.Read())
-            {
-                string[] values = new string[reader.FieldCount];
+            var al = new ArrayList();
+            var reader = _command.ExecuteReader();
+            while(reader.Read()) {
+                var values = new string[reader.FieldCount];
                 reader.GetValues(values);
                 al.Add(values);
             }

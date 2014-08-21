@@ -14,7 +14,7 @@
                     <asp:HyperLink ID="DepartmentName_Breadcrumb" runat="server"></asp:HyperLink>
                     <hr />
                 
-                    <% if(!isEmpty(CategoryList)) {%>
+                    <% if(!IsEmpty(CategoryList)) {%>
                         <h1><asp:Label ID="HeaderNameLabel" runat="server"></asp:Label></h1>
                         <asp:Label ID="HeaderDescriptionLabel" runat="server"></asp:Label>
                         <hr />
@@ -158,15 +158,15 @@
             <asp:ObjectDataSource ID="ProductsODS" runat="server" 
                                   TypeName="eStoreBLL.ProductsBLL"
                                   OldValuesParameterFormatString="original_{0}" 
-                                  SelectMethod="getProductsByCategoryIDAndCurrencyID"
+                                  SelectMethod="GetProductsByCategoryIdAndCurrencyId"
                                   EnableCaching="True"
                                   CacheDuration="3600"
                                   CacheExpirationPolicy="Absolute">
                 <SelectParameters>
-                    <asp:QueryStringParameter Name="categoryID" 
+                    <asp:QueryStringParameter Name="categoryId" 
                                               QueryStringField="CatID" 
                                               Type="Int32" />
-                    <asp:SessionParameter Name="currencyID" 
+                    <asp:SessionParameter Name="currencyId" 
                                           SessionField="Currency" 
                                           Type="Int32" 
                                           DefaultValue="1"  />

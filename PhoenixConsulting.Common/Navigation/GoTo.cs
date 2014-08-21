@@ -77,7 +77,7 @@ namespace phoenixconsulting.common.navigation {
         }
 
         public void Checkout1Page() {
-            ShoppingCart sc = new ShoppingCart();
+            var sc = new ShoppingCart();
             if(SessionHandler.Instance.CartDataSet == null || sc.IsEmptyList()) {
                 HomePage();
             } else {

@@ -34,37 +34,35 @@ using phoenixconsulting.common.logging;
 using PhoenixConsulting.PaymentService.PayPal.com.paypal.sandbox.www;
 
 namespace phoenixconsulting.paymentservice.paypal {
-    public class PayPalAPIUtil {
-        static Logger logger = LogManager.GetLogger("ErrorLogger");
-
+    public class PayPalApiUtil {
         #region "PaymentMethods"
         //****************************
         //Payment Methods
         //****************************
-        public static void setupExpressCheckout(HttpRequest request, HttpResponse response) {
+        public static void SetupExpressCheckout(HttpRequest request, HttpResponse response) {
             //build request
-            SetExpressCheckoutRequestDetailsType reqDetails = new SetExpressCheckoutRequestDetailsType();
-            string basePath = request.Url.AbsoluteUri.Replace(request.Url.PathAndQuery, 
+            var reqDetails = new SetExpressCheckoutRequestDetailsType();
+            var basePath = request.Url.AbsoluteUri.Replace(request.Url.PathAndQuery, 
                                                               string.Empty) + 
                                                               request.ApplicationPath;
 
             reqDetails.ReturnURL = basePath + "Checkout4.aspx";
             reqDetails.CancelURL = basePath + "Checkout3.aspx";
             reqDetails.NoShipping = "1";
-            reqDetails.OrderTotal = new BasicAmountType() {
+            reqDetails.OrderTotal = new BasicAmountType {
                 currencyID = CurrencyCodeType.AUD,
                 Value = CultureService.toInternalLocalCulture(SessionHandler.Instance.TotalCost),
             };
 
-            SetExpressCheckoutReq req = new SetExpressCheckoutReq() {
-                SetExpressCheckoutRequest = new SetExpressCheckoutRequestType() {
+            var req = new SetExpressCheckoutReq {
+                SetExpressCheckoutRequest = new SetExpressCheckoutRequestType {
                     Version = ApplicationHandler.Instance.PaypalVersion,
                     SetExpressCheckoutRequestDetails = reqDetails
                 }
             };
 
             //query PayPal and get token
-            SetExpressCheckoutResponseType resp = BuildPayPalWebservice().SetExpressCheckout(req);
+            var resp = BuildPayPalWebservice().SetExpressCheckout(req);
             HandleError(resp);
 
             //redirect user to PayPal
@@ -74,22 +72,22 @@ namespace phoenixconsulting.paymentservice.paypal {
 
         public static void GetExpressCheckoutDetails(HttpRequest request, Page page) {
             if(!page.IsPostBack) {
-                string token = request.QueryString["token"];
+                var token = request.QueryString["token"];
 
                 //build getdetails request
-                GetExpressCheckoutDetailsReq req = new GetExpressCheckoutDetailsReq() {
-                    GetExpressCheckoutDetailsRequest = new GetExpressCheckoutDetailsRequestType() {
+                var req = new GetExpressCheckoutDetailsReq {
+                    GetExpressCheckoutDetailsRequest = new GetExpressCheckoutDetailsRequestType {
                         Version = ApplicationHandler.Instance.PaypalVersion,
                         Token = token
                     }
                 };
 
                 //query PayPal for transaction details
-                GetExpressCheckoutDetailsResponseType resp =
+                var resp =
                     BuildPayPalWebservice().GetExpressCheckoutDetails(req);
                 HandleError(resp);
 
-                GetExpressCheckoutDetailsResponseDetailsType respDetails = resp.GetExpressCheckoutDetailsResponseDetails;
+                var respDetails = resp.GetExpressCheckoutDetailsResponseDetails;
 
                 //ShippingAddress
                 //respDetails.PayerInfo.Address
@@ -102,13 +100,13 @@ namespace phoenixconsulting.paymentservice.paypal {
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         public static DoExpressCheckoutPaymentResponseType CompletePayPalTransaction() {
             //get transaction details
-            GetExpressCheckoutDetailsResponseType resp = SessionHandler.Instance.PPCheckoutData;
-            GetExpressCheckoutDetailsResponseDetailsType respDetails = SessionHandler.Instance.PPCheckoutDetails;
+            var resp = SessionHandler.Instance.PPCheckoutData;
+            var respDetails = SessionHandler.Instance.PPCheckoutDetails;
 
             //create a new object, because it is now an array !!!!
-            PaymentDetailsType[] sPaymentDetails = new PaymentDetailsType[1];
-            sPaymentDetails[0] = new PaymentDetailsType() {
-                OrderTotal = new BasicAmountType() {
+            var sPaymentDetails = new PaymentDetailsType[1];
+            sPaymentDetails[0] = new PaymentDetailsType {
+                OrderTotal = new BasicAmountType {
                     currencyID = respDetails.PaymentDetails[0].OrderTotal.currencyID,
                     Value = respDetails.PaymentDetails[0].OrderTotal.Value
                 },
@@ -120,10 +118,10 @@ namespace phoenixconsulting.paymentservice.paypal {
 
 
             //prepare for commiting transaction
-            DoExpressCheckoutPaymentReq payReq = new DoExpressCheckoutPaymentReq() {
-                DoExpressCheckoutPaymentRequest = new DoExpressCheckoutPaymentRequestType() {
+            var payReq = new DoExpressCheckoutPaymentReq {
+                DoExpressCheckoutPaymentRequest = new DoExpressCheckoutPaymentRequestType {
                     Version = ApplicationHandler.Instance.PaypalVersion,
-                    DoExpressCheckoutPaymentRequestDetails = new DoExpressCheckoutPaymentRequestDetailsType() {
+                    DoExpressCheckoutPaymentRequestDetails = new DoExpressCheckoutPaymentRequestDetailsType {
                         Token = resp.GetExpressCheckoutDetailsResponseDetails.Token,
                         //must specify PaymentAction and PaymentActionSpecific, or it'll fail with
                         //PaymentAction : Required parameter missing (error code: 81115)
@@ -136,7 +134,7 @@ namespace phoenixconsulting.paymentservice.paypal {
             };
 
             //commit transaction and display results to user
-            DoExpressCheckoutPaymentResponseType doResponse =
+            var doResponse =
                 BuildPayPalWebservice().DoExpressCheckoutPayment(payReq);
             HandleError(doResponse);
             return doResponse;
@@ -150,14 +148,14 @@ namespace phoenixconsulting.paymentservice.paypal {
         //****************************
         public static PayPalAPIAASoapBinding BuildPayPalWebservice() {
             //more details on https://www.paypal.com/en_US/ebook/PP_APIReference/architecture.html
-            UserIdPasswordType credentials = new UserIdPasswordType() {
+            var credentials = new UserIdPasswordType {
                 Username = ApplicationHandler.Instance.PaypalAPIUsername,
                 Password = ApplicationHandler.Instance.PaypalAPIPassword,
                 Signature = ApplicationHandler.Instance.PaypalAPISignature,
             };
 
-            PayPalAPIAASoapBinding paypal = new PayPalAPIAASoapBinding();
-            paypal.RequesterCredentials = new CustomSecurityHeaderType() {
+            var paypal = new PayPalAPIAASoapBinding();
+            paypal.RequesterCredentials = new CustomSecurityHeaderType {
                 Credentials = credentials
             };
 
@@ -167,7 +165,7 @@ namespace phoenixconsulting.paymentservice.paypal {
         internal static void HandleError(AbstractResponseType resp) {
             if(resp.Errors != null && resp.Errors.Length > 0) {
                 //errors occured - log them
-                LoggerUtil.auditLog(LogLevel.Error,
+                LoggerUtil.AuditLog(LogLevel.Error,
                                     AuditEventType.SUBMIT_PAYPAL_PAYMENT_FAILED,
                                     "StoreSite",
                                     null,

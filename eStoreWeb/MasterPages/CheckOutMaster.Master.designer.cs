@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace eStoreWeb {
+namespace eStoreWeb.MasterPages {
     
     
     public partial class CheckOutMaster {

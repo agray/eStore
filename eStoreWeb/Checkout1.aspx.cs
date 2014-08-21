@@ -23,21 +23,20 @@
  * THE SOFTWARE.
  */
 #endregion
-using System;
-using System.Diagnostics.CodeAnalysis;
 using eStoreBLL;
-using eStoreDAL;
 using eStoreWeb.Controls;
 using eStoreWeb.Properties;
-using phoenixconsulting.businessentities.account;
 using phoenixconsulting.common.basepages;
 using phoenixconsulting.common.handlers;
 using phoenixconsulting.common.navigation;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 namespace eStoreWeb {
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-    public partial class checkout1 : BasePage {
+    public partial class Checkout1 : BasePage {
         protected void Page_Load(object sender, EventArgs e) {
             //NavigationUtils.handleCheckOut1NavigationRedirect();
             
@@ -56,19 +55,19 @@ namespace eStoreWeb {
             //}
 
             if(!Page.IsPostBack) {
-                populateForm();
+                PopulateForm();
             }
         }
 
-        private void populateForm() {
-            if(isLoggedIn()) {
+        private void PopulateForm() {
+            if(IsLoggedIn()) {
                 if(SessionHandler.Instance.IsBillingAddressSet()) {
                     SetFormToBillingSessionDetails();
                 } else {
                     //See if customer has address stored
-                    Guid userID = BaseUserControl.getUserID(this);
-                    CustomerAddressBLL ca = new CustomerAddressBLL();
-                    DTAddress address = ca.getCustomerBillingAddress(userID);
+                    var userId = BaseUserControl.getUserID(this);
+                    var ca = new CustomerAddressBLL();
+                    var address = ca.getCustomerBillingAddress(userId);
                     if(address != null) {
                         CustomerFirstNameTextBox.Text = address.FirstName;
                         CustomerLastNameTextBox.Text = address.LastName;
@@ -114,7 +113,7 @@ namespace eStoreWeb {
             }
 
             if(CurrentAddressCheckBox.Checked) {
-                CustomerAddressBLL ca = new CustomerAddressBLL();
+                var ca = new CustomerAddressBLL();
                 ca.saveBillingAddress(BaseUserControl.getUserID(this),
                                       CustomerFirstNameTextBox.Text,
                                       CustomerLastNameTextBox.Text,
@@ -131,13 +130,11 @@ namespace eStoreWeb {
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         private static void GetBillingCurrencyDetails() {
-            CurrenciesBLL currTableAdapter = new CurrenciesBLL();
-            DAL.CurrencyRow currRow = default(DAL.CurrencyRow);
-
-            currRow = currTableAdapter.getCurrencyByBillingCountry(Int32.Parse(SessionHandler.Instance.BillingCountry))[0];
+            var currTableAdapter = new CurrenciesBLL();
+            var currRow = currTableAdapter.getCurrencyByBillingCountry(Int32.Parse(SessionHandler.Instance.BillingCountry))[0];
 
             SessionHandler.Instance.BillingCurrencyValue = currRow.Value;
-            SessionHandler.Instance.BillingCurrencyId = currRow.ID.ToString();
+            SessionHandler.Instance.BillingCurrencyId = currRow.ID.ToString(CultureInfo.InvariantCulture);
             SessionHandler.Instance.BillingXRate = currRow.ExchangeRate;
         }
 

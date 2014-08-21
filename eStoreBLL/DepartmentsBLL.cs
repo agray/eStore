@@ -49,7 +49,7 @@ namespace eStoreBLL {
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
         public ArrayList getSEODetails(int ID) {
-            return new DataReader().getDepartmentSEODetails(ID);
+            return new DataReader().GetDepartmentSeoDetails(ID);
         }
     }
 }

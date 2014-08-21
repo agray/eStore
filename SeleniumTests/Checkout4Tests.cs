@@ -40,7 +40,7 @@ namespace SeleniumTests {
             testUtil.EnterCheckOut2DataAndSubmit(selenium);
             testUtil.EnterCheckOut3DataAndSubmit(selenium);
 
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             //Cart Details
             Assert.IsTrue(htmlSource.Contains("<legend>Cart Details</legend>"));
             Assert.IsTrue(htmlSource.Contains("4. Please review and place your order"));
@@ -98,7 +98,7 @@ namespace SeleniumTests {
             testUtil.WaitForPageToLoad(selenium, "7000");
             testUtil.MoveToPopUp(selenium, "10000");
 
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("<h2><a name=\"Exchanges\"></a>Exchanges</h2>"));
             Assert.IsTrue(htmlSource.Contains("<h2><a name=\"Cancellations\"></a>Cancellations</h2>"));
 
@@ -162,7 +162,7 @@ namespace SeleniumTests {
             testUtil.EnterDifferentCheckOut3DataAndSubmit(selenium);
 
             //Back at checkout4 page - assert changed payment details
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("<th>Payment Method:</th>"));
             //Assert.IsTrue(htmlSource.Contains("<td align=\"left\">Credit Card</td>"));
             Assert.IsTrue(htmlSource.Contains("<th>Name on Card:</th>"));

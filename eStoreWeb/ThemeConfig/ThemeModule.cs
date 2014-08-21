@@ -35,7 +35,7 @@ namespace HowTos {
         }
 
         private void HandlePreRequest(object sender, EventArgs e) {
-            Page page = HttpContext.Current.CurrentHandler as Page;
+            var page = HttpContext.Current.CurrentHandler as Page;
             if(page != null) {
                 page.PreInit += delegate { page.Theme = DetermineTheme(); };
             }

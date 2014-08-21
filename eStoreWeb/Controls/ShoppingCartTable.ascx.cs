@@ -40,9 +40,9 @@ namespace eStoreWeb.Controls {
         }
 
         protected void Page_Load(object sender, EventArgs e) {
-            ShoppingCart sc = new ShoppingCart();
+            var sc = new ShoppingCart();
             if(!sc.IsEmptyList()) {
-                DataSet dataSet = sc.ConvertToDataSet();
+                var dataSet = sc.ConvertToDataSet();
                 SessionHandler.Instance.CartDataSet = dataSet;
                 cartItemRepeater.DataSource = dataSet.Tables[0];
                 cartItemRepeater.DataBind();
@@ -54,7 +54,7 @@ namespace eStoreWeb.Controls {
         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
         protected void cartItemRepeater_ItemCommand(object source, CommandEventArgs e) {
             //Remove item from cart
-            ShoppingCart sc = new ShoppingCart();
+            var sc = new ShoppingCart();
             sc.RemoveItem(Int32.Parse(e.CommandArgument.ToString()));
             GoTo.Instance.ViewCartPage();
         }

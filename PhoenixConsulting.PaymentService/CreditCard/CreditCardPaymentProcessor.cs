@@ -30,10 +30,10 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Xml;
-using com.phoenixconsulting.common.mail;
 using eStoreBLL;
 using phoenixconsulting.common.handlers;
 using phoenixconsulting.common.logging;
+using PhoenixConsulting.Common.Mail;
 
 namespace phoenixconsulting.paymentservice.creditcard {
     public class CreditCardPaymentProcessor {
@@ -151,7 +151,7 @@ namespace phoenixconsulting.paymentservice.creditcard {
             SessionHandler.Instance.IsPaymentApproved = approved;
 
             //Update order status with result from CC Processor.
-            OrdersBLL order = new OrdersBLL();
+            var order = new OrdersBLL();
             order.updateOrderStatus(Convert.ToInt32(orderID),
                                     Convert.ToInt32(responseCode),
                                     txnID,
@@ -168,13 +168,13 @@ namespace phoenixconsulting.paymentservice.creditcard {
             if(IsCCApproved(SessionHandler.Instance.IsPaymentApproved, SessionHandler.Instance.PaymentResponseCode)) {
                 //Send Order Confirmation email to customer
                 MailMessageBuilder.SendOrderConfirmationEmail();
-                LoggerUtil.auditLog(NLog.LogLevel.Info,
+                LoggerUtil.AuditLog(NLog.LogLevel.Info,
                                 AuditEventType.SUBMIT_CC_PAYMENT_SUCCESS,
                                 "StoreSite",
                                 null,
                                 null, null, null, null, null);
             } else {
-                LoggerUtil.auditLog(NLog.LogLevel.Info,
+                LoggerUtil.AuditLog(NLog.LogLevel.Info,
                                 AuditEventType.SUBMIT_CC_PAYMENT_REJECTED,
                                 "StoreSite",
                                 null,
@@ -224,9 +224,9 @@ namespace phoenixconsulting.paymentservice.creditcard {
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         public string SetPaymentCreditCard(string merchantId, string time, int orderID, HttpRequest request) {
-            double amount = SessionHandler.Instance.TotalCost;
+            var amount = SessionHandler.Instance.TotalCost;
             //double amount = 100;  //This is to get Approved in Test Env
-            string tempMessage = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+            var tempMessage = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<SecurePayMessage>" +
                 "<MessageInfo>" +
                     "<messageID>" + orderID + "</messageID>" +
@@ -277,9 +277,9 @@ namespace phoenixconsulting.paymentservice.creditcard {
             SessionHandler.Instance.Url = strURL;
             //Uri newUri = new Uri(strURL);
 
-            HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create(strURL);
-            ASCIIEncoding encoding = new ASCIIEncoding();
-            Byte[] byte1 = encoding.GetBytes(message);
+            var myRequest = (HttpWebRequest)WebRequest.Create(strURL);
+            var encoding = new ASCIIEncoding();
+            var byte1 = encoding.GetBytes(message);
 
             myRequest.Method = "POST";
             myRequest.ContentType = "application/x-www-form-urlencoded";
@@ -287,20 +287,20 @@ namespace phoenixconsulting.paymentservice.creditcard {
             myRequest.Pipelined = false;
             myRequest.KeepAlive = false;
 
-            Stream newStream = myRequest.GetRequestStream();
+            var newStream = myRequest.GetRequestStream();
             newStream.Write(byte1, 0, byte1.Length);
             newStream.Close();
 
             try {
                 //Get the data as an HttpWebResponse object
-                HttpWebResponse resp = (HttpWebResponse)myRequest.GetResponse();
+                var resp = (HttpWebResponse)myRequest.GetResponse();
 
                 //Convert the data into a string (assumes that you are requesting text)
-                StreamReader sr = new StreamReader(resp.GetResponseStream());
-                XmlTextReader xmlreader = new XmlTextReader(sr);
+                var sr = new StreamReader(resp.GetResponseStream());
+                var xmlreader = new XmlTextReader(sr);
 
                 xmlreader.WhitespaceHandling = WhitespaceHandling.None;
-                XmlDocument myXMLdocument = new XmlDocument();
+                var myXMLdocument = new XmlDocument();
                 myXMLdocument.Load(xmlreader);
 
                 SessionHandler.Instance.CCResponseXml = myXMLdocument.InnerXml;
@@ -311,10 +311,10 @@ namespace phoenixconsulting.paymentservice.creditcard {
                 sr.Close();
                 xmlreader.Close();
 
-                for(int counter = 1; counter < myNodeList.Count; counter++) {
-                    XmlNode node = myNodeList.Item(counter);
+                for(var counter = 1; counter < myNodeList.Count; counter++) {
+                    var node = myNodeList.Item(counter);
                     if(node != null) {
-                        string innerXml = node.InnerXml;
+                        var innerXml = node.InnerXml;
                         switch(node.Name) {
                             case "messageID":
                                 messageID = innerXml;
@@ -425,7 +425,7 @@ namespace phoenixconsulting.paymentservice.creditcard {
                 resp.Close();
             } catch(WebException wex) {
                 //TODO: Offline Processor
-                LoggerUtil.auditLog(NLog.LogLevel.Info,
+                LoggerUtil.AuditLog(NLog.LogLevel.Info,
                                 AuditEventType.SUBMIT_CC_PAYMENT_FAILED,
                                 "StoreSite",
                                 null,

@@ -49,7 +49,7 @@ namespace eStoreBLL {
 
         [DataObjectMethodAttribute(DataObjectMethodType.Update, true)]
         public bool updateItem(int original_ID, Guid userID, int prodID, int sizeID, int colorID, int quantity) {
-            DAL.WishListDataTable wishlists = BLLAdapter.Instance.WishListAdapter.GetWishListByID(original_ID);
+            var wishlists = BLLAdapter.Instance.WishListAdapter.GetWishListByID(original_ID);
 
             if(wishlists.Count == 0) {
                 //No matching records found, return false
@@ -70,7 +70,7 @@ namespace eStoreBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Update, false)]
         public bool increaseQuantity(Guid userID, int prodID, int sizeID, int colorID, int quantity) {
             //Increase the quantity of the WishList item
-            int rowsAffected = (int)BLLAdapter.Instance.WishListAdapter.WishListIncreaseQuantity(userID, prodID, sizeID, colorID, quantity);
+            var rowsAffected = (int)BLLAdapter.Instance.WishListAdapter.WishListIncreaseQuantity(userID, prodID, sizeID, colorID, quantity);
 
             //Return True if exactly one row was updated, otherwise False
             return rowsAffected == 1;
@@ -79,7 +79,7 @@ namespace eStoreBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Update, false)]
         public bool updateQuantity(int original_ID, int quantity) {
             //Increase the quantity of the WishList item
-            int rowsAffected = (int)BLLAdapter.Instance.WishListAdapter.WishListUpdateQuantity(original_ID, quantity);
+            var rowsAffected = (int)BLLAdapter.Instance.WishListAdapter.WishListUpdateQuantity(original_ID, quantity);
 
             //Return True if exactly one row was updated, otherwise False
             return rowsAffected == 1;

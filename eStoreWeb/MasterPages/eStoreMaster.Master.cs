@@ -48,8 +48,8 @@ namespace eStoreWeb {
         public event CurrencyChangedEventHandler CurrencyChanged;
 
         protected virtual void OnCurrencyChanged(CurrencyChangedEventArgs e) {
-            DropDownList ddl = (DropDownList)currencyDDL.FindControl("CurrencyDropDownList");
-            DAL.CurrencyRow row = getCurrencyById(int.Parse(ddl.SelectedValue));
+            var ddl = (DropDownList)currencyDDL.FindControl("CurrencyDropDownList");
+            var row = getCurrencyById(int.Parse(ddl.SelectedValue));
             SessionHandler.Instance.SetCurrency(row.Value, row.ExchangeRate, row.ID.ToString());
 
             if(CurrencyChanged != null) {
@@ -90,21 +90,21 @@ namespace eStoreWeb {
                            ? "Welcome, " + getAuthenticatedFullName()
                            : String.Empty;
             } 
-            string authenticatedFullName = getAuthenticatedFullName();
+            var authenticatedFullName = getAuthenticatedFullName();
             return !authenticatedFullName.Equals(String.Empty)
                        ? "Welcome, " + getAuthenticatedFullName()
                        : String.Empty;
         }
 
         private static string getAuthenticatedFullName() {
-            UserBLL user = new UserBLL();
-            string fullname = user.getFullName(HttpContext.Current.User.Identity.Name, "eStore");
+            var user = new UserBLL();
+            var fullname = user.getFullName(HttpContext.Current.User.Identity.Name, "eStore");
             setLoginSessionVariables(fullname);
             return fullname;
         }
 
         private static void setLoginSessionVariables(string fullname) {
-            string[] names = fullname.Split(' ');
+            var names = fullname.Split(' ');
             if(names.Length.Equals(2)) {
                 SessionHandler.Instance.LoginFirstName = names[0];
                 SessionHandler.Instance.LoginLastName = names[1];

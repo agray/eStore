@@ -35,7 +35,7 @@ namespace SeleniumTests {
             testUtil.OpenHomePage(selenium);
             testUtil.AddOneItemHelper(selenium);
 
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("Brush From CatzRUs"));
             Assert.IsTrue(htmlSource.Contains("Size: Large"));
             Assert.IsTrue(htmlSource.Contains("Color: Yellow"));
@@ -56,7 +56,7 @@ namespace SeleniumTests {
             testUtil.WaitForPageToLoad(selenium, "5000");
             testUtil.AddItemToCart(selenium);
 
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("Brush From CatzRUs"));
             Assert.IsTrue(htmlSource.Contains("Size: Large"));
             Assert.IsTrue(htmlSource.Contains("Color: Yellow"));
@@ -78,7 +78,7 @@ namespace SeleniumTests {
             selenium.Select("ctl00_ContentPlaceHolder1_ProductFormView_productColorDDL_ColorDropDownList", "label=Red");
             testUtil.AddItemToCart(selenium);
 
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("Brush From CatzRUs"));
             Assert.IsTrue(htmlSource.Contains("<br>Size: Large"));
             Assert.IsTrue(htmlSource.Contains("<br>Color: Yellow"));
@@ -124,7 +124,7 @@ namespace SeleniumTests {
             testUtil.WaitForPageToLoad(selenium, "2000");
             testUtil.RemoveFirstItemHelper(selenium);
 
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("Brush From CatzRUs"));
             Assert.IsTrue(htmlSource.Contains("<br>Size: Small"));
             Assert.IsTrue(htmlSource.Contains("<br>Color: Orange"));
@@ -416,7 +416,7 @@ namespace SeleniumTests {
             selenium.Click("link=FAQ");
             testUtil.WaitForPageToLoad(selenium, "3000");
 
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.IsTrue(htmlSource.Contains("<h1>Frequently Asked Questions</h1>"));
             Assert.IsTrue(htmlSource.Contains("<li><a href=\"#howpay\">How do I order and pay?</a></li>"));
             Assert.IsTrue(htmlSource.Contains("<li><a href=\"#payment\">My payment won't go through, what's wrong?</a></li>"));

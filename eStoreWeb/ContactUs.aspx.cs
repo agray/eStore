@@ -37,8 +37,8 @@ namespace eStoreWeb {
             ContactHyperlink1.Text = Settings.Default.ContactUsMailTo;
         }
 
-        protected void StoreEmailInDB(object sender, EventArgs e) {
-            EmailBLL email = new EmailBLL();
+        protected void StoreEmailInDb(object sender, EventArgs e) {
+            var email = new EmailBLL();
             email.addEmail(NameTextBox.Text, EmailTextBox.Text, SubjectTextBox.Text, BodyTextBox.Text);
             GoTo.Instance.ContactUsSentPage();
         }

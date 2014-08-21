@@ -36,7 +36,7 @@ namespace SeleniumTests {
             selenium.Click("ctl00_NavCatalogue_DepartmentRepeater_ctl00_CategoryRepeater_ctl00_CategoryHyperLink");
             testUtil.WaitForPageToLoad(selenium, "2000");
 
-            string htmlSource = selenium.GetHtmlSource();
+            var htmlSource = selenium.GetHtmlSource();
             Assert.AreEqual("Dogs - Grooming", selenium.GetTitle());
             Assert.IsTrue(selenium.IsTextPresent("Grooming"));
             Assert.IsTrue(htmlSource.Contains("Keeps your pet clean and fresh year round."));

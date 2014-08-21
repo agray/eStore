@@ -38,7 +38,7 @@ namespace eStoreWeb.Controls {
         protected void savedSearchesItemLV_ItemCommand(object source, CommandEventArgs e) {
             if(!string.IsNullOrEmpty(e.CommandArgument.ToString())) {
                 if(e.CommandName.Equals("delete")) {
-                    int ID = Int32.Parse(e.CommandArgument.ToString());
+                    var ID = Int32.Parse(e.CommandArgument.ToString());
                     SavedSearchesODS.DeleteParameters.Add(new Parameter("original_ID", DbType.Int32, ID.ToString()));
                 } else {
                    SessionHandler.Instance.SearchString = e.CommandArgument.ToString();

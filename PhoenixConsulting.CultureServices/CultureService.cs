@@ -29,7 +29,7 @@ using phoenixconsulting.CultureServices.enums;
 namespace com.phoenixconsulting.culture {
     public class CultureService {
         public static string toLocalCulture(double d) {
-            NumberFormatInfo numberInfo = CultureInfo.InstalledUICulture.NumberFormat;
+            var numberInfo = CultureInfo.InstalledUICulture.NumberFormat;
             return d.ToString("c", numberInfo);
         }
 
@@ -38,9 +38,9 @@ namespace com.phoenixconsulting.culture {
         }
 
         public static string toInternalLocalCulture(double d) {
-            NumberFormatInfo numberInfo = CultureInfo.InstalledUICulture.NumberFormat;
-            string temp = d.ToString("c", numberInfo);
-            int length = temp.Length;
+            var numberInfo = CultureInfo.InstalledUICulture.NumberFormat;
+            var temp = d.ToString("c", numberInfo);
+            var length = temp.Length;
             return temp.Substring(1, length-1);
         }
 
@@ -48,13 +48,13 @@ namespace com.phoenixconsulting.culture {
                                                double xRate,
                                                string targetCurrency) {
             //do Calculation in AUS culture
-            double convertedPrice = double.Parse(rawValue) * xRate;
+            var convertedPrice = double.Parse(rawValue) * xRate;
 
             //change back to target culture
             SetCulture(targetCurrency);
 
-            NumberFormatInfo numberInfo = CultureInfo.CurrentCulture.NumberFormat;
-            string convertedPriceString = convertedPrice.ToString("c", numberInfo);
+            var numberInfo = CultureInfo.CurrentCulture.NumberFormat;
+            var convertedPriceString = convertedPrice.ToString("c", numberInfo);
 
             //change to AUS culture for next calculation
             SetCulture("AUD");
@@ -77,10 +77,10 @@ namespace com.phoenixconsulting.culture {
         }
 
         private static void ConfigureCultureInfo(CultureCode cc) {
-            string cultureCode = EnumUtils.descriptionStringValueOf(cc);
-            string currencySymbol = EnumUtils.categoryStringValueOf(cc);
+            var cultureCode = EnumUtils.descriptionStringValueOf(cc);
+            var currencySymbol = EnumUtils.categoryStringValueOf(cc);
 
-            CultureInfo cultureInfo = new CultureInfo(cultureCode, false);
+            var cultureInfo = new CultureInfo(cultureCode, false);
             cultureInfo.NumberFormat.CurrencyPositivePattern = 0;
 
             if(!currencySymbol.Equals("null")) {

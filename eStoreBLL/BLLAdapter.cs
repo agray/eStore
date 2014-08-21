@@ -27,7 +27,7 @@ using eStoreDAL.DALTableAdapters;
 
 namespace eStoreBLL {
     public class BLLAdapter {
-        private static BLLAdapter instance;
+        private static BLLAdapter _instance;
         private CategoryTableAdapter _categoriesAdapter;
         private ZoneTableAdapter _zoneAdapter;
         private WishListTableAdapter _wishListAdapter;
@@ -57,7 +57,7 @@ namespace eStoreBLL {
         }
 
         public static BLLAdapter Instance {
-            get { return instance ?? (instance = new BLLAdapter()); }
+            get { return _instance ?? (_instance = new BLLAdapter()); }
         }
 
         public CategoryTableAdapter CategoryAdapter {
@@ -76,11 +76,11 @@ namespace eStoreBLL {
             get { return _usersAdapter ?? (_usersAdapter = new UsersTableAdapter()); }
         }
 
-        public CCExpiryMonthTableAdapter CCMonthAdapter {
+        public CCExpiryMonthTableAdapter CcMonthAdapter {
             get { return _ccExpiryMonthsAdapter ?? (_ccExpiryMonthsAdapter = new CCExpiryMonthTableAdapter()); }
         }
 
-        public CCExpiryYearTableAdapter CCYearAdapter {
+        public CCExpiryYearTableAdapter CcYearAdapter {
             get { return _ccExpiryYearsAdapter ?? (_ccExpiryYearsAdapter = new CCExpiryYearTableAdapter()); }
         }
 

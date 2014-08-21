@@ -34,38 +34,38 @@ namespace eStoreWeb.Controls {
     public partial class OrderHistoryDetailTable : BaseUserControl {
         public string TotalTitle1 {
             get {
-                Label totalTitle = (Label)orderHistoryDetailItemLV.FindControl("TotalTitle");
+                var totalTitle = (Label)orderHistoryDetailItemLV.FindControl("TotalTitle");
                 return totalTitle.Text; 
             }
             set {
-                Label totalTitle = (Label)orderHistoryDetailItemLV.FindControl("TotalTitle");
+                var totalTitle = (Label)orderHistoryDetailItemLV.FindControl("TotalTitle");
                 totalTitle.Text = value; 
             }
         }
 
         protected void ProductDetailsLabel_DataBinding(object sender, EventArgs e) {
-            Label label = (Label)(sender);
+            var label = (Label)(sender);
             label.Text = string.Format("{0} From {1}", Eval("Product"), Eval("Supplier"));
         }
 
         protected void AddOrderToCart(object sender, EventArgs e) {
-            foreach(ListViewDataItem lvdi in orderHistoryDetailItemLV.Items) {
-                int depID = int.Parse(((Label)lvdi.FindControl("HiddenDepIDLabel")).Text);
-                int catID = int.Parse(((Label)lvdi.FindControl("HiddenCatIDLabel")).Text);
-                int prodID = int.Parse(((Label)lvdi.FindControl("HiddenProdIDLabel")).Text);
-                string prodDetails = ((Label)lvdi.FindControl("ProductDetailsLabel")).Text;
-                string imgPath = ((Label)lvdi.FindControl("HiddenImgPathLabel")).Text;
-                double unitPrice = double.Parse(((Label)lvdi.FindControl("HiddenUnitPriceLabel")).Text);
-                double prodWeight = double.Parse(((Label)lvdi.FindControl("HiddenProdWeightLabel")).Text);
-                int prodQuantity = int.Parse(((Label)lvdi.FindControl("HiddenProdQuantityLabel")).Text);
-                int isOnSale = int.Parse(((Label)lvdi.FindControl("HiddenIsOnSaleLabel")).Text);
-                double discPrice = double.Parse(((Label)lvdi.FindControl("HiddenDiscPriceLabel")).Text);
-                int colorID = int.Parse(((Label)lvdi.FindControl("HiddenColorIDLabel")).Text);
-                string colorName = ((Label)lvdi.FindControl("HiddenColorNameLabel")).Text;
-                int sizeID = int.Parse(((Label)lvdi.FindControl("HiddenSizeIDLabel")).Text);
-                string sizeName = ((Label)lvdi.FindControl("HiddenSizeNameLabel")).Text;
+            foreach(var lvdi in orderHistoryDetailItemLV.Items) {
+                var depID = int.Parse(((Label)lvdi.FindControl("HiddenDepIDLabel")).Text);
+                var catID = int.Parse(((Label)lvdi.FindControl("HiddenCatIDLabel")).Text);
+                var prodID = int.Parse(((Label)lvdi.FindControl("HiddenProdIDLabel")).Text);
+                var prodDetails = ((Label)lvdi.FindControl("ProductDetailsLabel")).Text;
+                var imgPath = ((Label)lvdi.FindControl("HiddenImgPathLabel")).Text;
+                var unitPrice = double.Parse(((Label)lvdi.FindControl("HiddenUnitPriceLabel")).Text);
+                var prodWeight = double.Parse(((Label)lvdi.FindControl("HiddenProdWeightLabel")).Text);
+                var prodQuantity = int.Parse(((Label)lvdi.FindControl("HiddenProdQuantityLabel")).Text);
+                var isOnSale = int.Parse(((Label)lvdi.FindControl("HiddenIsOnSaleLabel")).Text);
+                var discPrice = double.Parse(((Label)lvdi.FindControl("HiddenDiscPriceLabel")).Text);
+                var colorID = int.Parse(((Label)lvdi.FindControl("HiddenColorIDLabel")).Text);
+                var colorName = ((Label)lvdi.FindControl("HiddenColorNameLabel")).Text;
+                var sizeID = int.Parse(((Label)lvdi.FindControl("HiddenSizeIDLabel")).Text);
+                var sizeName = ((Label)lvdi.FindControl("HiddenSizeNameLabel")).Text;
                 
-                DTItem item = new DTItem(depID, catID, prodID, prodDetails, imgPath, unitPrice, 
+                var item = new DTItem(depID, catID, prodID, prodDetails, imgPath, unitPrice, 
                                          prodWeight, prodQuantity, isOnSale, discPrice, colorID, 
                                          colorName, sizeID, sizeName);
                 AddToCart(item);
@@ -76,7 +76,7 @@ namespace eStoreWeb.Controls {
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         private void AddToCart(DTItem listItem) {
-            ShoppingCart cart = new ShoppingCart();
+            var cart = new ShoppingCart();
             cart.AddItem(listItem);
         }
     }

@@ -23,9 +23,10 @@
  * THE SOFTWARE.
  */
 #endregion
+
 using System.Web.UI;
 
-namespace eStoreWeb {
+namespace eStoreWeb.MasterPages {
     public partial class CheckOutMaster : MasterPage {
     }
 }

@@ -62,14 +62,14 @@ namespace eStoreWeb {
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        protected double getRefundAdminFee() {
+        protected double GetRefundAdminFee() {
             return ApplicationHandler.Instance.RefundAdminFeePercent;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        protected double getCancellationAdminFee() {
+        protected double GetCancellationAdminFee() {
             return ApplicationHandler.Instance.CancelAdminFeePercent;
         }
     }

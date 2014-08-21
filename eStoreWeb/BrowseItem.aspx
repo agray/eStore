@@ -35,7 +35,7 @@
         <ContentTemplate>
             <div id="DivMain">
                 <div>
-                    <% if(!isEmpty(ProductFormView)) {%>
+                    <% if(!IsEmpty(ProductFormView)) {%>
                         <%--bulk of content goes here--%>
                         <asp:FormView ID="ProductFormView" runat="server" 
                                       DataKeyNames="ID" 
@@ -44,7 +44,7 @@
                             <ItemTemplate>
                                 <div>
                                     <asp:HyperLink ID="Home_Breadcrumb" runat="server" 
-                                                   NavigateUrl="~/" 
+                                                   NavigateUrl="~/Splash.aspx" 
                                                    Text="Home" />&nbsp;&gt;&nbsp
                                     <asp:HyperLink ID="DepartmentName_Breadcrumb" runat="server"
                                                    NavigateUrl='<%#"~/BrowseDepartment.aspx?DepID=" + Eval("DepID").ToString()%>'
@@ -101,7 +101,7 @@
                                                     <%} %>
                                                 </div>
                                                 <asp:Label Visible="false" ID="HasSN" runat="server" Text='<%#Eval("HasSN")%>' />
-                                                <%if(HasSN()) {%>
+                                                <%if(HasSn()) {%>
                                                     <div class="ProductBookmarks">
                                                         <h2>Bookmark this page</h2>
                                                         <p>
@@ -266,7 +266,7 @@
                     <%} else { %>
                         <div>
                             <asp:HyperLink ID="HyperLink1" runat="server"
-                                           NavigateUrl="~/"
+                                           NavigateUrl="~/Splash.aspx"
                                            Text="Home" />
                             <hr />
                         </div>

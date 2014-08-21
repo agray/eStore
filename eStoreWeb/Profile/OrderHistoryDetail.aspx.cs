@@ -39,7 +39,7 @@ namespace eStoreWeb.Profile {
         }
 
         private void CurrencyChangedFromMasterPage(object sender, CurrencyChangedEventArgs e) {
-            string currencyValue = e.CurrencyValue;
+            var currencyValue = e.CurrencyValue;
             oHDTable = OrderHistoryDetailTable;
             oHDTable.TotalTitle1 = "Total Price(" + currencyValue + ")";
 

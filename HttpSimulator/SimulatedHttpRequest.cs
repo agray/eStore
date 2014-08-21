@@ -113,8 +113,8 @@ namespace Subtext.TestLibrary {
             if(headers == null || headers.Count == 0) {
                 return null;
             }
-            string[][] headersArray = new string[this.headers.Count][];
-            for(int i = 0; i < headers.Count; i++) {
+            var headersArray = new string[this.headers.Count][];
+            for(var i = 0; i < headers.Count; i++) {
                 headersArray[i] = new string[2];
                 headersArray[i][0] = headers.Keys[i];
                 headersArray[i][1] = headers[i];
@@ -140,17 +140,17 @@ namespace Subtext.TestLibrary {
         /// The virtual path of the current application.
         /// </returns>
         public override string GetAppPath() {
-            string appPath = base.GetAppPath();
+            var appPath = base.GetAppPath();
             return appPath;
         }
 
         public override string GetAppPathTranslated() {
-            string path = base.GetAppPathTranslated();
+            var path = base.GetAppPathTranslated();
             return path;
         }
 
         public override string GetUriPath() {
-            string uriPath = base.GetUriPath();
+            var uriPath = base.GetUriPath();
             return uriPath;
         }
 
@@ -163,7 +163,7 @@ namespace Subtext.TestLibrary {
         /// </summary>
         /// <returns>The number of bytes read.</returns>
         public override byte[] GetPreloadedEntityBody() {
-            string formText = string.Empty;
+            var formText = string.Empty;
 
             foreach(string key in formVariables.Keys) {
                 formText += string.Format("{0}={1}&", key, formVariables[key]);

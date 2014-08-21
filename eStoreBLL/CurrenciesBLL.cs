@@ -47,8 +47,8 @@ namespace eStoreBLL {
 
         [DataObjectMethodAttribute(DataObjectMethodType.Update, true)]
         public bool updateExchangeRate(string value, double rate) {
-            int rowsAffected = 0;
-            CurrencyTableAdapter ca = new CurrencyTableAdapter();
+            var rowsAffected = 0;
+            var ca = new CurrencyTableAdapter();
             rowsAffected = (int)ca.UpdateExchangeRate(value, rate);
             return rowsAffected == 1;
         }

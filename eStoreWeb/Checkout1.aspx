@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/CheckOutMaster.Master" AutoEventWireup="true" CodeBehind="Checkout1.aspx.cs" Inherits="eStoreWeb.checkout1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/CheckOutMaster.Master" AutoEventWireup="true" CodeBehind="Checkout1.aspx.cs" Inherits="eStoreWeb.Checkout1" %>
 <%@ MasterType VirtualPath="~/MasterPages/CheckOutMaster.Master" %>
 
 <%@ Register tagprefix="country" tagname="CountryDDL" src="~/Controls/CountryDDL.ascx" %>
@@ -157,7 +157,7 @@
                                                     OnSelectedIndexChanged="countryDDL_SelectedIndexChanged" />
                             </td>
                         </tr>
-                        <%if(isLoggedIn()) { %>
+                        <%if(IsLoggedIn()) { %>
                             <tr>
                                 <td align="right">
                                     <asp:CheckBox ID="CurrentAddressCheckBox" runat="server" />

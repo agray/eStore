@@ -30,8 +30,8 @@ namespace eStoreBLL {
     [DataObject]
     public class ColorsBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.ProductColorDataTable getColorsByProductID(int productID) {
-            return BLLAdapter.Instance.ColorAdapter.GetProductColorsByProduct(productID);
+        public DAL.ProductColorDataTable GetColorsByProductId(int productId) {
+            return BLLAdapter.Instance.ColorAdapter.GetProductColorsByProduct(productId);
         }
 
         //[DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
@@ -47,8 +47,8 @@ namespace eStoreBLL {
         //}
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.ProductColorDataTable getColorByID(int ID) {
-            return BLLAdapter.Instance.ColorAdapter.GetProductColorByID(ID);
+        public DAL.ProductColorDataTable GetColorById(int id) {
+            return BLLAdapter.Instance.ColorAdapter.GetProductColorByID(id);
         }
     }
 }

@@ -31,12 +31,12 @@ namespace eStoreBLL {
     public class CCMonthsBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
         public DAL.CCExpiryMonthDataTable getCCExpiryMonths() {
-            return BLLAdapter.Instance.CCMonthAdapter.GetCCExpiryMonths();
+            return BLLAdapter.Instance.CcMonthAdapter.GetCCExpiryMonths();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
         public DAL.CCExpiryMonthDataTable getCCExpiryMonthByID(int ID) {
-            return BLLAdapter.Instance.CCMonthAdapter.GetCCExpiryMonthByID(ID);
+            return BLLAdapter.Instance.CcMonthAdapter.GetCCExpiryMonthByID(ID);
         }
     }
 }

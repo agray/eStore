@@ -40,7 +40,7 @@ namespace eStoreBLL {
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
         public string getUserIDByEmail(string emailAddress, string applicationName) {
-            object o = BLLAdapter.Instance.UserAdapter.GetUserIDByEmail(emailAddress, applicationName);
+            var o = BLLAdapter.Instance.UserAdapter.GetUserIDByEmail(emailAddress, applicationName);
             return o != null ? ((Guid)o).ToString() : (new Guid("00000000-0000-0000-0000-000000000000")).ToString();
         }
 

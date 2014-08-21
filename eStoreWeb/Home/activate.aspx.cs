@@ -37,8 +37,8 @@ namespace eStoreWeb.Home {
                 GoTo.Instance.Custom404Page();
             }
 
-            string emailAddress = RequestHandler.Instance.Email;
-            DTMembershipProvider dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
+            var emailAddress = RequestHandler.Instance.Email;
+            var dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
             dtmp.UnlockUser(emailAddress);
         }
     }

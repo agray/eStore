@@ -35,9 +35,9 @@ namespace eStoreBLL {
     public class CustomerAddressBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
         public DTAddress[] getCustomerAddresses(Guid userID) {
-            List<DTAddress> addresses = new List<DTAddress>();
-            DAL.CustomerAddressDataTable cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerAddresses(userID);
-            foreach(DAL.CustomerAddressRow row in cadt) {
+            var addresses = new List<DTAddress>();
+            var cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerAddresses(userID);
+            foreach(var row in cadt) {
                 addresses.Add(new DTAddress(int.Parse(row["ID"].ToString()),
                                             (AddressType)int.Parse(row["AddressType"].ToString()),
                                             row["FirstName"].ToString(),
@@ -53,10 +53,10 @@ namespace eStoreBLL {
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
         public DTAddress getCustomerBillingAddress(Guid userID) {
-            DAL.CustomerAddressDataTable cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerBillingAddress(userID);
+            var cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerBillingAddress(userID);
             if(cadt.Rows.Count == 1) {
-                DAL.CustomerAddressRow row = (DAL.CustomerAddressRow)cadt.Rows[0];
-                AddressType type = (AddressType)int.Parse(row["AddressType"].ToString());
+                var row = (DAL.CustomerAddressRow)cadt.Rows[0];
+                var type = (AddressType)int.Parse(row["AddressType"].ToString());
                 return type == AddressType.BILLING
                            ? new DTAddress(int.Parse(row["ID"].ToString()),
                                            type,
@@ -74,10 +74,10 @@ namespace eStoreBLL {
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
         public DTAddress getCustomerShippingAddress(Guid userID) {
-            DAL.CustomerAddressDataTable cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerShippingAddress(userID);
+            var cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerShippingAddress(userID);
             if(cadt.Rows.Count == 1) {
-                DAL.CustomerAddressRow row = (DAL.CustomerAddressRow)cadt.Rows[0];
-                AddressType type = (AddressType)int.Parse(row["AddressType"].ToString());
+                var row = (DAL.CustomerAddressRow)cadt.Rows[0];
+                var type = (AddressType)int.Parse(row["AddressType"].ToString());
                 return type == AddressType.SHIPPING
                            ? new DTAddress(int.Parse(row["ID"].ToString()),
                                            type,
@@ -101,7 +101,7 @@ namespace eStoreBLL {
                                        string billingStateProvinceRegion,
                                        string billingPostcode,
                                        int billingCountry) {
-            DTAddress DB_BillingAddress = getCustomerBillingAddress(userID);
+            var DB_BillingAddress = getCustomerBillingAddress(userID);
             if(DB_BillingAddress != null) {
                 //update existing billing address
                 updateAddress(new DTAddress(DB_BillingAddress.Id, AddressType.BILLING,
@@ -127,7 +127,7 @@ namespace eStoreBLL {
                                         string shippingStateProvinceRegion,
                                         string shippingPostcode,
                                         int shippingCountry) {
-            DTAddress DB_ShippingAddress = getCustomerShippingAddress(userID);
+            var DB_ShippingAddress = getCustomerShippingAddress(userID);
             if(DB_ShippingAddress != null) {
                 //update existing billing address
                 updateAddress(new DTAddress(DB_ShippingAddress.Id, AddressType.SHIPPING,
@@ -175,8 +175,8 @@ namespace eStoreBLL {
 
         private AddressType getDBAddressType(Guid userID) {
             //Only one address in the DB what is its type?
-            CustomerAddressBLL ca = new CustomerAddressBLL();
-            DTAddress[] addresses = ca.getCustomerAddresses(userID);
+            var ca = new CustomerAddressBLL();
+            var addresses = ca.getCustomerAddresses(userID);
             return addresses[0].AddressType;
         }
 
@@ -189,10 +189,10 @@ namespace eStoreBLL {
         }
 
         public bool addAddress(Guid userID, DTAddress address) {
-            DAL.CustomerAddressDataTable addresses = new DAL.CustomerAddressDataTable();
+            var addresses = new DAL.CustomerAddressDataTable();
 
             //Create a new CustomerAddressRow instance
-            DAL.CustomerAddressRow customerAddress = addresses.NewCustomerAddressRow();
+            var customerAddress = addresses.NewCustomerAddressRow();
 
             customerAddress.UserID = userID;
             customerAddress.AddressType = (int)address.AddressType;
@@ -206,7 +206,7 @@ namespace eStoreBLL {
 
             //Add the new CustomerAddress
             addresses.AddCustomerAddressRow(customerAddress);
-            int rowsAffected = BLLAdapter.Instance.CustomerAddressAdapter.Update(addresses);
+            var rowsAffected = BLLAdapter.Instance.CustomerAddressAdapter.Update(addresses);
 
             //Return True if exactly one row was inserted, otherwise False
 
@@ -214,7 +214,7 @@ namespace eStoreBLL {
         }
 
         public bool updateAddress(DTAddress address) {
-            DAL.CustomerAddressDataTable addresses = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerAddressByID(address.Id);
+            var addresses = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerAddressByID(address.Id);
 
             if(addresses.Count == 0) {
                 //No matching records found, return false

@@ -26,24 +26,23 @@
 using System;
 using System.Web.Security;
 using com.phoenixconsulting.AspNet.Membership;
-using com.phoenixconsulting.common.mail;
 using eStoreBLL;
 using phoenixconsulting.common.basepages;
+using PhoenixConsulting.Common.Mail;
 
 namespace eStoreWeb.Home {
     public partial class RemindPassword : BasePage {
         protected void RemindPassword_OnClick(object sender, EventArgs e) {
-            DTMembershipProvider dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
-            UserBLL user = new UserBLL();
-            string newPassword;
+            var dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
+            var user = new UserBLL();
 
             if(dtmp == null) {
                 return;
             } 
-            newPassword = dtmp.ResetPassword(EmailTextBox.Text, null);
+            var newPassword = dtmp.ResetPassword(EmailTextBox.Text, null);
 
-            string fullname = user.getFullName(EmailTextBox.Text, "eStore");
-            string[] names = getSeparateNames(fullname);
+            var fullname = user.getFullName(EmailTextBox.Text, "eStore");
+            var names = getSeparateNames(fullname);
 
             if(names != null) {
                 MailMessageBuilder.SendPasswordResetEmail(EmailTextBox.Text, names[0], names[1], newPassword);
@@ -53,7 +52,7 @@ namespace eStoreWeb.Home {
         }
 
         private string[] getSeparateNames(string fullname) {
-            string[] names = fullname.Split(' ');
+            var names = fullname.Split(' ');
             return names.Length.Equals(2) ? names : null;
         }
     }

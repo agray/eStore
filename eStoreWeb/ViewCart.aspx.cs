@@ -31,7 +31,7 @@ using phoenixconsulting.common.navigation;
 
 namespace eStoreWeb {
     partial class ViewCart : BasePage {
-        protected ShoppingCartTable cartTable; 
+        protected ShoppingCartTable CartTable; 
         
         protected void Page_Init(object sender, EventArgs e) {
             //Wire up the event (CurrencyChanged) to the event handler (CurrencyChangedFromMasterPage) 
@@ -39,9 +39,9 @@ namespace eStoreWeb {
         }
 
         private void CurrencyChangedFromMasterPage(object sender, CurrencyChangedEventArgs e) {
-            string currencyValue = e.CurrencyValue;
-            cartTable = ShoppingCartTable;
-            cartTable.TotalTitle1 = "Total Price(" + currencyValue + ")";
+            var currencyValue = e.CurrencyValue;
+            CartTable = ShoppingCartTable;
+            CartTable.TotalTitle1 = "Total Price(" + currencyValue + ")";
 
             GoTo.Instance.ViewCartPage();
         }

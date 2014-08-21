@@ -43,7 +43,7 @@ namespace phoenixconsulting.businessentities.list {
         }
 
         public void AddItem(DTItem item) {
-            int index = ItemIndex(item.ProductId, item.ColorId, item.SizeId);
+            var index = ItemIndex(item.ProductId, item.ColorId, item.SizeId);
             if(index == -1) {
                 //Doesn't already exist
                 itemList.Add(item);
@@ -60,7 +60,7 @@ namespace phoenixconsulting.businessentities.list {
         }
 
         protected void IncreaseQuantity(int index, int quantity) {
-            DTItem item = (DTItem)itemList[index];
+            var item = (DTItem)itemList[index];
 
             item.ProductQuantity = item.ProductQuantity + quantity;
             item.Subtotal = item.ProductQuantity * item.ProductPrice;
@@ -72,10 +72,10 @@ namespace phoenixconsulting.businessentities.list {
 
 
         protected int ItemIndex(int productId, int colorId, int sizeId) {
-            int index = -1;
+            var index = -1;
 
-            for(int count = 0; count <= itemList.Count - 1; count++) {
-                DTItem item = (DTItem)itemList[count];
+            for(var count = 0; count <= itemList.Count - 1; count++) {
+                var item = (DTItem)itemList[count];
                 if(item.ProductId == productId && item.ColorId == colorId && item.SizeId == sizeId) {
                     index = count;
                     break;
@@ -86,8 +86,8 @@ namespace phoenixconsulting.businessentities.list {
         }
 
         public bool hasWrapping() {
-            for(int i = 0; i <= itemList.Count - 1; i++) {
-                DTItem item = (DTItem)itemList[i];
+            for(var i = 0; i <= itemList.Count - 1; i++) {
+                var item = (DTItem)itemList[i];
                 if(isWrapping(item)) {
                     return true;
                 }
@@ -100,10 +100,10 @@ namespace phoenixconsulting.businessentities.list {
         }
 
         public DataSet ConvertToDataSet() {
-            DataSet tempDS = CreateDataSet();
+            var tempDS = CreateDataSet();
 
             foreach(DTItem item in itemList) {
-                DataRow myRow = tempDS.Tables[0].NewRow();
+                var myRow = tempDS.Tables[0].NewRow();
                 myRow[0] = item.ProductId;
                 myRow[1] = item.ProductDetails;
                 myRow[2] = item.ImagePath;
@@ -126,8 +126,8 @@ namespace phoenixconsulting.businessentities.list {
         }
 
         private DataSet CreateDataSet() {
-            DataSet tempDS = new DataSet();
-            DataTable dataTable = new DataTable();
+            var tempDS = new DataSet();
+            var dataTable = new DataTable();
             //Satisfies rule: SetLocaleForDataTypes.
             dataTable.Locale = CultureInfo.InvariantCulture;
             tempDS.Locale = CultureInfo.InvariantCulture;

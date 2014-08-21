@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/CheckOutMaster.Master" AutoEventWireup="true" CodeBehind="Checkout2.aspx.cs" Inherits="eStoreWeb.checkout2" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/CheckOutMaster.Master" AutoEventWireup="true" CodeBehind="Checkout2.aspx.cs" Inherits="eStoreWeb.Checkout2" %>
 <%@ MasterType VirtualPath="~/MasterPages/CheckOutMaster.Master" %>
 <%@ Reference Control="~/Controls/CountryDDL.ascx" %>
 <%@ Reference Control="~/Controls/YesNoDDL.ascx" %>
@@ -169,7 +169,7 @@
                         </tr>
                     
                 </asp:Panel>
-                    <%if(isLoggedIn()) { %>
+                    <%if(IsLoggedIn()) { %>
                         <tr>
                             <td align="right">
                                 <asp:CheckBox ID="CurrentAddressCheckBox" runat="server" />

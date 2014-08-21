@@ -14,7 +14,7 @@
                                NavigateUrl="~/Splash.aspx">Home</asp:HyperLink>
                 <hr />
                 
-                <% if(!isEmpty(DepartmentList)) {%>    
+                <% if(!IsEmpty(DepartmentList)) {%>    
                     <h1><asp:Label ID="HeaderNameLabel" runat="server" /></h1>
                     <hr />
                     <asp:ListView ID="DepartmentList" runat="server" 

@@ -27,16 +27,16 @@ using System;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using com.phoenixconsulting.AspNet.Membership;
-using com.phoenixconsulting.common.mail;
 using phoenixconsulting.common.basepages;
 using phoenixconsulting.common.handlers;
+using PhoenixConsulting.Common.Mail;
 using phoenixconsulting.common.navigation;
 
 namespace eStoreWeb.Profile {
     public partial class ChangeEmailPassword : BasePage {
         protected void Page_Load(object sender, EventArgs e) {
             if(!Page.IsPostBack) {
-                TextBox emailTextBox = getTextBox("EmailTextBox");
+                var emailTextBox = GetTextBox("EmailTextBox");
                 emailTextBox.Text = ChangePassword1.UserName;
             }
         }
@@ -46,23 +46,25 @@ namespace eStoreWeb.Profile {
         }
 
         protected void ChangePassword_Click(object sender, EventArgs e) {
-            DTMembershipProvider dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
-            TextBox emailTextBox = getTextBox("EmailTextBox");
+            var dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
+            var emailTextBox = GetTextBox("EmailTextBox");
 
-            dtmp.ChangePassword(ChangePassword1.UserName,
-                                ChangePassword1.CurrentPassword,
-                                ChangePassword1.NewPassword);
+            if(dtmp != null) {
+                dtmp.ChangePassword(ChangePassword1.UserName,
+                    ChangePassword1.CurrentPassword,
+                    ChangePassword1.NewPassword);
 
-            if(!emailTextBox.Text.Equals(ChangePassword1.UserName)) {
-                //email address has been changed
-                dtmp.LockUser(ChangePassword1.UserName);
-                dtmp.ChangeUsername(ChangePassword1.UserName, emailTextBox.Text);
+                if(!emailTextBox.Text.Equals(ChangePassword1.UserName)) {
+                    //email address has been changed
+                    dtmp.LockUser(ChangePassword1.UserName);
+                    dtmp.ChangeUsername(ChangePassword1.UserName, emailTextBox.Text);
                 
-                MailMessageBuilder.SendActivationEmail(emailTextBox.Text,
-                                                       SessionHandler.Instance.LoginFirstName,
-                                                       SessionHandler.Instance.LoginLastName,
-                                                       getTextBox("NewPassword").Text);
-                ChangePassword1.SuccessText = "Your email and password have been changed successfully.";
+                    MailMessageBuilder.SendActivationEmail(emailTextBox.Text,
+                        SessionHandler.Instance.LoginFirstName,
+                        SessionHandler.Instance.LoginLastName,
+                        GetTextBox("NewPassword").Text);
+                    ChangePassword1.SuccessText = "Your email and password have been changed successfully.";
+                }
             }
         }
 
@@ -72,7 +74,7 @@ namespace eStoreWeb.Profile {
             GoTo.Instance.HomePage();
         }
 
-        private TextBox getTextBox(string controlName) {
+        private TextBox GetTextBox(string controlName) {
             return (TextBox)ChangePassword1.ChangePasswordTemplateContainer.FindControl(controlName);
         }
     }

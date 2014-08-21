@@ -16,7 +16,7 @@
             <div id="DivMain">
                 <h1>View Cart</h1>
      
-                <%ShoppingCart sc = new ShoppingCart();
+                <%var sc = new ShoppingCart();
                   if(sc.IsEmptyList())
                   {%>
                     <table>

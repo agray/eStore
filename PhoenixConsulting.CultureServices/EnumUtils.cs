@@ -28,24 +28,24 @@ using System.Reflection;
 namespace phoenixconsulting.CultureServices.enums {
     public class EnumUtils {
         public static string descriptionStringValueOf(Enum value) {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            var fi = value.GetType().GetField(value.ToString());
+            var attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
             return attributes.Length > 0 
                    ? attributes[0].Description 
                    : value.ToString();
         }
 
         public static string categoryStringValueOf(Enum value) {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-            CategoryAttribute[] attributes = (CategoryAttribute[])fi.GetCustomAttributes(typeof(CategoryAttribute), false);
+            var fi = value.GetType().GetField(value.ToString());
+            var attributes = (CategoryAttribute[])fi.GetCustomAttributes(typeof(CategoryAttribute), false);
             return attributes.Length > 0 
                    ? attributes[0].Category 
                    : value.ToString();
         }
 
         public static object enumValueOf(string value, Type enumType) {
-            string[] names = Enum.GetNames(enumType);
-            foreach(string name in names) {
+            var names = Enum.GetNames(enumType);
+            foreach(var name in names) {
                 if(descriptionStringValueOf((Enum)Enum.Parse(enumType, name)).Equals(value)) {
                     return Enum.Parse(enumType, name);
                 }

@@ -32,10 +32,10 @@ namespace eStoreWeb.Controls {
     public delegate void IndexChangedEventHandler(object sender, EventArgs e);
 
     public class BaseDDL : BaseUserControl {
-        private ListItemCollection m_Items;
+        private ListItemCollection _mItems;
 
         protected virtual DropDownList DropList() {
-            throw new InvalidOperationException("BaseUserControl.DropList not overridden in " + this.ToString());
+            throw new InvalidOperationException("BaseUserControl.DropList not overridden in " + ToString());
         }
 
         public bool AutoPostBack {
@@ -74,16 +74,16 @@ namespace eStoreWeb.Controls {
 
         [DefaultValue((string)null), MergableProperty(false), PersistenceMode(PersistenceMode.InnerDefaultProperty), Editor("System.Web.UI.Design.WebControls.ListItemsCollectionEditor,System.Design, Version=2.0.0.0,Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
         public virtual ListItemCollection Items {
-            get { return m_Items ?? (m_Items = new ListItemCollection()); }
+            get { return _mItems ?? (_mItems = new ListItemCollection()); }
         }
 
         protected override void CreateChildControls() {
-            if(m_Items == null) {
-                m_Items = new ListItemCollection();
+            if(_mItems == null) {
+                _mItems = new ListItemCollection();
             }
 
-            if(m_Items.Count > 0) {
-                foreach(ListItem item in m_Items) {
+            if(_mItems.Count > 0) {
+                foreach(ListItem item in _mItems) {
                     if(!GetDropDownList.Items.Contains(item)) {
                         GetDropDownList.Items.Add(item);
                     }

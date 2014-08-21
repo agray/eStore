@@ -160,10 +160,10 @@ namespace com.phoenixconsulting.AspNet.Membership {
             requiresQuestionAndAnswer = Convert.ToBoolean(GetConfigValue(config["requiresQuestionAndAnswer"], "false"));
             requiresUniqueEmail = Convert.ToBoolean(GetConfigValue(config["requiresUniqueEmail"], "true"));
 
-            string temp_format = config["passwordFormat"] ?? "Hashed";
+            var temp_format = config["passwordFormat"] ?? "Hashed";
             passwordFormat = getMembershipPasswordFormat(temp_format);
 
-            ConnectionStringSettings ConnectionStringSettings = ConfigurationManager.ConnectionStrings["eStoreConnectionString"];
+            var ConnectionStringSettings = ConfigurationManager.ConnectionStrings["eStoreConnectionString"];
 
             if((ConnectionStringSettings == null) || (ConnectionStringSettings.ConnectionString.Trim() == String.Empty)) {
                 throw new ProviderException("Connection string cannot be blank.");
@@ -173,7 +173,7 @@ namespace com.phoenixconsulting.AspNet.Membership {
             //connectionString = getConnectionString("DTMembershipProviderSqlServer");
 
             //Get encryption and decryption key information from the configuration.
-            Configuration cfg = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
+            var cfg = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
             machineKey = cfg.GetSection("system.web/machineKey") as MachineKeySection;
 
             if(machineKey.ValidationKey.Contains("AutoGenerate")) {
@@ -197,7 +197,7 @@ namespace com.phoenixconsulting.AspNet.Membership {
         }
 
         private string getConnectionString(string name) {
-            Configuration rootWebConfig = WebConfigurationManager.OpenWebConfiguration(null);
+            var rootWebConfig = WebConfigurationManager.OpenWebConfiguration(null);
             WebConfigurationManager.OpenWebConfiguration(null);
             return rootWebConfig.ConnectionStrings.ConnectionStrings[name].ConnectionString;
         }
@@ -222,7 +222,7 @@ namespace com.phoenixconsulting.AspNet.Membership {
                 return false;
             }
 
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, newPwd, true);
+            var args = new ValidatePasswordEventArgs(username, newPwd, true);
 
             OnValidatingPassword(args);
 
@@ -233,8 +233,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
                 throw args.FailureInformation;
             }
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_ChangePassword", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_ChangePassword", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@password", SqlDbType.NVarChar, 255).Value = EncodePassword(newPwd);
@@ -262,8 +262,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <param name="newPwd">New UserName.</param>
         /// <returns>T/F if password was changed.</returns>
         public bool ChangeUsername(string oldUsername, string newUsername) {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_ChangeUserName", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_ChangeUserName", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@oldusername", SqlDbType.NVarChar, 255).Value = oldUsername;
@@ -298,8 +298,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
                 return false;
             }
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_ChangePasswordQuestionAnswer", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_ChangePasswordQuestionAnswer", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@returnValue", SqlDbType.Int, 0).Direction = ParameterDirection.ReturnValue;
@@ -339,7 +339,7 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns>MembershipUser</returns>
 
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status) {
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, password, true);
+            var args = new ValidatePasswordEventArgs(username, password, true);
             OnValidatingPassword(args);
 
             if(args.Cancel) {
@@ -352,13 +352,13 @@ namespace com.phoenixconsulting.AspNet.Membership {
                 return null;
             }
 
-            MembershipUser membershipUser = GetUser(username, false);
+            var membershipUser = GetUser(username, false);
 
             if(membershipUser == null) {
                 //DateTime createDate = DateTime.Now;
 
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-                SqlCommand sqlCommand = new SqlCommand("User_Ins", sqlConnection);
+                var sqlConnection = new SqlConnection(connectionString);
+                var sqlCommand = new SqlCommand("User_Ins", sqlConnection);
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add("@returnValue", SqlDbType.Int, 0).Direction = ParameterDirection.ReturnValue;
@@ -404,8 +404,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns>T/F if the user was deleted.</returns>
         public override bool DeleteUser(string username, bool deleteAllRelatedData) {
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_Del", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_Del", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@returnValue", SqlDbType.Int, 0).Direction = ParameterDirection.ReturnValue;
@@ -440,13 +440,13 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns>Collection of MembershipUser objects.</returns>
         public override MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords) {
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("Users_Sel", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("Users_Sel", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
 
-            MembershipUserCollection users = new MembershipUserCollection();
+            var users = new MembershipUserCollection();
 
             SqlDataReader sqlDataReader = null;
             totalRecords = 0;
@@ -455,9 +455,9 @@ namespace com.phoenixconsulting.AspNet.Membership {
                 sqlConnection.Open();
                 sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
 
-                int counter = 0;
-                int startIndex = pageSize * pageIndex;
-                int endIndex = startIndex + pageSize - 1;
+                var counter = 0;
+                var startIndex = pageSize * pageIndex;
+                var endIndex = startIndex + pageSize - 1;
 
                 while(sqlDataReader.Read()) {
                     if(counter >= startIndex) {
@@ -487,17 +487,17 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns>  /// # of users on-line.</returns>
         public override int GetNumberOfUsersOnline() {
 
-            TimeSpan onlineSpan = new TimeSpan(0, System.Web.Security.Membership.UserIsOnlineTimeWindow, 0);
-            DateTime compareTime = DateTime.Now.Subtract(onlineSpan);
+            var onlineSpan = new TimeSpan(0, System.Web.Security.Membership.UserIsOnlineTimeWindow, 0);
+            var compareTime = DateTime.Now.Subtract(onlineSpan);
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("Users_NumberOnline", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("Users_NumberOnline", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
             sqlCommand.Parameters.Add("@compareDate", SqlDbType.DateTime).Value = compareTime;
 
-            int numOnline = 0;
+            var numOnline = 0;
 
             try {
                 sqlConnection.Open();
@@ -528,15 +528,15 @@ namespace com.phoenixconsulting.AspNet.Membership {
                 throw new ProviderException("Cannot retrieve Hashed passwords.");
             }
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_GetPassword", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_GetPassword", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
             sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
 
-            string password = String.Empty;
-            string passwordAnswer = String.Empty;
+            var password = String.Empty;
+            var passwordAnswer = String.Empty;
             SqlDataReader sqlDataReader = null;
 
             try {
@@ -575,8 +575,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
 
         public override MembershipUser GetUser(string username, bool userIsOnline) {
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_Sel", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_Sel", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
@@ -594,7 +594,7 @@ namespace com.phoenixconsulting.AspNet.Membership {
                     membershipUser = GetUserFromReader(sqlDataReader);
 
                     if(userIsOnline) {
-                        SqlCommand sqlUpdateCommand = new SqlCommand("User_UpdateActivityDate_ByUserName", sqlConnection);
+                        var sqlUpdateCommand = new SqlCommand("User_UpdateActivityDate_ByUserName", sqlConnection);
 
                         sqlUpdateCommand.CommandType = CommandType.StoredProcedure;
                         sqlUpdateCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
@@ -622,8 +622,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns></returns>
         public override MembershipUser GetUser(object userID, bool userIsOnline) {
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_SelByUserID", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_SelByUserID", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@userID", SqlDbType.UniqueIdentifier).Value = userID;
@@ -640,7 +640,7 @@ namespace com.phoenixconsulting.AspNet.Membership {
                     membershipUser = GetUserFromReader(sqlDataReader);
 
                     if(userIsOnline) {
-                        SqlCommand sqlUpdateCommand = new SqlCommand("User_UpdateActivityDate_ByUserID", sqlConnection);
+                        var sqlUpdateCommand = new SqlCommand("User_UpdateActivityDate_ByUserID", sqlConnection);
 
                         sqlUpdateCommand.CommandType = CommandType.StoredProcedure;
                         sqlUpdateCommand.Parameters.Add("@userID", SqlDbType.NVarChar, 255).Value = userID;
@@ -667,8 +667,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns>T/F if unlocked.</returns>
         public override bool UnlockUser(string username) {
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_Unlock", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_Unlock", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@returnValue", SqlDbType.Int, 0).Direction = ParameterDirection.ReturnValue;
@@ -702,8 +702,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns>T/F if locked.</returns>
         public bool LockUser(string username) {
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_Lock", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_Lock", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@returnValue", SqlDbType.Int, 0).Direction = ParameterDirection.ReturnValue;
@@ -733,14 +733,14 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <param name="username">Email Address.</param>
         /// <returns>username.</returns>
         public override string GetUserNameByEmail(string email) {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("UserName_Sel_ByEmail", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("UserName_Sel_ByEmail", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@email", SqlDbType.NVarChar, 128).Value = email;
             sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
 
-            string username = String.Empty;
+            var username = String.Empty;
 
             try {
                 sqlConnection.Open();
@@ -778,9 +778,9 @@ namespace com.phoenixconsulting.AspNet.Membership {
                 throw new ProviderException("Password answer required for password Reset.");
             }
 
-            string newPassword = System.Web.Security.Membership.GeneratePassword(newPasswordLength, MinRequiredNonAlphanumericCharacters);
+            var newPassword = System.Web.Security.Membership.GeneratePassword(newPasswordLength, MinRequiredNonAlphanumericCharacters);
 
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, newPassword, true);
+            var args = new ValidatePasswordEventArgs(username, newPassword, true);
 
             OnValidatingPassword(args);
 
@@ -793,13 +793,13 @@ namespace com.phoenixconsulting.AspNet.Membership {
             }
 
 
-            int rowsAffected = 0;
-            string passwordAnswer = String.Empty;
+            var rowsAffected = 0;
+            var passwordAnswer = String.Empty;
             SqlDataReader sqlDataReader = null;
 
             try {
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-                SqlCommand sqlCommand = new SqlCommand("User_IsLockedOut", sqlConnection);
+                var sqlConnection = new SqlConnection(connectionString);
+                var sqlCommand = new SqlCommand("User_IsLockedOut", sqlConnection);
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
@@ -834,8 +834,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
             }
 
             try {
-                SqlConnection sqlConnection2 = new SqlConnection(connectionString);
-                SqlCommand sqlUpdateCommand = new SqlCommand("User_UpdatePassword", sqlConnection2);
+                var sqlConnection2 = new SqlConnection(connectionString);
+                var sqlUpdateCommand = new SqlCommand("User_UpdatePassword", sqlConnection2);
 
                 sqlUpdateCommand.CommandType = CommandType.StoredProcedure;
                 sqlUpdateCommand.Parameters.Add("@password", SqlDbType.NVarChar, 128).Value = EncodePassword(newPassword);
@@ -843,7 +843,7 @@ namespace com.phoenixconsulting.AspNet.Membership {
                 sqlUpdateCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
                 sqlConnection2.Open();
                 rowsAffected = sqlUpdateCommand.ExecuteNonQuery();
-                int i = 1;
+                var i = 1;
                 i++;
 
             } catch(SqlException) {
@@ -937,8 +937,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
 
 
         public void UpdateUserContactPreferences(string userName, bool requiresNewsletter) {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_ContactPreferences_Upd", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_ContactPreferences_Upd", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
@@ -963,8 +963,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <param name="_membershipUser">MembershipUser object containing data.</param>
         public override void UpdateUser(MembershipUser membershipUser) {
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_Upd", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_Upd", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@email", SqlDbType.NVarChar, 128).Value = membershipUser.Email;
@@ -992,22 +992,22 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns>T/F if the user is valid.</returns>
         public override bool ValidateUser(string username, string password) {
 
-            bool isValid = false;
+            var isValid = false;
 
             if(String.IsNullOrEmpty(SessionHandler.Instance.LoginEmailAddress)) {
                 SessionHandler.Instance.LoginEmailAddress = username;
             }
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_Validate", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("User_Validate", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@emailAddress", SqlDbType.NVarChar, 255).Value = SessionHandler.Instance.LoginEmailAddress;
             sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
 
             SqlDataReader sqlDataReader = null;
-            bool isApproved = false;
-            string storedPassword = String.Empty;
+            var isApproved = false;
+            var storedPassword = String.Empty;
 
             try {
                 sqlConnection.Open();
@@ -1027,7 +1027,7 @@ namespace com.phoenixconsulting.AspNet.Membership {
                     if(isApproved) {
                         isValid = true;
 
-                        SqlCommand sqlUpdateCommand = new SqlCommand("User_UpdateLoginDate", sqlConnection);
+                        var sqlUpdateCommand = new SqlCommand("User_UpdateLoginDate", sqlConnection);
 
                         sqlUpdateCommand.CommandType = CommandType.StoredProcedure;
                         sqlUpdateCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
@@ -1062,27 +1062,27 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns>Collection of MembershipUser objects.</returns>
 
         public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords) {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("Users_Sel_ByUserName", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("Users_Sel_ByUserName", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = usernameToMatch;
             sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
 
-            MembershipUserCollection membershipUsers = new MembershipUserCollection();
+            var membershipUsers = new MembershipUserCollection();
             SqlDataReader sqlDataReader = null;
-            int counter = 0;
+            var counter = 0;
 
             try {
                 sqlConnection.Open();
                 sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
 
-                int startIndex = pageSize * pageIndex;
-                int endIndex = startIndex + pageSize - 1;
+                var startIndex = pageSize * pageIndex;
+                var endIndex = startIndex + pageSize - 1;
 
                 while(sqlDataReader.Read()) {
                     if(counter >= startIndex) {
-                        MembershipUser membershipUser = GetUserFromReader(sqlDataReader);
+                        var membershipUser = GetUserFromReader(sqlDataReader);
                         membershipUsers.Add(membershipUser);
                     }
 
@@ -1115,27 +1115,27 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns>Collection of MembershipUser objects.</returns>
 
         public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords) {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("Users_Sel_ByUserName", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("Users_Sel_ByUserName", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@email", SqlDbType.NVarChar, 255).Value = emailToMatch;
             sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
 
-            MembershipUserCollection membershipUsers = new MembershipUserCollection();
+            var membershipUsers = new MembershipUserCollection();
             SqlDataReader sqlDataReader = null;
-            int counter = 0;
+            var counter = 0;
 
             try {
                 sqlConnection.Open();
                 sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
 
-                int startIndex = pageSize * pageIndex;
-                int endIndex = startIndex + pageSize - 1;
+                var startIndex = pageSize * pageIndex;
+                var endIndex = startIndex + pageSize - 1;
 
                 while(sqlDataReader.Read()) {
                     if(counter >= startIndex) {
-                        MembershipUser membershipUser = GetUserFromReader(sqlDataReader);
+                        var membershipUser = GetUserFromReader(sqlDataReader);
                         membershipUsers.Add(membershipUser);
                     }
 
@@ -1172,38 +1172,38 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <param name="sqlDataReader">Data reader.</param>
         /// <returns>MembershipUser object.</returns>
         private MembershipUser GetUserFromReader(SqlDataReader sqlDataReader) {
-            object userID = sqlDataReader.GetValue(0);
-            string username = sqlDataReader.GetString(1);
-            string email = sqlDataReader.GetString(5);
+            var userID = sqlDataReader.GetValue(0);
+            var username = sqlDataReader.GetString(1);
+            var email = sqlDataReader.GetString(5);
 
             //string passwordQuestion = String.Empty;
             //if(sqlDataReader.GetValue(3) != DBNull.Value) {
             //    passwordQuestion = sqlDataReader.GetString(3);
             //}
 
-            string comment = String.Empty;
+            var comment = String.Empty;
             if(sqlDataReader.GetValue(6) != DBNull.Value) {
                 comment = sqlDataReader.GetString(6);
             }
 
-            bool isApproved = sqlDataReader.GetBoolean(7);
-            bool isLockedOut = sqlDataReader.GetBoolean(8);
-            DateTime creationDate = sqlDataReader.GetDateTime(9);
+            var isApproved = sqlDataReader.GetBoolean(7);
+            var isLockedOut = sqlDataReader.GetBoolean(8);
+            var creationDate = sqlDataReader.GetDateTime(9);
 
-            DateTime lastLoginDate = new DateTime();
+            var lastLoginDate = new DateTime();
             if(sqlDataReader.GetValue(10) != DBNull.Value) {
                 lastLoginDate = sqlDataReader.GetDateTime(10);
             }
 
-            DateTime lastActivityDate = sqlDataReader.GetDateTime(11);
-            DateTime lastPasswordChangedDate = sqlDataReader.GetDateTime(12);
+            var lastActivityDate = sqlDataReader.GetDateTime(11);
+            var lastPasswordChangedDate = sqlDataReader.GetDateTime(12);
 
-            DateTime lastLockedOutDate = new DateTime();
+            var lastLockedOutDate = new DateTime();
             if(sqlDataReader.GetValue(13) != DBNull.Value) {
                 lastLockedOutDate = sqlDataReader.GetDateTime(13);
             }
 
-            MembershipUser membershipUser = new MembershipUser(Name, username, userID, email, "", comment, isApproved, isLockedOut, creationDate, lastLoginDate, lastActivityDate, lastPasswordChangedDate, lastLockedOutDate);
+            var membershipUser = new MembershipUser(Name, username, userID, email, "", comment, isApproved, isLockedOut, creationDate, lastLoginDate, lastActivityDate, lastPasswordChangedDate, lastLockedOutDate);
 
             return membershipUser;
 
@@ -1216,8 +1216,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns></returns>
         /// <remarks></remarks>
         private byte[] HexToByte(string hexString) {
-            byte[] returnBytes = new byte[hexString.Length / 2];
-            for(int i = 0; i < returnBytes.Length; i++)
+            var returnBytes = new byte[hexString.Length / 2];
+            for(var i = 0; i < returnBytes.Length; i++)
                 returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
             return returnBytes;
         }
@@ -1229,8 +1229,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <param name="failureType">Type of failure</param>
         /// <remarks></remarks>
         private void UpdateFailureCount(string username, FailureType failureType) {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("Users_Sel_ByUserName", sqlConnection);
+            var sqlConnection = new SqlConnection(connectionString);
+            var sqlCommand = new SqlCommand("Users_Sel_ByUserName", sqlConnection);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@failureType", SqlDbType.Int, 0).Value = failureType;
@@ -1256,8 +1256,8 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <returns></returns>
         /// <remarks></remarks>
         private bool CheckPassword(string password, string dbpassword) {
-            string pass1 = password;
-            string pass2 = dbpassword;
+            var pass1 = password;
+            var pass2 = dbpassword;
 
             switch(PasswordFormat) {
                 case MembershipPasswordFormat.Encrypted:
@@ -1277,7 +1277,7 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <param name="password">Password.</param>
         /// <returns>Encoded password.</returns>
         private string EncodePassword(string password) {
-            string encodedPassword = password;
+            var encodedPassword = password;
 
             switch(PasswordFormat) {
                 case MembershipPasswordFormat.Clear:
@@ -1286,7 +1286,7 @@ namespace com.phoenixconsulting.AspNet.Membership {
                     encodedPassword = Convert.ToBase64String(EncryptPassword(Encoding.Unicode.GetBytes(password)));
                     break;
                 case MembershipPasswordFormat.Hashed:
-                    HMACSHA1 hash = new HMACSHA1();
+                    var hash = new HMACSHA1();
                     hash.Key = HexToByte(machineKey.ValidationKey);
                     encodedPassword = Convert.ToBase64String(hash.ComputeHash(Encoding.Unicode.GetBytes(password)));
                     break;
@@ -1303,7 +1303,7 @@ namespace com.phoenixconsulting.AspNet.Membership {
         /// <param name="encodedPassword">Password.</param>
         /// <returns>Unencoded password.</returns>
         private string UnEncodePassword(string encodedPassword) {
-            string password = encodedPassword;
+            var password = encodedPassword;
 
             switch(PasswordFormat) {
                 case MembershipPasswordFormat.Clear:

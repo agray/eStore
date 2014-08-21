@@ -35,7 +35,7 @@ namespace eStoreWeb.Controls {
         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
         protected void orderHistoryItemLV_ItemCommand(object source, CommandEventArgs e) {
             if(!string.IsNullOrEmpty(e.CommandArgument.ToString())) {
-                int ID = Int32.Parse(e.CommandArgument.ToString());
+                var ID = Int32.Parse(e.CommandArgument.ToString());
                 if(e.CommandName.Equals("viewdetail")) {
                     GoTo.Instance.OrderHistoryDetailPage(ID);
                 }

@@ -32,9 +32,9 @@ using phoenixconsulting.common.cart;
 namespace eStoreWeb.Controls {
     public partial class ReviewCartTable : UserControl {
         protected void Page_Load(object sender, EventArgs e) {
-            ShoppingCart sc = new ShoppingCart();
+            var sc = new ShoppingCart();
             if(!sc.IsEmptyList()) {
-                DataSet dataSet = sc.ConvertToDataSet();
+                var dataSet = sc.ConvertToDataSet();
                 SessionHandler.Instance.CartDataSet = dataSet;
                 cartItemRepeater.DataSource = dataSet.Tables[0];
                 cartItemRepeater.DataBind();

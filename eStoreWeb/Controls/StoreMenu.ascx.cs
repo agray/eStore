@@ -43,10 +43,10 @@ namespace eStoreWeb.Controls {
         }
 
         private void BuildCatalogueMenu(string relationName, string parentID, string childID) {
-            DepartmentsBLL depTableAdapter = new DepartmentsBLL();
-            CategoriesBLL catTableAdapter = new CategoriesBLL();
+            var depTableAdapter = new DepartmentsBLL();
+            var catTableAdapter = new CategoriesBLL();
 
-            DataSet dsDepartments = (DataSet)Cache.Get("Menu");
+            var dsDepartments = (DataSet)Cache.Get("Menu");
 
             if(dsDepartments == null) {
                 //Not in the cache, so have to go back to the database
@@ -56,12 +56,12 @@ namespace eStoreWeb.Controls {
                 dsDepartments.Tables.Add(depTableAdapter.getDepartments());
                 dsDepartments.Tables.Add(catTableAdapter.getCategories());
 
-                DataTable depTable = dsDepartments.Tables[0];
-                DataTable catTable = dsDepartments.Tables[1];
+                var depTable = dsDepartments.Tables[0];
+                var catTable = dsDepartments.Tables[1];
 
                 dsDepartments.Relations.Add(relationName, depTable.Columns[parentID], catTable.Columns[childID]);
 
-                SqlCacheDependency dependency = new SqlCacheDependency("eStore", "Department");
+                var dependency = new SqlCacheDependency("eStore", "Department");
                 Cache.Insert("Menu", dsDepartments, dependency);
             }
 

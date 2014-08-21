@@ -37,7 +37,7 @@ namespace phoenixconsulting.businessentities.helpers {
         }
 
         public static DTItem CreateDTItem(int ID) {
-            DAL.WishListDataTable wldt = WishlistAdapter.getWishListItemByID(ID);
+            var wldt = WishlistAdapter.getWishListItemByID(ID);
             return new DTItem((int)wldt.Rows[0]["DepID"], (int)wldt.Rows[0]["CatID"], (int)wldt.Rows[0]["ProdID"], (string)wldt.Rows[0]["ProdDetails"], (string)wldt.Rows[0]["ImgPath"], double.Parse(((decimal)wldt.Rows[0]["UnitPrice"]).ToString()), (double)wldt.Rows[0]["ProdWeight"], (int)wldt.Rows[0]["Quantity"], (int)wldt.Rows[0]["IsOnSale"], double.Parse(((decimal)wldt.Rows[0]["DiscPrice"]).ToString()), (int)wldt.Rows[0]["ColorID"], isNull(wldt.Rows[0]["ColorName"]) ? string.Empty : (string)wldt.Rows[0]["ColorName"], (int)wldt.Rows[0]["SizeID"], isNull(wldt.Rows[0]["SizeName"]) ? string.Empty : (string)wldt.Rows[0]["SizeName"]);
         }
 

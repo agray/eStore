@@ -33,8 +33,8 @@ namespace eStoreWeb.Profile {
     public partial class ContactPreference : Page {
         protected void Page_Load(object sender, EventArgs e) {
             if(!Page.IsPostBack) {
-                DTMembershipProvider dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
-                MembershipUser user = dtmp.GetUser(Page.User.Identity.Name, false);
+                var dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
+                var user = dtmp.GetUser(Page.User.Identity.Name, false);
             }
         }
 
@@ -47,7 +47,7 @@ namespace eStoreWeb.Profile {
         }
 
         protected void SaveButton_Click(object sender, EventArgs e) {
-            DTMembershipProvider dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
+            var dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
             //UserBLL userBLL = new UserBLL();
             //userBLL.getUserIDByEmail(Page.User.Identity.Name, "eStore");
 

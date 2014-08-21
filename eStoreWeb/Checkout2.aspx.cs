@@ -23,9 +23,6 @@
  * THE SOFTWARE.
  */
 #endregion
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Web.UI;
 using eStoreBLL;
 using eStoreWeb.Controls;
 using phoenixconsulting.businessentities.account;
@@ -33,11 +30,13 @@ using phoenixconsulting.common.basepages;
 using phoenixconsulting.common.enums.account;
 using phoenixconsulting.common.handlers;
 using phoenixconsulting.common.navigation;
+using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace eStoreWeb {
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-    public partial class checkout2 : BasePage {
+    public partial class Checkout2 : BasePage {
         protected void Page_Load(object sender, EventArgs e) {
             CameFrom.handleNavigationRedirect(Request.UrlReferrer);
 
@@ -57,16 +56,16 @@ namespace eStoreWeb {
             //    }
             //}
             if(!Page.IsPostBack) {
-                populateForm();
+                PopulateForm();
             }
         }
 
-        private void populateForm() {
+        private void PopulateForm() {
             if(CameFrom.Checkout3Page()) {
                 sameAddressDDL.SelectedValue = SessionHandler.Instance.SameAddress;
             }
 
-            if(isLoggedIn()) {
+            if(IsLoggedIn()) {
                 if(SessionHandler.Instance.IsShippingAddressSet()) {
                     if(IsSameAddress()) {
                         SetFormValuesToBillingDetails();
@@ -75,9 +74,9 @@ namespace eStoreWeb {
                     }
                 } else {
                     //See if customer has address stored
-                    Guid userID = BaseUserControl.getUserID(this);
-                    CustomerAddressBLL ca = new CustomerAddressBLL();
-                    DTAddress address = ca.getCustomerShippingAddress(userID);
+                    var userId = BaseUserControl.getUserID(this);
+                    var ca = new CustomerAddressBLL();
+                    var address = ca.getCustomerShippingAddress(userId);
                     if(address != null) {
                         ShippingFirstNameTextBox.Text = address.FirstName;
                         ShippingLastNameTextBox.Text = address.LastName;
@@ -85,7 +84,7 @@ namespace eStoreWeb {
                         ShippingSuburbTextBox.Text = address.SuburbCity;
                         ShippingStateTextBox.Text = address.StateProvinceRegion;
                         ShippingPostcodeTextBox.Text = address.ZipPostCode;
-                        setSameAddressDDL(address);
+                        SetSameAddressDdl(address);
                     }
                 }
             } else {
@@ -97,8 +96,8 @@ namespace eStoreWeb {
             }
         }
 
-        private void setSameAddressDDL(DTAddress shippingAddress) {
-            DTAddress billingAddress = new DTAddress(0, AddressType.BILLING,
+        private void SetSameAddressDdl(DTAddress shippingAddress) {
+            var billingAddress = new DTAddress(0, AddressType.BILLING,
                                                      SessionHandler.Instance.BillingFirstName,
                                                      SessionHandler.Instance.BillingLastName,
                                                      SessionHandler.Instance.BillingAddress,
@@ -141,7 +140,7 @@ namespace eStoreWeb {
                 SetShippingSessionValues();
 
                 if(CurrentAddressCheckBox.Checked) {
-                    CustomerAddressBLL ca = new CustomerAddressBLL();
+                    var ca = new CustomerAddressBLL();
                     ca.saveShippingAddress(BaseUserControl.getUserID(this), 
                                            ShippingFirstNameTextBox.Text,
                                            ShippingLastNameTextBox.Text,
