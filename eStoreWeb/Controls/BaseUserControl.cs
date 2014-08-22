@@ -28,7 +28,7 @@ using com.phoenixconsulting.AspNet.Membership;
 
 namespace eStoreWeb.Controls {
     public class BaseUserControl : UserControl {
-        public static Guid getUserID(Page page) {
+        public static Guid GetUserId(Page page) {
             var dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
             return dtmp.getLoggedInUserID(page.User.Identity.Name);
         }

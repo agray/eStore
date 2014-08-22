@@ -29,6 +29,7 @@ using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using NLog;
+using PhoenixConsulting.Common.Enums.Logging;
 
 namespace phoenixconsulting.common.logging {
     public class LoggerUtil : Page {

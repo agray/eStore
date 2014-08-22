@@ -32,22 +32,22 @@ using System.Web.UI;
 namespace phoenixconsulting.businessentities.list {
     public class DTItemList: Page {
         //Declare module level array to store list of DTItems
-        protected ArrayList itemList;
+        protected ArrayList ItemList;
         
         public bool IsEmptyList() {
-            return itemList == null || itemList.Count == 0;
+            return ItemList == null || ItemList.Count == 0;
         }
 
         public int ListLength() {
-            return itemList.Count;
+            return ItemList.Count;
         }
 
         public void AddItem(DTItem item) {
             var index = ItemIndex(item.ProductId, item.ColorId, item.SizeId);
             if(index == -1) {
                 //Doesn't already exist
-                itemList.Add(item);
-                itemList.TrimToSize();
+                ItemList.Add(item);
+                ItemList.TrimToSize();
             } else {
                 //Does already exist - increase quantity only
                 IncreaseQuantity(index, item.ProductQuantity);
@@ -55,27 +55,27 @@ namespace phoenixconsulting.businessentities.list {
         }
 
         public void RemoveItem(int index) {
-            itemList.RemoveAt(index);
-            itemList.TrimToSize();
+            ItemList.RemoveAt(index);
+            ItemList.TrimToSize();
         }
 
         protected void IncreaseQuantity(int index, int quantity) {
-            var item = (DTItem)itemList[index];
+            var item = (DTItem)ItemList[index];
 
             item.ProductQuantity = item.ProductQuantity + quantity;
             item.Subtotal = item.ProductQuantity * item.ProductPrice;
         }
 
         public DTItem GetItem(int index) {
-            return (DTItem)itemList[index];
+            return (DTItem)ItemList[index];
         }
 
 
         protected int ItemIndex(int productId, int colorId, int sizeId) {
             var index = -1;
 
-            for(var count = 0; count <= itemList.Count - 1; count++) {
-                var item = (DTItem)itemList[count];
+            for(var count = 0; count <= ItemList.Count - 1; count++) {
+                var item = (DTItem)ItemList[count];
                 if(item.ProductId == productId && item.ColorId == colorId && item.SizeId == sizeId) {
                     index = count;
                     break;
@@ -85,25 +85,25 @@ namespace phoenixconsulting.businessentities.list {
             return index;
         }
 
-        public bool hasWrapping() {
-            for(var i = 0; i <= itemList.Count - 1; i++) {
-                var item = (DTItem)itemList[i];
-                if(isWrapping(item)) {
+        public bool HasWrapping() {
+            for(var i = 0; i <= ItemList.Count - 1; i++) {
+                var item = (DTItem)ItemList[i];
+                if(IsWrapping(item)) {
                     return true;
                 }
             }
             return false;
         }
 
-        protected bool isWrapping(DTItem item) {
+        protected bool IsWrapping(DTItem item) {
             return item.ProductDetails.Contains("Gift Wrapping");
         }
 
         public DataSet ConvertToDataSet() {
-            var tempDS = CreateDataSet();
+            var tempDs = CreateDataSet();
 
-            foreach(DTItem item in itemList) {
-                var myRow = tempDS.Tables[0].NewRow();
+            foreach(DTItem item in ItemList) {
+                var myRow = tempDs.Tables[0].NewRow();
                 myRow[0] = item.ProductId;
                 myRow[1] = item.ProductDetails;
                 myRow[2] = item.ImagePath;
@@ -119,37 +119,36 @@ namespace phoenixconsulting.businessentities.list {
                 myRow[12] = item.CategoryId;
                 myRow[13] = item.DepartmentId;
                 myRow[14] = item.Subtotal;
-                tempDS.Tables[0].Rows.Add(myRow);
+                tempDs.Tables[0].Rows.Add(myRow);
             }
 
-            return tempDS;
+            return tempDs;
         }
 
-        private DataSet CreateDataSet() {
-            var tempDS = new DataSet();
-            var dataTable = new DataTable();
+        private static DataSet CreateDataSet() {
+            var tempDs = new DataSet();
+            var dataTable = new DataTable {Locale = CultureInfo.InvariantCulture};
             //Satisfies rule: SetLocaleForDataTypes.
-            dataTable.Locale = CultureInfo.InvariantCulture;
-            tempDS.Locale = CultureInfo.InvariantCulture;
-            tempDS.Tables.Add(dataTable);
+            tempDs.Locale = CultureInfo.InvariantCulture;
+            tempDs.Tables.Add(dataTable);
 
-            tempDS.Tables[0].Columns.Add("ProductID", Type.GetType("System.Int32"), "");
-            tempDS.Tables[0].Columns.Add("ProductDetails", Type.GetType("System.String"), "");
-            tempDS.Tables[0].Columns.Add("ImagePath", Type.GetType("System.String"), "");
-            tempDS.Tables[0].Columns.Add("ProductPrice", Type.GetType("System.Double"), "");
-            tempDS.Tables[0].Columns.Add("ProductWeight", Type.GetType("System.Double"), "");
-            tempDS.Tables[0].Columns.Add("ProductQuantity", Type.GetType("System.Int32"), "");
-            tempDS.Tables[0].Columns.Add("ProductOnSale", Type.GetType("System.Int32"), "");
-            tempDS.Tables[0].Columns.Add("ProductDiscountPrice", Type.GetType("System.Double"), "");
-            tempDS.Tables[0].Columns.Add("ColorID", Type.GetType("System.Int32"), "");
-            tempDS.Tables[0].Columns.Add("ColorName", Type.GetType("System.String"), "");
-            tempDS.Tables[0].Columns.Add("SizeID", Type.GetType("System.Int32"), "");
-            tempDS.Tables[0].Columns.Add("SizeName", Type.GetType("System.String"), "");
-            tempDS.Tables[0].Columns.Add("CategoryID", Type.GetType("System.Int32"), "");
-            tempDS.Tables[0].Columns.Add("DepartmentID", Type.GetType("System.Int32"), "");
-            tempDS.Tables[0].Columns.Add("SubTotal", Type.GetType("System.Double"), "");
+            tempDs.Tables[0].Columns.Add("ProductID", Type.GetType("System.Int32"), string.Empty);
+            tempDs.Tables[0].Columns.Add("ProductDetails", Type.GetType("System.String"), string.Empty);
+            tempDs.Tables[0].Columns.Add("ImagePath", Type.GetType("System.String"), string.Empty);
+            tempDs.Tables[0].Columns.Add("ProductPrice", Type.GetType("System.Double"), string.Empty);
+            tempDs.Tables[0].Columns.Add("ProductWeight", Type.GetType("System.Double"), string.Empty);
+            tempDs.Tables[0].Columns.Add("ProductQuantity", Type.GetType("System.Int32"), string.Empty);
+            tempDs.Tables[0].Columns.Add("ProductOnSale", Type.GetType("System.Int32"), string.Empty);
+            tempDs.Tables[0].Columns.Add("ProductDiscountPrice", Type.GetType("System.Double"), string.Empty);
+            tempDs.Tables[0].Columns.Add("ColorID", Type.GetType("System.Int32"), string.Empty);
+            tempDs.Tables[0].Columns.Add("ColorName", Type.GetType("System.String"), string.Empty);
+            tempDs.Tables[0].Columns.Add("SizeID", Type.GetType("System.Int32"), string.Empty);
+            tempDs.Tables[0].Columns.Add("SizeName", Type.GetType("System.String"), string.Empty);
+            tempDs.Tables[0].Columns.Add("CategoryID", Type.GetType("System.Int32"), string.Empty);
+            tempDs.Tables[0].Columns.Add("DepartmentID", Type.GetType("System.Int32"), string.Empty);
+            tempDs.Tables[0].Columns.Add("SubTotal", Type.GetType("System.Double"), string.Empty);
 
-            return tempDS;
+            return tempDs;
         }
     }
 }

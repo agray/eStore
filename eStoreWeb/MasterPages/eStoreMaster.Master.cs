@@ -25,6 +25,7 @@
 #endregion
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -40,25 +41,25 @@ namespace eStoreWeb {
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public partial class eStoreMaster : MasterPage {
         private static Logger logger = LogManager.GetLogger("TraceFileAndEventLogger");
-        protected DropDownList NavCart_CurrencyDropDownList;
+        protected DropDownList NavCartCurrencyDropDownList;
         protected UpdatePanel NavCurrencyPanel;
-        protected Repeater NavCatalogue_DepartmentRepeater;
+        protected Repeater NavCatalogueDepartmentRepeater;
 
         public delegate void CurrencyChangedEventHandler(object sender, CurrencyChangedEventArgs e);
         public event CurrencyChangedEventHandler CurrencyChanged;
 
         protected virtual void OnCurrencyChanged(CurrencyChangedEventArgs e) {
             var ddl = (DropDownList)currencyDDL.FindControl("CurrencyDropDownList");
-            var row = getCurrencyById(int.Parse(ddl.SelectedValue));
-            SessionHandler.Instance.SetCurrency(row.Value, row.ExchangeRate, row.ID.ToString());
+            var row = GetCurrencyById(int.Parse(ddl.SelectedValue));
+            SessionHandler.Instance.SetCurrency(row.Value, row.ExchangeRate, row.ID.ToString(CultureInfo.InvariantCulture));
 
             if(CurrencyChanged != null) {
                 CurrencyChanged(this, e);
             }
         }
 
-        public DAL.CurrencyRow getCurrencyById(int id) {
-            return (new CurrenciesBLL()).getCurrencyByID(id)[0];
+        public DAL.CurrencyRow GetCurrencyById(int id) {
+            return (new CurrenciesBLL()).GetCurrencyById(id)[0];
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
@@ -70,8 +71,7 @@ namespace eStoreWeb {
 
         protected void Page_Init(object sender, EventArgs e) {
             if(Page.IsPostBack) {
-                currencyDDL.IndexChanged +=
-                    new IndexChangedEventHandler(currencyDDL_IndexChanged);
+                currencyDDL.IndexChanged += currencyDDL_IndexChanged;
             }
         }
 
@@ -87,23 +87,23 @@ namespace eStoreWeb {
         public static string LoginText(HttpContext context) {
             if(context.Request.UrlReferrer == null) {
                 return context.Request.IsAuthenticated
-                           ? "Welcome, " + getAuthenticatedFullName()
+                           ? "Welcome, " + GetAuthenticatedFullName()
                            : String.Empty;
             } 
-            var authenticatedFullName = getAuthenticatedFullName();
+            var authenticatedFullName = GetAuthenticatedFullName();
             return !authenticatedFullName.Equals(String.Empty)
-                       ? "Welcome, " + getAuthenticatedFullName()
+                       ? "Welcome, " + GetAuthenticatedFullName()
                        : String.Empty;
         }
 
-        private static string getAuthenticatedFullName() {
+        private static string GetAuthenticatedFullName() {
             var user = new UserBLL();
-            var fullname = user.getFullName(HttpContext.Current.User.Identity.Name, "eStore");
-            setLoginSessionVariables(fullname);
+            var fullname = user.GetFullName(HttpContext.Current.User.Identity.Name, "eStore");
+            SetLoginSessionVariables(fullname);
             return fullname;
         }
 
-        private static void setLoginSessionVariables(string fullname) {
+        private static void SetLoginSessionVariables(string fullname) {
             var names = fullname.Split(' ');
             if(names.Length.Equals(2)) {
                 SessionHandler.Instance.LoginFirstName = names[0];

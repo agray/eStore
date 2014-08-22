@@ -28,6 +28,7 @@ using eStoreBLL;
 using eStoreWeb.Controls;
 using phoenixconsulting.common;
 using phoenixconsulting.common.basepages;
+using PhoenixConsulting.Common.Enums.Logging;
 using phoenixconsulting.common.handlers;
 using phoenixconsulting.common.logging;
 using phoenixconsulting.common.navigation;
@@ -50,7 +51,7 @@ namespace eStoreWeb {
             if(IsLoggedIn() && SessionHandler.Instance.SearchString != String.Empty) {
                 //Session still active
                 var userBll = new UserBLL();
-                var foundUserId = userBll.getUserIDByEmail(Page.User.Identity.Name, "eStore");
+                var foundUserId = userBll.GetUserIdByEmail(Page.User.Identity.Name, "eStore");
 
                 var ss = new SavedSearchBLL();
                 ss.addSavedSearch(new Guid(foundUserId),

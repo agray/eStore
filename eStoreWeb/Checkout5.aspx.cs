@@ -33,7 +33,7 @@ namespace eStoreWeb {
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
     public partial class Checkout5 : BasePage {
         protected void Page_Load(object sender, EventArgs e) {
-            CameFrom.handleNavigationRedirect(Request.UrlReferrer);
+            CameFrom.HandleNavigationRedirect(Request.UrlReferrer);
 
             //string redirectPage = NavigationUtils.getInvalidNavigationRedirect(Request.UrlReferrer);
             //if(!redirectPage.Equals("")) {

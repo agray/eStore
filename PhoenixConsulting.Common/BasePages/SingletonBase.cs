@@ -31,10 +31,6 @@ using phoenixconsulting.common.handlers;
 namespace phoenixconsulting.common.basepages {
     public abstract class SingletonBase<T> : HTTPScopeHandlerBase where T : class {
         ////Singleton based on http://csharpindepth.com/Articles/General/Singleton.aspx. Fifth version.
-        /// <summary>
-        /// A protected constructor which is accessible only to the sub classes.
-        /// </summary>
-        protected SingletonBase() { }
 
         /// <summary>
         /// Gets the singleton instance of this class.

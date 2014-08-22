@@ -23,10 +23,10 @@
  * THE SOFTWARE.
  */
 #endregion
-using System;
 using eStoreBLL;
-using eStoreDAL;
 using phoenixconsulting.businessentities.list;
+using System;
+using System.Globalization;
 
 namespace phoenixconsulting.businessentities.helpers {
     public class WishListHelper {
@@ -36,21 +36,38 @@ namespace phoenixconsulting.businessentities.helpers {
             get { return _wishlistAdapter ?? (_wishlistAdapter = new WishListsBLL()); }
         }
 
-        public static DTItem CreateDTItem(int ID) {
-            var wldt = WishlistAdapter.getWishListItemByID(ID);
-            return new DTItem((int)wldt.Rows[0]["DepID"], (int)wldt.Rows[0]["CatID"], (int)wldt.Rows[0]["ProdID"], (string)wldt.Rows[0]["ProdDetails"], (string)wldt.Rows[0]["ImgPath"], double.Parse(((decimal)wldt.Rows[0]["UnitPrice"]).ToString()), (double)wldt.Rows[0]["ProdWeight"], (int)wldt.Rows[0]["Quantity"], (int)wldt.Rows[0]["IsOnSale"], double.Parse(((decimal)wldt.Rows[0]["DiscPrice"]).ToString()), (int)wldt.Rows[0]["ColorID"], isNull(wldt.Rows[0]["ColorName"]) ? string.Empty : (string)wldt.Rows[0]["ColorName"], (int)wldt.Rows[0]["SizeID"], isNull(wldt.Rows[0]["SizeName"]) ? string.Empty : (string)wldt.Rows[0]["SizeName"]);
+        public static DTItem CreateDtItem(int id) {
+            var wldt = WishlistAdapter.GetWishListItemById(id);
+            return new DTItem((int)wldt.Rows[0]["DepID"], 
+                              (int)wldt.Rows[0]["CatID"], 
+                              (int)wldt.Rows[0]["ProdID"], 
+                              (string)wldt.Rows[0]["ProdDetails"], 
+                              (string)wldt.Rows[0]["ImgPath"], 
+                              double.Parse(((decimal)wldt.Rows[0]["UnitPrice"]).ToString(CultureInfo.InvariantCulture)), 
+                              (double)wldt.Rows[0]["ProdWeight"], 
+                              (int)wldt.Rows[0]["Quantity"], 
+                              (int)wldt.Rows[0]["IsOnSale"], 
+                              double.Parse(((decimal)wldt.Rows[0]["DiscPrice"]).ToString(CultureInfo.InvariantCulture)), 
+                              (int)wldt.Rows[0]["ColorID"], 
+                              IsNull(wldt.Rows[0]["ColorName"]) 
+                                ? string.Empty 
+                                : (string)wldt.Rows[0]["ColorName"], 
+                              (int)wldt.Rows[0]["SizeID"], 
+                              IsNull(wldt.Rows[0]["SizeName"]) 
+                                ? string.Empty 
+                                : (string)wldt.Rows[0]["SizeName"]);
         }
 
-        private static bool isNull(object column) {
+        private static bool IsNull(object column) {
             return (column) is DBNull;
         }
 
-        public static bool deleteItem(int ID) {
-            return WishlistAdapter.deleteItem(ID);
+        public static bool DeleteItem(int id) {
+            return WishlistAdapter.DeleteItem(id);
         }
 
-        public static bool updateQuantity(int ID, int quantity) {
-            return WishlistAdapter.updateQuantity(ID, quantity);
+        public static bool UpdateQuantity(int id, int quantity) {
+            return WishlistAdapter.UpdateQuantity(id, quantity);
         }
     }
 }

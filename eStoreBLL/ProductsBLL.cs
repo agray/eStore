@@ -47,32 +47,32 @@ namespace eStoreBLL {
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.ProductDataTable getProductByIDAndCurrencyID(int ID, int currencyID) {
-            return BLLAdapter.Instance.ProductAdapter.GetProductByIDAndCurrency(ID, currencyID);
+        public DAL.ProductDataTable GetProductByIdAndCurrencyId(int id, int currencyId) {
+            return BLLAdapter.Instance.ProductAdapter.GetProductByIDAndCurrency(id, currencyId);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.ProductDataTable getProductByID(int ID) {
-            return BLLAdapter.Instance.ProductAdapter.GetProductByID(ID);
+        public DAL.ProductDataTable GetProductById(int id) {
+            return BLLAdapter.Instance.ProductAdapter.GetProductByID(id);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.ProductDataTable getSearchResults(String query, int currencyID) {
-            return BLLAdapter.Instance.ProductAdapter.GetSearchResults(query, currencyID);
+        public DAL.ProductDataTable GetSearchResults(String query, int currencyId) {
+            return BLLAdapter.Instance.ProductAdapter.GetSearchResults(query, currencyId);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Update, false)]
-        public int IncrementNumViews(int ID) {
-            return (int)BLLAdapter.Instance.ProductAdapter.ProductIncrementNumViews(ID);
+        public int IncrementNumViews(int id) {
+            return (int)BLLAdapter.Instance.ProductAdapter.ProductIncrementNumViews(id);
         }
 
-        public string GetProductPageTitle(int ID) {
-            return BLLAdapter.Instance.ProductAdapter.GetProductPageTitle(ID).ToString();
+        public string GetProductPageTitle(int id) {
+            return BLLAdapter.Instance.ProductAdapter.GetProductPageTitle(id).ToString();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public ArrayList GetSeoDetails(int ID) {
-            return new DataReader().GetProductSeoDetails(ID);
+        public ArrayList GetSeoDetails(int id) {
+            return new DataReader().GetProductSeoDetails(id);
         }
     }
 }

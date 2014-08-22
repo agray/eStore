@@ -24,8 +24,8 @@
  */
 #endregion
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using eStoreDAL;
 using phoenixconsulting.businessentities.account;
 using phoenixconsulting.common.enums.account;
@@ -34,26 +34,22 @@ namespace eStoreBLL {
     [DataObject]
     public class CustomerAddressBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DTAddress[] getCustomerAddresses(Guid userID) {
-            var addresses = new List<DTAddress>();
-            var cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerAddresses(userID);
-            foreach(var row in cadt) {
-                addresses.Add(new DTAddress(int.Parse(row["ID"].ToString()),
-                                            (AddressType)int.Parse(row["AddressType"].ToString()),
-                                            row["FirstName"].ToString(),
-                                            row["LastName"].ToString(),
-                                            row["Address"].ToString(),
-                                            row["SuburbCity"].ToString(),
-                                            row["StateProvinceRegion"].ToString(),
-                                            row["ZipPostcode"].ToString(),
-                                            int.Parse(row["CountryID"].ToString())));
-            }
-            return addresses.ToArray();
+        public DTAddress[] GetCustomerAddresses(Guid userId) {
+            var cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerAddresses(userId);
+            return cadt.Select(row => new DTAddress(int.Parse(row["ID"].ToString()), 
+                                                    (AddressType)int.Parse(row["AddressType"].ToString()), 
+                                                    row["FirstName"].ToString(), 
+                                                    row["LastName"].ToString(), 
+                                                    row["Address"].ToString(), 
+                                                    row["SuburbCity"].ToString(), 
+                                                    row["StateProvinceRegion"].ToString(), 
+                                                    row["ZipPostcode"].ToString(), 
+                                                    int.Parse(row["CountryID"].ToString()))).ToArray();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DTAddress getCustomerBillingAddress(Guid userID) {
-            var cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerBillingAddress(userID);
+        public DTAddress GetCustomerBillingAddress(Guid userId) {
+            var cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerBillingAddress(userId);
             if(cadt.Rows.Count == 1) {
                 var row = (DAL.CustomerAddressRow)cadt.Rows[0];
                 var type = (AddressType)int.Parse(row["AddressType"].ToString());
@@ -73,8 +69,8 @@ namespace eStoreBLL {
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DTAddress getCustomerShippingAddress(Guid userID) {
-            var cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerShippingAddress(userID);
+        public DTAddress GetCustomerShippingAddress(Guid userId) {
+            var cadt = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerShippingAddress(userId);
             if(cadt.Rows.Count == 1) {
                 var row = (DAL.CustomerAddressRow)cadt.Rows[0];
                 var type = (AddressType)int.Parse(row["AddressType"].ToString());
@@ -93,7 +89,7 @@ namespace eStoreBLL {
             return null;
         }
 
-        public void saveBillingAddress(Guid userID,
+        public void SaveBillingAddress(Guid userId,
                                        string billingFirstName,
                                        string billingLastName,
                                        string billingAddress,
@@ -101,17 +97,17 @@ namespace eStoreBLL {
                                        string billingStateProvinceRegion,
                                        string billingPostcode,
                                        int billingCountry) {
-            var DB_BillingAddress = getCustomerBillingAddress(userID);
-            if(DB_BillingAddress != null) {
+            var dbBillingAddress = GetCustomerBillingAddress(userId);
+            if(dbBillingAddress != null) {
                 //update existing billing address
-                updateAddress(new DTAddress(DB_BillingAddress.Id, AddressType.BILLING,
+                UpdateAddress(new DTAddress(dbBillingAddress.Id, AddressType.BILLING,
                                             billingFirstName, billingLastName,
                                             billingAddress, billingSuburbCity,
                                             billingStateProvinceRegion, billingPostcode,
                                             billingCountry));
             } else {
                 //insert new billing address
-                addAddress(userID, new DTAddress(0, AddressType.BILLING,
+                AddAddress(userId, new DTAddress(0, AddressType.BILLING,
                                                  billingFirstName, billingLastName,
                                                  billingAddress, billingSuburbCity,
                                                  billingStateProvinceRegion, billingPostcode,
@@ -119,7 +115,7 @@ namespace eStoreBLL {
             }
         }
 
-        public void saveShippingAddress(Guid userID,
+        public void SaveShippingAddress(Guid userId,
                                         string shippingFirstName,
                                         string shippingLastName,
                                         string shippingAddress,
@@ -127,17 +123,17 @@ namespace eStoreBLL {
                                         string shippingStateProvinceRegion,
                                         string shippingPostcode,
                                         int shippingCountry) {
-            var DB_ShippingAddress = getCustomerShippingAddress(userID);
-            if(DB_ShippingAddress != null) {
+            var dbShippingAddress = GetCustomerShippingAddress(userId);
+            if(dbShippingAddress != null) {
                 //update existing billing address
-                updateAddress(new DTAddress(DB_ShippingAddress.Id, AddressType.SHIPPING,
+                UpdateAddress(new DTAddress(dbShippingAddress.Id, AddressType.SHIPPING,
                                             shippingFirstName, shippingLastName,
                                             shippingAddress, shippingSuburbCity,
                                             shippingStateProvinceRegion, shippingPostcode,
                                             shippingCountry));
             } else {
                 //insert new shipping address
-                addAddress(userID, new DTAddress(0, AddressType.SHIPPING,
+                AddAddress(userId, new DTAddress(0, AddressType.SHIPPING,
                                                  shippingFirstName, shippingLastName,
                                                  shippingAddress, shippingSuburbCity,
                                                  shippingStateProvinceRegion, shippingPostcode,
@@ -145,56 +141,56 @@ namespace eStoreBLL {
             }
         }
 
-        public bool isSameAddress(DAL.CustomerAddressDataTable cadt) {
+        public bool IsSameAddress(DAL.CustomerAddressDataTable cadt) {
             return cadt.Rows.Count < 2 || cadt[0].GetHashCode() == cadt[1].GetHashCode();
         }
 
-        public bool saveAddresses(Guid userID,
+        public bool SaveAddresses(Guid userId,
                                   int currentAddressCount,
                                   DTAddress billingAddress,
                                   DTAddress shippingAddress) {
             switch(currentAddressCount) {
                 case 0:
                     //Add billingAddress and ShippingAddress
-                    return addBothAddresses(userID, billingAddress, shippingAddress);
+                    return AddBothAddresses(userId, billingAddress, shippingAddress);
                 //break;
                 case 1:
-                    if(getDBAddressType(userID) == AddressType.BILLING) {
-                        return updateAddress(billingAddress) && addAddress(userID, shippingAddress);
+                    if(GetDbAddressType(userId) == AddressType.BILLING) {
+                        return UpdateAddress(billingAddress) && AddAddress(userId, shippingAddress);
                     }
-                    return updateAddress(shippingAddress) && addAddress(userID, billingAddress);
+                    return UpdateAddress(shippingAddress) && AddAddress(userId, billingAddress);
                 //break;
                 case 2:
                     //Update billingAddress and ShippingAddress
-                    return updateBothAddresses(billingAddress, shippingAddress);
+                    return UpdateBothAddresses(billingAddress, shippingAddress);
                 //break;
                 default:
                     return false;
             }
         }
 
-        private AddressType getDBAddressType(Guid userID) {
+        private static AddressType GetDbAddressType(Guid userId) {
             //Only one address in the DB what is its type?
             var ca = new CustomerAddressBLL();
-            var addresses = ca.getCustomerAddresses(userID);
+            var addresses = ca.GetCustomerAddresses(userId);
             return addresses[0].AddressType;
         }
 
-        private bool addBothAddresses(Guid userID, DTAddress billingAddress, DTAddress shippingAddress) {
-            return addAddress(userID, billingAddress) && addAddress(userID, shippingAddress);
+        private bool AddBothAddresses(Guid userId, DTAddress billingAddress, DTAddress shippingAddress) {
+            return AddAddress(userId, billingAddress) && AddAddress(userId, shippingAddress);
         }
 
-        private bool updateBothAddresses(DTAddress billingAddress, DTAddress shippingAddress) {
-            return updateAddress(billingAddress) && updateAddress(shippingAddress);
+        private bool UpdateBothAddresses(DTAddress billingAddress, DTAddress shippingAddress) {
+            return UpdateAddress(billingAddress) && UpdateAddress(shippingAddress);
         }
 
-        public bool addAddress(Guid userID, DTAddress address) {
+        public bool AddAddress(Guid userId, DTAddress address) {
             var addresses = new DAL.CustomerAddressDataTable();
 
             //Create a new CustomerAddressRow instance
             var customerAddress = addresses.NewCustomerAddressRow();
 
-            customerAddress.UserID = userID;
+            customerAddress.UserID = userId;
             customerAddress.AddressType = (int)address.AddressType;
             customerAddress.FirstName = address.FirstName;
             customerAddress.LastName = address.LastName;
@@ -209,11 +205,10 @@ namespace eStoreBLL {
             var rowsAffected = BLLAdapter.Instance.CustomerAddressAdapter.Update(addresses);
 
             //Return True if exactly one row was inserted, otherwise False
-
             return rowsAffected == 1;
         }
 
-        public bool updateAddress(DTAddress address) {
+        public bool UpdateAddress(DTAddress address) {
             var addresses = BLLAdapter.Instance.CustomerAddressAdapter.GetCustomerAddressByID(address.Id);
 
             if(addresses.Count == 0) {

@@ -31,6 +31,7 @@ using System.Text;
 using System.Web;
 using System.Xml;
 using eStoreBLL;
+using PhoenixConsulting.Common.Enums.Logging;
 using phoenixconsulting.common.handlers;
 using phoenixconsulting.common.logging;
 using PhoenixConsulting.Common.Mail;

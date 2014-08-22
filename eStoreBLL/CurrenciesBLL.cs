@@ -36,20 +36,19 @@ namespace eStoreBLL {
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.CurrencyDataTable getCurrencyByID(int ID) {
-            return BLLAdapter.Instance.CurrencyAdapter.GetCurrencyByID(ID);
+        public DAL.CurrencyDataTable GetCurrencyById(int id) {
+            return BLLAdapter.Instance.CurrencyAdapter.GetCurrencyByID(id);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.CurrencyDataTable getCurrencyByBillingCountry(int ID) {
-            return BLLAdapter.Instance.CurrencyAdapter.GetCurrencyByBillingCountryID(ID);
+        public DAL.CurrencyDataTable GetCurrencyByBillingCountry(int id) {
+            return BLLAdapter.Instance.CurrencyAdapter.GetCurrencyByBillingCountryID(id);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Update, true)]
-        public bool updateExchangeRate(string value, double rate) {
-            var rowsAffected = 0;
+        public bool UpdateExchangeRate(string value, double rate) {
             var ca = new CurrencyTableAdapter();
-            rowsAffected = (int)ca.UpdateExchangeRate(value, rate);
+            var rowsAffected = (int)ca.UpdateExchangeRate(value, rate);
             return rowsAffected == 1;
         }
     }

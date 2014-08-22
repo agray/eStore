@@ -31,26 +31,26 @@ namespace eStoreBLL {
     [DataObject]
     public class OrdersBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.OrderDataTable getOrderHistory(Guid userID) {
-            return BLLAdapter.Instance.OrderAdapter.GetOrderHistory(userID);
+        public DAL.OrderDataTable GetOrderHistory(Guid userId) {
+            return BLLAdapter.Instance.OrderAdapter.GetOrderHistory(userId);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.OrderDetailDataTable getOrderDetailsByOrderID(int orderID) {
-            return BLLAdapter.Instance.OrderDetailAdapter.GetOrderDetailsByOrderID(orderID);
+        public DAL.OrderDetailDataTable GetOrderDetailsByOrderId(int orderId) {
+            return BLLAdapter.Instance.OrderDetailAdapter.GetOrderDetailsByOrderID(orderId);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Insert, true)]
-        public int addOrder(string emailAddress, string billingFirstName, string billingLastName, string billingAddress, string billingSuburbCity, string billingStateProvinceRegion, string billingZipPostcode, int billingCountryID, string shippingFirstName, string shippingLastName, string shippingAddress, string shippingSuburbCity, string shippingStateProvinceRegion, string shippingZipPostcode, int shippingCountryID, int shippingModeID, double shippingCost, string orderDetailXML, string orderComments, string giftTagComments, double totalCost, Guid userID) {
-            var orderID = (int)BLLAdapter.Instance.OrderAdapter.AddOrder(emailAddress, billingFirstName, billingLastName, billingAddress, 
-                                                     billingSuburbCity, billingStateProvinceRegion, 
-                                                     billingZipPostcode, billingCountryID, shippingFirstName, 
-                                                     shippingLastName, shippingAddress, shippingSuburbCity, 
-                                                     shippingStateProvinceRegion, shippingZipPostcode, 
-                                                     shippingCountryID, shippingModeID, shippingCost, 
-                                                     orderDetailXML, orderComments, giftTagComments, totalCost, 
-                                                     userID);
-            return orderID;
+        public int AddOrder(string emailAddress, string billingFirstName, string billingLastName, string billingAddress, string billingSuburbCity, string billingStateProvinceRegion, string billingZipPostcode, int billingCountryId, string shippingFirstName, string shippingLastName, string shippingAddress, string shippingSuburbCity, string shippingStateProvinceRegion, string shippingZipPostcode, int shippingCountryId, int shippingModeId, double shippingCost, string orderDetailXml, string orderComments, string giftTagComments, double totalCost, Guid userId) {
+            var orderId = (int)BLLAdapter.Instance.OrderAdapter.AddOrder(emailAddress, billingFirstName, billingLastName, billingAddress, 
+                                                                         billingSuburbCity, billingStateProvinceRegion, 
+                                                                         billingZipPostcode, billingCountryId, shippingFirstName, 
+                                                                         shippingLastName, shippingAddress, shippingSuburbCity, 
+                                                                         shippingStateProvinceRegion, shippingZipPostcode, 
+                                                                         shippingCountryId, shippingModeId, shippingCost, 
+                                                                         orderDetailXml, orderComments, giftTagComments, totalCost, 
+                                                                         userId);
+            return orderId;
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Update, true)]

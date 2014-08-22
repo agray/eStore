@@ -24,6 +24,7 @@
  */
 #endregion
 using System;
+using System.Globalization;
 using eStoreBLL;
 using eStoreWeb.Controls;
 using phoenixconsulting.businessentities.account;
@@ -38,10 +39,10 @@ namespace eStoreWeb.Profile {
             if(!Page.IsPostBack) {
                 billingCountryDDL.DataBind();
                 shippingCountryDDL.DataBind();
-                var userID = BaseUserControl.getUserID(this);
+                var userId = BaseUserControl.GetUserId(this);
 
                 var ca = new CustomerAddressBLL();
-                var addresses = ca.getCustomerAddresses(userID);
+                var addresses = ca.GetCustomerAddresses(userId);
 
                 setFields(addresses);
 
@@ -53,13 +54,13 @@ namespace eStoreWeb.Profile {
         private void setFields(DTAddress[] addresses) {
             switch(addresses.Length) {
                 case 1:
-                    populateOneAddress(addresses[0]);
+                    PopulateOneAddress(addresses[0]);
                     if(addresses[0].AddressType == AddressType.BILLING) {
-                        populateShippingAddress(addresses[0]);
+                        PopulateShippingAddress(addresses[0]);
                     }
                     break;
                 case 2:
-                    populateTwoAddresses(addresses);
+                    PopulateTwoAddresses(addresses);
                     break;
             }
             setSameAddressDDL(addresses);
@@ -92,39 +93,39 @@ namespace eStoreWeb.Profile {
             }
         }
 
-        private void populateTwoAddresses(DTAddress[] addresses) {
-            populateOneAddress(addresses[0]);
-            populateOneAddress(addresses[1]);
+        private void PopulateTwoAddresses(DTAddress[] addresses) {
+            PopulateOneAddress(addresses[0]);
+            PopulateOneAddress(addresses[1]);
         }
 
-        private void populateOneAddress(DTAddress address) {
+        private void PopulateOneAddress(DTAddress address) {
             if(address.AddressType == AddressType.BILLING) {
-                populateBillingAddress(address);
+                PopulateBillingAddress(address);
                 //SetShippingFieldsToBillingDetails();
             } else {
-                populateShippingAddress(address);
+                PopulateShippingAddress(address);
             }
         }
 
-        private void populateBillingAddress(DTAddress address) {
+        private void PopulateBillingAddress(DTAddress address) {
             BillingAddressIDLabel.Text = address.Id.ToString();
-            CustomerFirstNameTextBox.Text = address.FirstName.ToString();
-            CustomerLastNameTextBox.Text = address.LastName.ToString();
-            CustomerAddressTextBox.Text = address.StreetAddress.ToString();
-            CustomerSuburbTextBox.Text = address.SuburbCity.ToString();
-            CustomerStateTextBox.Text = address.StateProvinceRegion.ToString();
-            CustomerPostcodeTextBox.Text = address.ZipPostCode.ToString();
+            CustomerFirstNameTextBox.Text = address.FirstName;
+            CustomerLastNameTextBox.Text = address.LastName;
+            CustomerAddressTextBox.Text = address.StreetAddress;
+            CustomerSuburbTextBox.Text = address.SuburbCity;
+            CustomerStateTextBox.Text = address.StateProvinceRegion;
+            CustomerPostcodeTextBox.Text = address.ZipPostCode;
             billingCountryDDL.SelectedValue = address.CountryId.ToString();
         }
 
-        private void populateShippingAddress(DTAddress address) {
-            ShippingAddressIDLabel.Text = address.Id.ToString();
-            ShippingFirstNameTextBox.Text = address.FirstName.ToString();
-            ShippingLastNameTextBox.Text = address.LastName.ToString();
-            ShippingAddressTextBox.Text = address.StreetAddress.ToString();
-            ShippingSuburbTextBox.Text = address.SuburbCity.ToString();
-            ShippingStateTextBox.Text = address.StateProvinceRegion.ToString();
-            ShippingPostcodeTextBox.Text = address.ZipPostCode.ToString();
+        private void PopulateShippingAddress(DTAddress address) {
+            ShippingAddressIDLabel.Text = address.Id.ToString(CultureInfo.InvariantCulture);
+            ShippingFirstNameTextBox.Text = address.FirstName;
+            ShippingLastNameTextBox.Text = address.LastName;
+            ShippingAddressTextBox.Text = address.StreetAddress;
+            ShippingSuburbTextBox.Text = address.SuburbCity;
+            ShippingStateTextBox.Text = address.StateProvinceRegion;
+            ShippingPostcodeTextBox.Text = address.ZipPostCode;
             shippingCountryDDL.SelectedValue = address.CountryId.ToString();
         }
 
@@ -199,11 +200,11 @@ namespace eStoreWeb.Profile {
         }
 
         protected void SaveChanges(object sender, EventArgs e) {
-            var userID = BaseUserControl.getUserID(this);
+            var userID = BaseUserControl.GetUserId(this);
             var ca = new CustomerAddressBLL();
-            ca.saveAddresses(userID,
+            ca.SaveAddresses(userID,
                              int.Parse(AddressCountLabel.Text),
-                             new DTAddress(IntParseOrZero(BillingAddressIDLabel.Text.ToString()),
+                             new DTAddress(IntParseOrZero(BillingAddressIDLabel.Text),
                                            AddressType.BILLING,
                                            CustomerFirstNameTextBox.Text,
                                            CustomerLastNameTextBox.Text,
@@ -212,7 +213,7 @@ namespace eStoreWeb.Profile {
                                            CustomerStateTextBox.Text,
                                            CustomerPostcodeTextBox.Text,
                                            int.Parse(billingCountryDDL.SelectedValue)),
-                             new DTAddress(IntParseOrZero(ShippingAddressIDLabel.Text.ToString()),
+                             new DTAddress(IntParseOrZero(ShippingAddressIDLabel.Text),
                                            AddressType.SHIPPING,
                                            ShippingFirstNameTextBox.Text,
                                            ShippingLastNameTextBox.Text,

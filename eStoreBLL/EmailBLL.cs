@@ -29,7 +29,7 @@ namespace eStoreBLL {
     [DataObject]
     public class EmailBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Insert, true)]
-        public bool addEmail(string customerName,
+        public bool AddEmail(string customerName,
                              string emailAddress,
                              string subject,
                              string message)

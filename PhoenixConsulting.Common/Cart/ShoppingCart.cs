@@ -36,7 +36,7 @@ namespace phoenixconsulting.common.cart {
         #region Constructor
 
         public ShoppingCart() {
-            initFromSession();
+            InitFromSession();
         }
 
         #endregion
@@ -45,25 +45,25 @@ namespace phoenixconsulting.common.cart {
             base.AddItem(cartItem);
             CalculateTotals();
 
-            if(isWrapping(cartItem)) {
+            if(IsWrapping(cartItem)) {
                 SessionHandler.Instance.Wrapping = true;
             }
-            saveToSession();
+            SaveToSession();
         }
 
         public new void RemoveItem(int index) {
             base.RemoveItem(index);
             CalculateTotals();
 
-            if(!hasWrapping()) {
+            if(!HasWrapping()) {
                 SessionHandler.Instance.Wrapping = false;
             }
-            saveToSession();
+            SaveToSession();
         }
 
         public new void IncreaseQuantity(int index, int quantity) {
             base.IncreaseQuantity(index, quantity);
-            saveToSession();
+            SaveToSession();
         }
 
         public void CalculateTotals() {
@@ -71,21 +71,21 @@ namespace phoenixconsulting.common.cart {
             double totalSubTotals = 0;
             var totalNumItems = 0;
 
-            foreach(DTItem cartItem in itemList) {
+            foreach(DTItem cartItem in ItemList) {
                 totalWeight = totalWeight + cartItem.ProductWeight * cartItem.ProductQuantity;
                 totalSubTotals = totalSubTotals + cartItem.Subtotal;
-                if(!isWrapping(cartItem)) {
+                if(!IsWrapping(cartItem)) {
                     totalNumItems = totalNumItems + cartItem.ProductQuantity;
                 }
             }
 
-            SessionHandler.Instance.TotalShipping = calculateShippingCosts(totalNumItems, totalWeight);
+            SessionHandler.Instance.TotalShipping = CalculateShippingCosts(totalNumItems, totalWeight);
             SessionHandler.Instance.TotalCost = totalSubTotals + SessionHandler.Instance.TotalShipping;
             SessionHandler.Instance.TotalWeight = totalWeight;
         }
 
-        private double calculateShippingCosts(int itemCount, double totalweight) {
-            if(totalweight == 0) {
+        private double CalculateShippingCosts(int itemCount, double totalweight) {
+            if(Math.Abs(totalweight) < .1) {
                 return 0;
             }
 
@@ -114,12 +114,12 @@ namespace phoenixconsulting.common.cart {
 
         #region SessionMethods
 
-        private void initFromSession() {
-            itemList = SessionHandler.Instance.ShoppingCart ?? new ArrayList();
+        private void InitFromSession() {
+            ItemList = SessionHandler.Instance.ShoppingCart ?? new ArrayList();
         }
 
-        private void saveToSession() {
-            SessionHandler.Instance.ShoppingCart = itemList;
+        private void SaveToSession() {
+            SessionHandler.Instance.ShoppingCart = ItemList;
         }
 
         #endregion

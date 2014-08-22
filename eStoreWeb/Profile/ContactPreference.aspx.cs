@@ -26,6 +26,7 @@
 using System;
 using System.Web.Security;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using com.phoenixconsulting.AspNet.Membership;
 using phoenixconsulting.common.navigation;
 
@@ -51,7 +52,7 @@ namespace eStoreWeb.Profile {
             //UserBLL userBLL = new UserBLL();
             //userBLL.getUserIDByEmail(Page.User.Identity.Name, "eStore");
 
-            dtmp.UpdateUserContactPreferences(Page.User.Identity.Name, NewsletterPreference.Checked);
+            dtmp.UpdateUserContactPreferences(Page.User.Identity.Name, ((CheckBox)FindControl("NewsletterPreference")).Checked);
         }
     }
 }

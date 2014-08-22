@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReviewCartTable.ascx.cs" Inherits="eStoreWeb.Controls.ReviewCartTable" %>
-<%@ Import Namespace="eStoreWeb" %>
 <%@ Import Namespace="com.phoenixconsulting.culture" %>
+<%@ Import Namespace="PhoenixConsulting.Common" %>
 <%@ Import Namespace="phoenixconsulting.common.handlers" %>
 
 <table id="CartTable" class="PPTable" width="99%">

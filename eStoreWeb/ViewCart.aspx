@@ -1,10 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/eStoreMaster.Master" AutoEventWireup="true" CodeBehind="ViewCart.aspx.cs" Inherits="eStoreWeb.ViewCart" %>
 <%@ MasterType VirtualPath="~/MasterPages/eStoreMaster.Master" %>
-<%@ Import Namespace="eStoreWeb" %>
 <%@ Import Namespace="phoenixconsulting.common.cart" %>
 <%@ Reference Control="Controls/ShoppingCartTable.ascx" %>
-
-<%@ Register assembly="System.Web.Entity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" namespace="System.Web.UI.WebControls" tagprefix="asp" %>
 <%@ Register Src="~/Controls/ShoppingCartTable.ascx" TagName="ShoppingCartTable" TagPrefix="cart" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
@@ -28,7 +25,7 @@
                   else
                   {%>
                     <cart:ShoppingCartTable ID="ShoppingCartTable" runat="server" />
-                    <%if(!sc.hasWrapping()) {%>
+                    <%if(!sc.HasWrapping()) {%>
                         <div>
                             <table align="center">
                                 <tbody>

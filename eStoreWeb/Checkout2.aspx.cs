@@ -38,7 +38,7 @@ namespace eStoreWeb {
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
     public partial class Checkout2 : BasePage {
         protected void Page_Load(object sender, EventArgs e) {
-            CameFrom.handleNavigationRedirect(Request.UrlReferrer);
+            CameFrom.HandleNavigationRedirect(Request.UrlReferrer);
 
             //string redirectPage = NavigationUtils.getInvalidNavigationRedirect(Request.UrlReferrer);
             //if(!redirectPage.Equals(String.Empty)) {
@@ -74,9 +74,9 @@ namespace eStoreWeb {
                     }
                 } else {
                     //See if customer has address stored
-                    var userId = BaseUserControl.getUserID(this);
+                    var userId = BaseUserControl.GetUserId(this);
                     var ca = new CustomerAddressBLL();
-                    var address = ca.getCustomerShippingAddress(userId);
+                    var address = ca.GetCustomerShippingAddress(userId);
                     if(address != null) {
                         ShippingFirstNameTextBox.Text = address.FirstName;
                         ShippingLastNameTextBox.Text = address.LastName;
@@ -141,7 +141,7 @@ namespace eStoreWeb {
 
                 if(CurrentAddressCheckBox.Checked) {
                     var ca = new CustomerAddressBLL();
-                    ca.saveShippingAddress(BaseUserControl.getUserID(this), 
+                    ca.SaveShippingAddress(BaseUserControl.GetUserId(this), 
                                            ShippingFirstNameTextBox.Text,
                                            ShippingLastNameTextBox.Text,
                                            ShippingAddressTextBox.Text,
@@ -198,12 +198,12 @@ namespace eStoreWeb {
             //countryDDL.DataBind();
             if(IsSameAddress()) {
                 SessionHandler.Instance.ShippingCountry = SessionHandler.Instance.BillingCountry;
-                SessionHandler.Instance.ShippingCountryName = (string)new CountriesBLL().getCountryByID(int.Parse(SessionHandler.Instance.BillingCountry)).Rows[0]["Name"];
+                SessionHandler.Instance.ShippingCountryName = (string)new CountriesBLL().GetCountryById(int.Parse(SessionHandler.Instance.BillingCountry)).Rows[0]["Name"];
                 SessionHandler.Instance.ShippingCountryCode = SessionHandler.Instance.BillingCountryCode;
             } else {
                 SessionHandler.Instance.ShippingCountry = countryDDL.SelectedValue;
                 SessionHandler.Instance.ShippingCountryName = countryDDL.SelectedItem.Text;
-                SessionHandler.Instance.ShippingCountryCode = new CountriesBLL().getCountryCode(Int32.Parse(SessionHandler.Instance.ShippingCountry));
+                SessionHandler.Instance.ShippingCountryCode = new CountriesBLL().GetCountryCode(Int32.Parse(SessionHandler.Instance.ShippingCountry));
             }
         }
     }

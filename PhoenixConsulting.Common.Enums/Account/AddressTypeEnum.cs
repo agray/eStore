@@ -1,4 +1,5 @@
-﻿/*
+﻿#region Licence
+/*
  * The MIT License
  *
  * Copyright (c) 2008-2013, Andrew Gray
@@ -21,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#endregion
 namespace phoenixconsulting.common.enums.account {
     public enum AddressType {
         BILLING = 1,

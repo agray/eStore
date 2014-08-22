@@ -1,8 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/eStoreMaster.Master" AutoEventWireup="true" CodeBehind="AccountInfo.aspx.cs" Inherits="eStoreWeb.Profile.AccountInfo" %>
 <%@ MasterType VirtualPath="~/MasterPages/eStoreMaster.Master" %>
-<%@ Import Namespace="eStoreWeb"%>
-<%@ Import Namespace="com.phoenixconsulting.culture" %>
-<%@ Import Namespace="phoenixconsulting.common.handlers" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -24,11 +21,11 @@
                            NavigateUrl="~/Profile/ChangeEmailPassword.aspx"/></h3>
         <asp:Literal runat="server" 
                      Text="Update your e-mail address, password and contact information"/><br/><br/>
-        <h3><asp:HyperLink ID="ContactPreferenceHyperlink" runat="server" 
+        <%--<h3><asp:HyperLink ID="ContactPreferenceHyperlink" runat="server" 
                            Text="Contact Preferences"
                            NavigateUrl="~/Profile/ContactPreference.aspx"/></h3>
         <asp:Literal runat="server" 
-                     Text="Update your contact preferences"/><br/><br/>
+                     Text="Update your contact preferences"/><br/><br/>--%>
         <h3><asp:HyperLink ID="SavedSearchesHyperLink" runat="server" 
                            Text="Saved Searches"
                            NavigateUrl="~/Profile/SavedSearches.aspx"/></h3>

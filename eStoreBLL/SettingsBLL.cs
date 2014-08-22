@@ -30,7 +30,7 @@ namespace eStoreBLL {
     [DataObject]
     public class SettingsBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.SettingsDataTable getSettings() {
+        public DAL.SettingsDataTable GetSettings() {
             return BLLAdapter.Instance.SettingAdapter.GetSettings();
         }
     }

@@ -55,39 +55,39 @@ namespace phoenixconsulting.common.basepages {
 
         #region Setters
 
-        protected void setInt(string variableName, HTTPScope scope, int val) {
-            setVar(variableName, scope, val);
+        protected void SetInt(string variableName, HTTPScope scope, int val) {
+            SetVar(variableName, scope, val);
         }
 
-        protected void setString(string variableName, HTTPScope scope, string val) {
-            setVar(variableName, scope, val);
+        protected void SetString(string variableName, HTTPScope scope, string val) {
+            SetVar(variableName, scope, val);
         }
 
-        protected void setDouble(string variableName, HTTPScope scope, double val) {
-            setVar(variableName, scope, val);
+        protected void SetDouble(string variableName, HTTPScope scope, double val) {
+            SetVar(variableName, scope, val);
         }
 
-        protected void setBool(string variableName, HTTPScope scope, bool val) {
-            setVar(variableName, scope, val);
+        protected void SetBool(string variableName, HTTPScope scope, bool val) {
+            SetVar(variableName, scope, val);
         }
 
-        protected void setArrayList(string variableName, HTTPScope scope, ArrayList val) {
-            setVar(variableName, scope, val);
+        protected void SetArrayList(string variableName, HTTPScope scope, ArrayList val) {
+            SetVar(variableName, scope, val);
         }
 
-        protected void setDataSet(string variableName, HTTPScope scope, DataSet val) {
-            setVar(variableName, scope, val);
+        protected void SetDataSet(string variableName, HTTPScope scope, DataSet val) {
+            SetVar(variableName, scope, val);
         }
 
-        protected void setECDResponseType(string variableName, HTTPScope scope, GetExpressCheckoutDetailsResponseType val) {
-            setVar(variableName, scope, val);
+        protected void SetEcdResponseType(string variableName, HTTPScope scope, GetExpressCheckoutDetailsResponseType val) {
+            SetVar(variableName, scope, val);
         }
 
-        protected void setECDResponseDetailsType(string variableName, HTTPScope scope, GetExpressCheckoutDetailsResponseDetailsType val) {
-            setVar(variableName, scope, val);
+        protected void SetEcdResponseDetailsType(string variableName, HTTPScope scope, GetExpressCheckoutDetailsResponseDetailsType val) {
+            SetVar(variableName, scope, val);
         }
 
-        private void setVar(string variableName, HTTPScope scope, object objVal) {
+        private void SetVar(string variableName, HTTPScope scope, object objVal) {
             switch(scope) {
                 case HTTPScope.APPLICATION:
                     ApplicationState[variableName] = objVal;
@@ -102,48 +102,48 @@ namespace phoenixconsulting.common.basepages {
 
         #region Getters
 
-        protected int getInt(string variableName, HTTPScope scope) {
-            var check = getScopedValue(variableName, scope);
-            return (int)returnVal(check, typeof(int));
+        protected int GetInt(string variableName, HTTPScope scope) {
+            var check = GetScopedValue(variableName, scope);
+            return (int)ReturnVal(check, typeof(int));
         }
 
-        protected string getString(string variableName, HTTPScope scope) {
-            var check = getScopedValue(variableName, scope);
-            return (string)returnVal(check, typeof(string));
+        protected string GetString(string variableName, HTTPScope scope) {
+            var check = GetScopedValue(variableName, scope);
+            return (string)ReturnVal(check, typeof(string));
         }
 
-        protected double getDouble(string variableName, HTTPScope scope) {
-            var check = getScopedValue(variableName, scope);
+        protected double GetDouble(string variableName, HTTPScope scope) {
+            var check = GetScopedValue(variableName, scope);
             //Check for null first
             return check == null ? 0 : (double)check;
         }
 
-        protected bool getBool(string variableName, HTTPScope scope) {
-            var check = getScopedValue(variableName, scope);
-            return (bool)returnVal(check, typeof(bool));
+        protected bool GetBool(string variableName, HTTPScope scope) {
+            var check = GetScopedValue(variableName, scope);
+            return (bool)ReturnVal(check, typeof(bool));
         }
 
-        protected ArrayList getArrayList(string variableName, HTTPScope scope) {
-            var check = getScopedValue(variableName, scope);
-            return (ArrayList)returnVal(check, typeof(ArrayList));
+        protected ArrayList GetArrayList(string variableName, HTTPScope scope) {
+            var check = GetScopedValue(variableName, scope);
+            return (ArrayList)ReturnVal(check, typeof(ArrayList));
         }
 
-        protected DataSet getDataSet(string variableName, HTTPScope scope) {
-            var check = getScopedValue(variableName, scope);
-            return (DataSet)returnVal(check, typeof(DataSet));
+        protected DataSet GetDataSet(string variableName, HTTPScope scope) {
+            var check = GetScopedValue(variableName, scope);
+            return (DataSet)ReturnVal(check, typeof(DataSet));
         }
 
-        protected GetExpressCheckoutDetailsResponseType getECDResponseType(string variableName, HTTPScope scope) {
-            var check = getScopedValue(variableName, scope);
-            return (GetExpressCheckoutDetailsResponseType)returnVal(check, typeof(GetExpressCheckoutDetailsResponseType));
+        protected GetExpressCheckoutDetailsResponseType GetEcdResponseType(string variableName, HTTPScope scope) {
+            var check = GetScopedValue(variableName, scope);
+            return (GetExpressCheckoutDetailsResponseType)ReturnVal(check, typeof(GetExpressCheckoutDetailsResponseType));
         }
 
-        protected GetExpressCheckoutDetailsResponseDetailsType getECDResponseDetailsType(string variableName, HTTPScope scope) {
-            var check = getScopedValue(variableName, scope);
-            return (GetExpressCheckoutDetailsResponseDetailsType)returnVal(check, typeof(GetExpressCheckoutDetailsResponseDetailsType));
+        protected GetExpressCheckoutDetailsResponseDetailsType GetEcdResponseDetailsType(string variableName, HTTPScope scope) {
+            var check = GetScopedValue(variableName, scope);
+            return (GetExpressCheckoutDetailsResponseDetailsType)ReturnVal(check, typeof(GetExpressCheckoutDetailsResponseDetailsType));
         }
 
-        private object getScopedValue(string variableName, HTTPScope scope) {
+        private object GetScopedValue(string variableName, HTTPScope scope) {
             switch(scope) {
                 case HTTPScope.APPLICATION:
                     return ApplicationState[variableName];
@@ -156,24 +156,24 @@ namespace phoenixconsulting.common.basepages {
             }
         }
 
-        private object returnVal(object val, Type t) {
+        private object ReturnVal(object val, Type t) {
             if(t == typeof(int)) {
-                return getInt(val);
+                return GetInt(val);
             }
             if(t == typeof(double)) {
-                return getDouble(val);
+                return GetDouble(val);
             }
             if(t == typeof(string)) {
-                return getString(val);
+                return GetString(val);
             }
             if(t == typeof(bool)) {
-                return getBool(val);
+                return GetBool(val);
             }
             if(t == typeof(ArrayList)) {
-                return getArrayList(val);
+                return GetArrayList(val);
             }
             if(t == typeof(DataSet)) {
-                return getDataSet(val);
+                return GetDataSet(val);
             }
             if(t == typeof(GetExpressCheckoutDetailsResponseType)) {
                 return getECDRType(val);
@@ -185,27 +185,27 @@ namespace phoenixconsulting.common.basepages {
             return string.Empty;
         }
 
-        private int getInt(object val) {
+        private int GetInt(object val) {
             return val == null ? 0 : int.Parse(val.ToString());
         }
 
-        private double getDouble(object val) {
+        private double GetDouble(object val) {
             return val == null ? 0 : double.Parse(val.ToString());
         }
 
-        private bool getBool(object val) {
+        private bool GetBool(object val) {
             return val != null && (bool)val;
         }
 
-        private string getString(object val) {
+        private string GetString(object val) {
             return val == null ? null : val.ToString();
         }
 
-        private ArrayList getArrayList(object val) {
+        private ArrayList GetArrayList(object val) {
             return val == null ? null : (ArrayList)val;
         }
 
-        private DataSet getDataSet(object val) {
+        private DataSet GetDataSet(object val) {
             return val == null ? null : (DataSet)val;
         }
 

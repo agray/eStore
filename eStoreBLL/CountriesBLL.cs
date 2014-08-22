@@ -30,18 +30,17 @@ namespace eStoreBLL {
     [DataObject]
     public class CountriesBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.ShipToCountryDataTable getCountries() {
+        public DAL.ShipToCountryDataTable GetCountries() {
             return BLLAdapter.Instance.CountryAdapter.GetCountries();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.ShipToCountryDataTable getCountryByID(int ID) {
-            return BLLAdapter.Instance.CountryAdapter.GetCountryByID(ID);
+        public DAL.ShipToCountryDataTable GetCountryById(int id) {
+            return BLLAdapter.Instance.CountryAdapter.GetCountryByID(id);
         }
 
-        public string getCountryCode(int ID) {
-            DAL.ShipToCountryDataTable s;
-            s = BLLAdapter.Instance.CountryAdapter.GetCountryByID(ID);
+        public string GetCountryCode(int id) {
+            var s = BLLAdapter.Instance.CountryAdapter.GetCountryByID(id);
             return s.Rows[0]["CountryCode"].ToString();
         }
     }

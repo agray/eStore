@@ -50,11 +50,10 @@ namespace eStoreWeb.Controls {
 
             if(dsDepartments == null) {
                 //Not in the cache, so have to go back to the database
-                dsDepartments = new DataSet();
+                dsDepartments = new DataSet {Locale = CultureInfo.InvariantCulture};
                 //Satisfies rule: SetLocaleForDataTypes.
-                dsDepartments.Locale = CultureInfo.InvariantCulture;
-                dsDepartments.Tables.Add(depTableAdapter.getDepartments());
-                dsDepartments.Tables.Add(catTableAdapter.getCategories());
+                dsDepartments.Tables.Add(depTableAdapter.GetDepartments());
+                dsDepartments.Tables.Add(catTableAdapter.GetCategories());
 
                 var depTable = dsDepartments.Tables[0];
                 var catTable = dsDepartments.Tables[1];

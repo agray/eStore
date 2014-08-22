@@ -67,13 +67,13 @@ namespace eStoreWeb {
         protected global::System.Web.UI.WebControls.LoginView MasterLoginView;
         
         /// <summary>
-        /// TopMenu control.
+        /// NavBarTopMenu_SkipLink control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::eStoreWeb.Controls.TopMenu TopMenu;
+        protected global::System.Web.UI.WebControls.Menu NavBarTopMenu_SkipLink;
         
         /// <summary>
         /// ContentPlaceHolder1 control.

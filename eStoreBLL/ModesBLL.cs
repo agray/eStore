@@ -30,13 +30,13 @@ namespace eStoreBLL {
     [DataObject]
     public class ModesBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.ShipToModeDataTable getModes() {
+        public DAL.ShipToModeDataTable GetModes() {
             return BLLAdapter.Instance.ModeAdapter.GetModes();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.ShipToModeDataTable getModeByID(int ID) {
-            return BLLAdapter.Instance.ModeAdapter.GetModeByID(ID);
+        public DAL.ShipToModeDataTable GetModeById(int id) {
+            return BLLAdapter.Instance.ModeAdapter.GetModeByID(id);
         }
     }
 }

@@ -30,13 +30,13 @@ namespace eStoreBLL {
     [DataObject]
     public class SuppliersBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.SupplierDataTable getSuppliers() {
+        public DAL.SupplierDataTable GetSuppliers() {
             return BLLAdapter.Instance.SupplierAdapter.GetSuppliers();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.SupplierDataTable getSupplierByID(int ID) {
-            return BLLAdapter.Instance.SupplierAdapter.GetSupplierByID(ID);
+        public DAL.SupplierDataTable GetSupplierById(int id) {
+            return BLLAdapter.Instance.SupplierAdapter.GetSupplierByID(id);
         }
     }
 }

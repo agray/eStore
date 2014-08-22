@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ShoppingCartTable.ascx.cs" Inherits="eStoreWeb.Controls.ShoppingCartTable" %>
 <%@ Import Namespace="eStoreWeb" %>
 <%@ Import Namespace="com.phoenixconsulting.culture" %>
+<%@ Import Namespace="PhoenixConsulting.Common" %>
 <%@ Import Namespace="phoenixconsulting.common.handlers" %>
 
 <%@ Reference Control="CountryAndModeDDLs.ascx" %>

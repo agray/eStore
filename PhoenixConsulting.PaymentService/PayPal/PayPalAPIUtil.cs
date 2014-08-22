@@ -29,6 +29,7 @@ using System.Web.UI;
 using com.phoenixconsulting.culture;
 using com.phoenixconsulting.exceptions;
 using NLog;
+using PhoenixConsulting.Common.Enums.Logging;
 using phoenixconsulting.common.handlers;
 using phoenixconsulting.common.logging;
 using PhoenixConsulting.PaymentService.PayPal.com.paypal.sandbox.www;

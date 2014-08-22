@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="OrderHistoryDetailTable.ascx.cs" Inherits="eStoreWeb.Controls.OrderHistoryDetailTable" %>
-<%@ Import Namespace="eStoreWeb" %>
 <%@ Import Namespace="com.phoenixconsulting.culture" %>
+<%@ Import Namespace="PhoenixConsulting.Common" %>
 <%@ Import Namespace="phoenixconsulting.common.handlers" %>
 
 <asp:ListView ID="orderHistoryDetailItemLV" runat="server"

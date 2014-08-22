@@ -52,7 +52,7 @@ namespace eStoreWeb.Controls {
         }
 
         protected void SavedSearchODS_Selecting(object sender, ObjectDataSourceSelectingEventArgs e) {
-            e.InputParameters["userID"] = getUserID(Page);
+            e.InputParameters["userID"] = GetUserId(Page);
         }
     }
 }

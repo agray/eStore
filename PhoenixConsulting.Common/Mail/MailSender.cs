@@ -24,13 +24,14 @@
  */
 #endregion
 
+using NLog;
+using PhoenixConsulting.Common.Enums.Logging;
+using phoenixconsulting.common.handlers;
+using phoenixconsulting.common.logging;
 using System;
 using System.Net;
 using System.Net.Mail;
 using System.Web.UI;
-using NLog;
-using phoenixconsulting.common.handlers;
-using phoenixconsulting.common.logging;
 
 namespace PhoenixConsulting.Common.Mail {
     public class MailSender : Page {

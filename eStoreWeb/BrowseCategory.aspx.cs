@@ -78,7 +78,7 @@ namespace eStoreWeb {
             var catTableAdapter = new CategoriesBLL();
 
             try {
-                var catRow = catTableAdapter.getCategoryByID(RequestHandler.Instance.CategoryID)[0];
+                var catRow = catTableAdapter.GetCategoryById(RequestHandler.Instance.CategoryID)[0];
                 DepartmentName_Breadcrumb.Text = catRow.DepName;
                 DepartmentName_Breadcrumb.NavigateUrl = "BrowseDepartment.aspx?DepID=" + catRow.DepID;
                 HeaderNameLabel.Text = catRow.Name;

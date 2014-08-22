@@ -1,13 +1,11 @@
 using System;
 using System.Reflection;
 
-namespace Subtext.TestLibrary {
+namespace HttpSimulator {
     /// <summary>
     /// Helper class to simplify common reflection tasks.
     /// </summary>
-    public sealed class ReflectionHelper {
-        private ReflectionHelper() {}
-
+    public static class ReflectionHelper {
         /// <summary>
         /// Returns the value of the private member specified.
         /// </summary>
@@ -113,30 +111,30 @@ namespace Subtext.TestLibrary {
         /// <param name="parameters"></param>
         /// <returns></returns>
         public static TReturn InvokeNonPublicMethod<TReturn>(Type type, string methodName, params object[] parameters) {
-            var paramTypes = Array.ConvertAll(parameters, new Converter<object, Type>(delegate(object o) { return o.GetType(); }));
+            var paramTypes = Array.ConvertAll(parameters, o => o.GetType());
 
             var method = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Static, null, paramTypes, null);
-            if(method == null)
+            if(method == null) {
                 throw new ArgumentException(string.Format("Could not find a method with the name '{0}'", methodName), "method");
-
+            }
             return (TReturn)method.Invoke(null, parameters);
         }
 
         public static TReturn InvokeNonPublicMethod<TReturn>(object source, string methodName, params object[] parameters) {
-            var paramTypes = Array.ConvertAll(parameters, new Converter<object, Type>(delegate(object o) { return o.GetType(); }));
+            var paramTypes = Array.ConvertAll(parameters, o => o.GetType());
 
             var method = source.GetType().GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance, null, paramTypes, null);
-            if(method == null)
+            if(method == null) {
                 throw new ArgumentException(string.Format("Could not find a method with the name '{0}'", methodName), "method");
-
+            }
             return (TReturn)method.Invoke(source, parameters);
         }
 
         public static TReturn InvokeProperty<TReturn>(object source, string propertyName) {
             var propertyInfo = source.GetType().GetProperty(propertyName);
-            if(propertyInfo == null)
+            if(propertyInfo == null) {
                 throw new ArgumentException(string.Format("Could not find a propertyName with the name '{0}'", propertyName), "propertyName");
-
+            }
             return (TReturn)propertyInfo.GetValue(source, null);
         }
 
@@ -150,9 +148,9 @@ namespace Subtext.TestLibrary {
 
         public static object InvokeNonPublicProperty(object source, string propertyName) {
             var propertyInfo = source.GetType().GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Instance);
-            if(propertyInfo == null)
+            if(propertyInfo == null) {
                 throw new ArgumentException(string.Format("Could not find a propertyName with the name '{0}'", propertyName), "propertyName");
-
+            }
             return propertyInfo.GetValue(source, null);
         }
     }

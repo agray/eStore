@@ -32,6 +32,7 @@ using eStoreBLL;
 using eStoreWeb.Controls;
 using phoenixconsulting.businessentities.list;
 using phoenixconsulting.common.basepages;
+using PhoenixConsulting.Common.Enums.Logging;
 using phoenixconsulting.common.handlers;
 using phoenixconsulting.common.logging;
 using phoenixconsulting.common.navigation;
@@ -44,7 +45,7 @@ namespace eStoreWeb {
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
     public partial class Checkout4 : BasePage {
         protected void Page_Load(object sender, EventArgs e) {
-            CameFrom.handleNavigationRedirect(Request.UrlReferrer);
+            CameFrom.HandleNavigationRedirect(Request.UrlReferrer);
             
             //string redirectPage = NavigationUtils.getInvalidNavigationRedirect(Request.UrlReferrer);
             //if(!redirectPage.Equals("")) {
@@ -153,15 +154,15 @@ namespace eStoreWeb {
             if(string.IsNullOrEmpty(userName)) {
                 //user not logged in, try to find it by email
                 var userBll = new UserBLL();
-                var foundUserId = userBll.getUserIDByEmail(SessionHandler.Instance.BillingEmailAddress, "eStore");
+                var foundUserId = userBll.GetUserIdByEmail(SessionHandler.Instance.BillingEmailAddress, "eStore");
                 userId = new Guid(foundUserId);
             } else {
                 //user is logged in
-                userId = BaseUserControl.getUserID(this);
+                userId = BaseUserControl.GetUserId(this);
                 //DTMembershipProvider dtmp = (DTMembershipProvider)Membership.Providers["DTMembershipProvider"];
                 //userID = dtmp.getLoggedInUserID(Page.User.Identity.Name);
             }
-            var orderId = order.addOrder(SessionHandler.Instance.BillingEmailAddress,
+            var orderId = order.AddOrder(SessionHandler.Instance.BillingEmailAddress,
                                          SessionHandler.Instance.BillingFirstName,
                                          SessionHandler.Instance.BillingLastName,
                                          SessionHandler.Instance.BillingAddress,

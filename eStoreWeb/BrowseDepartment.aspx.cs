@@ -66,7 +66,7 @@ namespace eStoreWeb {
         private string GetDepartmentName() {
             var depTableAdapter = new DepartmentsBLL();
             try {
-                return depTableAdapter.getDepartmentByID(RequestHandler.Instance.DepartmentID)[0]["Name"].ToString();
+                return depTableAdapter.GetDepartmentById(RequestHandler.Instance.DepartmentID)[0]["Name"].ToString();
             } catch(Exception) {
                 Page.Title = "Department not found.";
                 return String.Empty;

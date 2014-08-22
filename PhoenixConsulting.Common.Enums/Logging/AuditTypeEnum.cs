@@ -1,4 +1,5 @@
-﻿/*
+﻿#region Licence
+/*
  * The MIT License
  *
  * Copyright (c) 2008-2013, Andrew Gray
@@ -21,7 +22,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace phoenixconsulting.common.logging {
+#endregion
+namespace PhoenixConsulting.Common.Enums.Logging {
     public enum AuditEventType {
         LOGIN_SUCCESS = 1,
         DIAGNOSTICS_PAGE,

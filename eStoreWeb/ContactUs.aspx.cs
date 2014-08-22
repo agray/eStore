@@ -39,7 +39,7 @@ namespace eStoreWeb {
 
         protected void StoreEmailInDb(object sender, EventArgs e) {
             var email = new EmailBLL();
-            email.addEmail(NameTextBox.Text, EmailTextBox.Text, SubjectTextBox.Text, BodyTextBox.Text);
+            email.AddEmail(NameTextBox.Text, EmailTextBox.Text, SubjectTextBox.Text, BodyTextBox.Text);
             GoTo.Instance.ContactUsSentPage();
         }
     }

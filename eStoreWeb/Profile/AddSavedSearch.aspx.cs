@@ -33,11 +33,11 @@ namespace eStoreWeb.Profile {
         protected void SaveSearch(object sender, EventArgs e) {
             if(IsLoggedIn()) {
                 //Session still active
-                var userBLL = new UserBLL();
-                var foundUserID = userBLL.getUserIDByEmail(Page.User.Identity.Name, "eStore");
+                var userBll = new UserBLL();
+                var foundUserId = userBll.GetUserIdByEmail(Page.User.Identity.Name, "eStore");
 
                 var ss = new SavedSearchBLL();
-                ss.addSavedSearch(new Guid(foundUserID), NameTextBox.Text, CriteriaTextBox.Text);
+                ss.addSavedSearch(new Guid(foundUserId), NameTextBox.Text, CriteriaTextBox.Text);
                 GoTo.Instance.SavedSearchPage();
             } else {
                 GoTo.Instance.HomePage();

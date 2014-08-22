@@ -45,7 +45,7 @@ namespace eStoreWeb.Controls {
         }
 
         protected void WishListODS_Selecting(object sender, ObjectDataSourceSelectingEventArgs e) {
-            e.InputParameters["guid"] = getUserID(this.Page);
+            e.InputParameters["guid"] = GetUserId(this.Page);
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
@@ -56,11 +56,11 @@ namespace eStoreWeb.Controls {
                 var ID = Int32.Parse(e.CommandArgument.ToString());
                 if(e.CommandName.Equals("delete")) {
                     //Remove Item from WishList
-                    WishListHelper.deleteItem(ID);
+                    WishListHelper.DeleteItem(ID);
                     GoTo.Instance.WishListPage();
                 } else {
                     //Add Item to Cart
-                    var item = WishListHelper.CreateDTItem(ID);
+                    var item = WishListHelper.CreateDtItem(ID);
                     AddToCart(item);
                     GoTo.Instance.ViewCartPage();
                 }
@@ -72,7 +72,7 @@ namespace eStoreWeb.Controls {
             int ID;
             foreach(var listItem in wishListItemLV.Items) {
                 ID = int.Parse((((Label)listItem.FindControl("HiddenIDLabel")).Text));
-                var item = WishListHelper.CreateDTItem(ID);
+                var item = WishListHelper.CreateDtItem(ID);
                 AddToCart(item);
             }
 
@@ -84,12 +84,12 @@ namespace eStoreWeb.Controls {
             foreach(var item in wishListItemLV.Items) {
                 var quantity = int.Parse((((TextBox)item.FindControl("QuantityTextBox")).Text));
                 var ID = int.Parse((((Label)item.FindControl("HiddenIDLabel")).Text));
-                WishListHelper.updateQuantity(ID, quantity);
+                WishListHelper.UpdateQuantity(ID, quantity);
             }
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
-        private void AddToCart(DTItem listItem) {
+        private static void AddToCart(DTItem listItem) {
             var cart = new ShoppingCart();
             
             cart.AddItem(listItem);

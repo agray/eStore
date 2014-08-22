@@ -473,59 +473,59 @@ namespace phoenixconsulting.common.handlers {
         #region Convenience Methods
 
         private void setInt(string variableName, int val) {
-            setInt(variableName, HTTPScope.SESSION, val);
+            SetInt(variableName, HTTPScope.SESSION, val);
         }
 
         private void setString(string variableName, string val) {
-            setString(variableName, HTTPScope.SESSION, val);
+            SetString(variableName, HTTPScope.SESSION, val);
         }
 
         private void setDouble(string variableName, double val) {
-            setDouble(variableName, HTTPScope.SESSION, val);
+            SetDouble(variableName, HTTPScope.SESSION, val);
         }
 
         private void setBool(string variableName, bool val) {
-            setBool(variableName, HTTPScope.SESSION, val);
+            SetBool(variableName, HTTPScope.SESSION, val);
         }
 
         private void setArrayList(string variableName, ArrayList list) {
-            setArrayList(variableName, HTTPScope.SESSION, list);
+            SetArrayList(variableName, HTTPScope.SESSION, list);
         }
 
         private void setDataSet(string variableName, DataSet set) {
-            setDataSet(variableName, HTTPScope.SESSION, set);
+            SetDataSet(variableName, HTTPScope.SESSION, set);
         }
 
         private void setECDResponseType(string variableName, GetExpressCheckoutDetailsResponseType type) {
-            setECDResponseType(variableName, HTTPScope.SESSION, type);
+            SetEcdResponseType(variableName, HTTPScope.SESSION, type);
         }
 
         private void setECDResponseDetailsType(string variableName, GetExpressCheckoutDetailsResponseDetailsType type) {
-            setECDResponseDetailsType(variableName, HTTPScope.SESSION, type);
+            SetEcdResponseDetailsType(variableName, HTTPScope.SESSION, type);
         }
 
         private int getInt(string variableName) {
-            return getInt(variableName, HTTPScope.SESSION);
+            return GetInt(variableName, HTTPScope.SESSION);
         }
 
         private string getString(string variableName) {
-            return getString(variableName, HTTPScope.SESSION);
+            return GetString(variableName, HTTPScope.SESSION);
         }
 
         private double getDouble(string variableName) {
-            return getDouble(variableName, HTTPScope.SESSION);
+            return GetDouble(variableName, HTTPScope.SESSION);
         }
 
         private bool getBool(string variableName) {
-            return getBool(variableName, HTTPScope.SESSION);
+            return GetBool(variableName, HTTPScope.SESSION);
         }
 
         private ArrayList getArrayList(string variableName) {
-            return getArrayList(variableName, HTTPScope.SESSION);
+            return GetArrayList(variableName, HTTPScope.SESSION);
         }
 
         private DataSet getDataSet(string variableName) {
-            return getDataSet(variableName, HTTPScope.SESSION);
+            return GetDataSet(variableName, HTTPScope.SESSION);
         }
 
         public bool IsBillingAddressSet() {
@@ -537,11 +537,11 @@ namespace phoenixconsulting.common.handlers {
         }
 
         private GetExpressCheckoutDetailsResponseType getECDResponseType(string variableName) {
-            return getECDResponseType(variableName, HTTPScope.SESSION);
+            return GetEcdResponseType(variableName, HTTPScope.SESSION);
         }
 
         private GetExpressCheckoutDetailsResponseDetailsType getECDResponseDetailsType(string variableName) {
-            return getECDResponseDetailsType(variableName, HTTPScope.SESSION);
+            return GetEcdResponseDetailsType(variableName, HTTPScope.SESSION);
         }
 
         #endregion

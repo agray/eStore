@@ -16,19 +16,20 @@
 using System;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Web.Hosting;
 
-namespace Subtext.TestLibrary {
+namespace HttpSimulator {
     /// <summary>
     /// Used to simulate an HttpRequest.
     /// </summary>
     public class SimulatedHttpRequest : SimpleWorkerRequest {
         private Uri _referer;
-        private string _host;
-        private string _verb;
-        private int _port;
-        private string _physicalFilePath;
+        private readonly string _host;
+        private readonly string _verb;
+        private readonly int _port;
+        private readonly string _physicalFilePath;
 
         /// <summary>
         /// Creates a new <see cref="SimulatedHttpRequest"/> instance.
@@ -82,7 +83,7 @@ namespace Subtext.TestLibrary {
         }
 
         public override int GetLocalPort() {
-            return this._port;
+            return _port;
         }
 
         /// <summary>
@@ -90,34 +91,34 @@ namespace Subtext.TestLibrary {
         /// </summary>
         /// <value>The headers.</value>
         public NameValueCollection Headers {
-            get { return headers; }
+            get { return _headers; }
         }
 
-        private NameValueCollection headers = new NameValueCollection();
+        private readonly NameValueCollection _headers = new NameValueCollection();
 
         /// <summary>
         /// Gets the format exception.
         /// </summary>
         /// <value>The format exception.</value>
         public NameValueCollection Form {
-            get { return formVariables; }
+            get { return _formVariables; }
         }
 
-        private NameValueCollection formVariables = new NameValueCollection();
+        private readonly NameValueCollection _formVariables = new NameValueCollection();
 
         /// <summary>
         /// Get all nonstandard HTTP header name-value pairs.
         /// </summary>
         /// <returns>An array of header name-value pairs.</returns>
         public override string[][] GetUnknownRequestHeaders() {
-            if(headers == null || headers.Count == 0) {
+            if(_headers == null || _headers.Count == 0) {
                 return null;
             }
-            var headersArray = new string[this.headers.Count][];
-            for(var i = 0; i < headers.Count; i++) {
+            var headersArray = new string[_headers.Count][];
+            for(var i = 0; i < _headers.Count; i++) {
                 headersArray[i] = new string[2];
-                headersArray[i][0] = headers.Keys[i];
-                headersArray[i][1] = headers[i];
+                headersArray[i][0] = _headers.Keys[i];
+                headersArray[i][1] = _headers[i];
             }
             return headersArray;
         }
@@ -163,12 +164,7 @@ namespace Subtext.TestLibrary {
         /// </summary>
         /// <returns>The number of bytes read.</returns>
         public override byte[] GetPreloadedEntityBody() {
-            var formText = string.Empty;
-
-            foreach(string key in formVariables.Keys) {
-                formText += string.Format("{0}={1}&", key, formVariables[key]);
-            }
-
+            var formText = _formVariables.Keys.Cast<string>().Aggregate(string.Empty, (current, key) => current + string.Format("{0}={1}&", key, _formVariables[key]));
             return Encoding.UTF8.GetBytes(formText);
         }
 

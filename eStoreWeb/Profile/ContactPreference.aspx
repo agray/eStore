@@ -16,7 +16,7 @@
                       DataKeyNames="ID" 
                       DataSourceID="UserODS">
             <ItemTemplate>
-                <asp:CheckBox runat="server" ID="NewsletterPreference" Checked="<%#IsRequired(Eval("RequireNewsletter"))%>" />
+                <asp:CheckBox runat="server" ID="NewsletterPreference" Checked="<%#isRequired((int)Eval(FindControl("RequireNewsletter").ToString()))%>" />
                 <asp:Literal runat="server" Text="Yes, please contact me about new product updates." />
             </ItemTemplate>
         </asp:FormView>
@@ -37,7 +37,7 @@
         <asp:ObjectDataSource ID="UserODS" runat="server"
                               TypeName="eStoreBLL.UserBLL" 
                               OldValuesParameterFormatString="original_{0}" 
-                              SelectMethod="User_Sel_ByEmail">
+                              SelectMethod="GetUserIdByEmail">
             <SelectParameters>
                 <asp:SessionParameter Name="username" SessionField="LoginEmailAddress" Type="String" />
                 <asp:QueryStringParameter Name="Application" DefaultValue="eStore" Type="String" />

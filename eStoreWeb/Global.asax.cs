@@ -38,7 +38,7 @@ namespace eStoreWeb {
 
         protected void Application_Start(object sender, EventArgs e) {
             var settings = new SettingsBLL();
-            var dt = settings.getSettings();
+            var dt = settings.GetSettings();
 
             ApplicationHandler.Instance.TradingName = dt.Rows[0]["Value"].ToString();
             ApplicationHandler.Instance.CCProcessorMerchantID = dt.Rows[1]["Value"].ToString();

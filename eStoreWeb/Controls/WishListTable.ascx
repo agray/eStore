@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="WishListTable.ascx.cs" Inherits="eStoreWeb.Controls.WishListTable" %>
-<%@ Import Namespace="eStoreWeb" %>
 <%@ Import Namespace="com.phoenixconsulting.culture" %>
+<%@ Import Namespace="PhoenixConsulting.Common" %>
 <%@ Import Namespace="phoenixconsulting.common.handlers" %>
    
 <asp:ListView ID="wishListItemLV" runat="server"

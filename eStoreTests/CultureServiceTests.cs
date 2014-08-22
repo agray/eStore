@@ -1,6 +1,7 @@
 ﻿using com.phoenixconsulting.culture;
 using NUnit.Framework;
-using Subtext.TestLibrary; //HttpSimulator
+
+//HttpSimulator
 
 namespace eStoreTests {
     [TestFixture]
@@ -16,77 +17,69 @@ namespace eStoreTests {
 
         [Test]
         public void setCultureTest_AUD() {
-            using(new HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
-                string currSymOut = null;
+            using(new HttpSimulator.HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
                 CultureService.SetCulture("AUD");
-
-                currSymOut = CultureService.getCurrencySymbol();
+                var currSymOut = CultureService.getCurrencySymbol();
                 Assert.AreEqual("$", currSymOut);
             }
         }
 
         [Test]
         public void setCultureTest_USD() {
-            using(new HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
-                string currSymOut = null;
+            using(new HttpSimulator.HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
                 CultureService.SetCulture("USD");
 
-                currSymOut = CultureService.getCurrencySymbol();
+                var currSymOut = CultureService.getCurrencySymbol();
                 Assert.AreEqual("$", currSymOut);
             }
         }
 
         [Test]
         public void setCultureTest_EUR() {
-            using(new HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
-                string currSymOut = null;
+            using(new HttpSimulator.HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
                 CultureService.SetCulture("EUR");
 
-                currSymOut = CultureService.getCurrencySymbol();
+                var currSymOut = CultureService.getCurrencySymbol();
                 Assert.True('€'.CompareTo(currSymOut.ToCharArray(0, 1)[0]) == 0);
             }
         }
 
         [Test]
         public void setCultureTest_GBP() {
-            using(new HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
-                string currSymOut = null;
+            using(new HttpSimulator.HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
                 CultureService.SetCulture("GBP");
 
-                currSymOut = CultureService.getCurrencySymbol();
+                var currSymOut = CultureService.getCurrencySymbol();
                 Assert.True('£'.CompareTo(currSymOut.ToCharArray(0, 1)[0]) == 0);
             }
         }
 
         [Test]
         public void setCultureTest_DKK() {
-            using(new HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
-                string currSymOut = null;
+            using(new HttpSimulator.HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
                 CultureService.SetCulture("DKK");
 
-                currSymOut = CultureService.getCurrencySymbol();
+                var currSymOut = CultureService.getCurrencySymbol();
                 Assert.AreEqual("", currSymOut);
             }
         }
 
         [Test]
         public void setCultureTest_SEK() {
-            using(new HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
-                string currSymOut = null;
+            using(new HttpSimulator.HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
                 CultureService.SetCulture("SEK");
 
-                currSymOut = CultureService.getCurrencySymbol();
+                var currSymOut = CultureService.getCurrencySymbol();
                 Assert.AreEqual("", currSymOut);
             }
         }
 
         [Test]
         public void setCultureTest_HKD() {
-            using(new HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
-                string currSymOut = null;
+            using(new HttpSimulator.HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
                 CultureService.SetCulture("HKD");
 
-                currSymOut = CultureService.getCurrencySymbol();
+                var currSymOut = CultureService.getCurrencySymbol();
                 Assert.AreEqual("$", currSymOut);
             }
         }

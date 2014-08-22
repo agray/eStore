@@ -33,23 +33,23 @@ namespace eStoreBLL {
         
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.DepartmentDataTable getDepartments() {
+        public DAL.DepartmentDataTable GetDepartments() {
             return BLLAdapter.Instance.DepartmentAdapter.GetDepartments();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.DepartmentDataTable getDepartmentByID(int ID) {
-            return BLLAdapter.Instance.DepartmentAdapter.GetDepartmentByID(ID);
+        public DAL.DepartmentDataTable GetDepartmentById(int id) {
+            return BLLAdapter.Instance.DepartmentAdapter.GetDepartmentByID(id);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.DepartmentDataTable getDepartmentDetailsByDepartmentIDAndCurrencyID(int departmentID, int currencyID) {
-            return BLLAdapter.Instance.DepartmentAdapter.GetDepartmentDetailsByDepartmentAndCurrency(departmentID, currencyID);
+        public DAL.DepartmentDataTable GetDepartmentDetailsByDepartmentIdAndCurrencyId(int departmentId, int currencyId) {
+            return BLLAdapter.Instance.DepartmentAdapter.GetDepartmentDetailsByDepartmentAndCurrency(departmentId, currencyId);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public ArrayList getSEODetails(int ID) {
-            return new DataReader().GetDepartmentSeoDetails(ID);
+        public ArrayList GetSeoDetails(int id) {
+            return new DataReader().GetDepartmentSeoDetails(id);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="OrderHistoryTable.ascx.cs" Inherits="eStoreWeb.Controls.OrderHistoryTable" %>
-<%@ Import Namespace="eStoreWeb" %>
 
 <asp:ListView ID="orderHistoryItemLV" runat="server"
               DataSourceID="OrderHistoryODS"

@@ -41,7 +41,7 @@ namespace eStoreWeb.Home {
             } 
             var newPassword = dtmp.ResetPassword(EmailTextBox.Text, null);
 
-            var fullname = user.getFullName(EmailTextBox.Text, "eStore");
+            var fullname = user.GetFullName(EmailTextBox.Text, "eStore");
             var names = getSeparateNames(fullname);
 
             if(names != null) {

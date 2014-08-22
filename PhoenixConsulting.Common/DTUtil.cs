@@ -1,9 +1,10 @@
-﻿/*
+﻿#region Licence
+/*
  * The MIT License
  *
  * Copyright (c) 2008-2013, Andrew Gray
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining a copyC:\GitRepositories\GitHub\eStore\PhoenixConsulting.Common\DTUtil.cs
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -21,19 +22,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#endregion
+
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Web.UI;
 using phoenixconsulting.common.handlers;
 using PhoenixConsulting.Common.Properties;
 
-namespace eStoreWeb {
+namespace PhoenixConsulting.Common {
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public class DTUtil : Page {
         public static string EmitSizeInformation(string sizeName) {
             return !String.IsNullOrEmpty(sizeName) 
                    ? "<BR>Size: " + sizeName 
-                   : "";
+                   : string.Empty;
         }
 
         public static string EmitColorInformation(string colorName) {
@@ -49,9 +53,9 @@ namespace eStoreWeb {
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         public static string EmitShippingModeName(int mode) {
-            return mode.ToString() == Settings.Default.ModeExpressAirMail 
+            return mode.ToString(CultureInfo.InvariantCulture) == Settings.Default.ModeExpressAirMail 
                    ? "EXPRESS" 
-                   : (mode.ToString() == Settings.Default.ModeAirMail 
+                   : (mode.ToString(CultureInfo.InvariantCulture) == Settings.Default.ModeAirMail 
                    ? "AIRMAIL" 
                    : "UPS");
         }

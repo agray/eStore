@@ -31,27 +31,27 @@ namespace eStoreBLL {
     [DataObject]
     public class CategoriesBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.CategoryDataTable getCategories() {
+        public DAL.CategoryDataTable GetCategories() {
             return BLLAdapter.Instance.CategoryAdapter.GetCategories();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.CategoryDataTable getCategoriesByDepartmentID(int departmentID) {
-            return BLLAdapter.Instance.CategoryAdapter.GetCategoriesByDepartment(departmentID);
+        public DAL.CategoryDataTable GetCategoriesByDepartmentId(int departmentId) {
+            return BLLAdapter.Instance.CategoryAdapter.GetCategoriesByDepartment(departmentId);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.CategoryDataTable getCategoryByID(int ID) {
-            return BLLAdapter.Instance.CategoryAdapter.GetCategoryByID(ID);
+        public DAL.CategoryDataTable GetCategoryById(int id) {
+            return BLLAdapter.Instance.CategoryAdapter.GetCategoryByID(id);
         }
 
-        public string getCategoryPageTitle(int ID) {
-            return BLLAdapter.Instance.CategoryAdapter.GetCategoryPageTitle(ID).ToString();
+        public string GetCategoryPageTitle(int id) {
+            return BLLAdapter.Instance.CategoryAdapter.GetCategoryPageTitle(id).ToString();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public ArrayList getSEODetails(int ID) {
-            return new DataReader().GetCategorySeoDetails(ID);
+        public ArrayList GetSeoDetails(int id) {
+            return new DataReader().GetCategorySeoDetails(id);
         }
     }
 }

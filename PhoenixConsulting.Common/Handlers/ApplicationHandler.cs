@@ -187,35 +187,35 @@ namespace phoenixconsulting.common.handlers {
 
         #region Convenience Methods
         private void setInt(string variableName, int val) {
-            setInt(variableName, HTTPScope.APPLICATION, val);
+            SetInt(variableName, HTTPScope.APPLICATION, val);
         }
 
         private void setString(string variableName, string val) {
-            setString(variableName, HTTPScope.APPLICATION, val);
+            SetString(variableName, HTTPScope.APPLICATION, val);
         }
 
         private void setDouble(string variableName, double val) {
-            setDouble(variableName, HTTPScope.APPLICATION, val);
+            SetDouble(variableName, HTTPScope.APPLICATION, val);
         }
 
         private void setBool(string variableName, bool val) {
-            setBool(variableName, HTTPScope.APPLICATION, val);
+            SetBool(variableName, HTTPScope.APPLICATION, val);
         }
 
         private int getInt(string variableName) {
-            return getInt(variableName, HTTPScope.APPLICATION);
+            return GetInt(variableName, HTTPScope.APPLICATION);
         }
 
         private string getString(string variableName) {
-            return getString(variableName, HTTPScope.APPLICATION);
+            return GetString(variableName, HTTPScope.APPLICATION);
         }
 
         private double getDouble(string variableName) {
-            return getDouble(variableName, HTTPScope.APPLICATION);
+            return GetDouble(variableName, HTTPScope.APPLICATION);
         }
 
         private bool getBool(string variableName) {
-            return getBool(variableName, HTTPScope.APPLICATION);
+            return GetBool(variableName, HTTPScope.APPLICATION);
         }
         #endregion
     }

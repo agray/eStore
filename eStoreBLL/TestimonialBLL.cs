@@ -30,7 +30,7 @@ namespace eStoreBLL {
     [DataObject]
     public class TestimonialsBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.TestimonialsDataTable getTestimonials() {
+        public DAL.TestimonialsDataTable GetTestimonials() {
             return BLLAdapter.Instance.TestimonialAdapter.GetTestimonials();
         }
     }

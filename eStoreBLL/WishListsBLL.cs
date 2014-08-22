@@ -33,33 +33,33 @@ namespace eStoreBLL {
         
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.WishListDataTable getWishListByUserID(Guid guid) {
+        public DAL.WishListDataTable GetWishListByUserId(Guid guid) {
             return BLLAdapter.Instance.WishListAdapter.GetWishListByUserID(guid);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.WishListDataTable getWishListItemByID(int ID) {
-            return BLLAdapter.Instance.WishListAdapter.GetWishListByID(ID);
+        public DAL.WishListDataTable GetWishListItemById(int id) {
+            return BLLAdapter.Instance.WishListAdapter.GetWishListByID(id);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Insert, true)]
-        public bool addItem(Guid userID, int prodID, int quantity, int colorID, int sizeID) {
-            return BLLAdapter.Instance.WishListAdapter.Insert(userID, prodID, quantity, colorID, sizeID) == 1;
+        public bool AddItem(Guid userId, int prodId, int quantity, int colorId, int sizeId) {
+            return BLLAdapter.Instance.WishListAdapter.Insert(userId, prodId, quantity, colorId, sizeId) == 1;
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Update, true)]
-        public bool updateItem(int original_ID, Guid userID, int prodID, int sizeID, int colorID, int quantity) {
-            var wishlists = BLLAdapter.Instance.WishListAdapter.GetWishListByID(original_ID);
+        public bool UpdateItem(int originalId, Guid userId, int prodId, int sizeId, int colorId, int quantity) {
+            var wishlists = BLLAdapter.Instance.WishListAdapter.GetWishListByID(originalId);
 
             if(wishlists.Count == 0) {
                 //No matching records found, return false
                 return false;
             }
 
-            wishlists.Rows[0]["UserID"] = userID;
-            wishlists.Rows[0]["ProdID"] = prodID;
-            wishlists.Rows[0]["SizeID"] = sizeID;
-            wishlists.Rows[0]["ColorID"] = colorID;
+            wishlists.Rows[0]["UserID"] = userId;
+            wishlists.Rows[0]["ProdID"] = prodId;
+            wishlists.Rows[0]["SizeID"] = sizeId;
+            wishlists.Rows[0]["ColorID"] = colorId;
             wishlists.Rows[0]["Quantity"] = quantity;
 
             //Update the wishlist records
@@ -68,16 +68,16 @@ namespace eStoreBLL {
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Update, false)]
-        public bool increaseQuantity(Guid userID, int prodID, int sizeID, int colorID, int quantity) {
+        public bool IncreaseQuantity(Guid userId, int prodId, int sizeId, int colorId, int quantity) {
             //Increase the quantity of the WishList item
-            var rowsAffected = (int)BLLAdapter.Instance.WishListAdapter.WishListIncreaseQuantity(userID, prodID, sizeID, colorID, quantity);
+            var rowsAffected = (int)BLLAdapter.Instance.WishListAdapter.WishListIncreaseQuantity(userId, prodId, sizeId, colorId, quantity);
 
             //Return True if exactly one row was updated, otherwise False
             return rowsAffected == 1;
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Update, false)]
-        public bool updateQuantity(int original_ID, int quantity) {
+        public bool UpdateQuantity(int original_ID, int quantity) {
             //Increase the quantity of the WishList item
             var rowsAffected = (int)BLLAdapter.Instance.WishListAdapter.WishListUpdateQuantity(original_ID, quantity);
 
@@ -86,7 +86,7 @@ namespace eStoreBLL {
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Delete, true)]
-        public bool deleteItem(int original_ID) {
+        public bool DeleteItem(int original_ID) {
             //Update the WishList record
             //Return True if exactly one row was deleted, otherwise False   
             return BLLAdapter.Instance.WishListAdapter.Delete(original_ID) == 1;

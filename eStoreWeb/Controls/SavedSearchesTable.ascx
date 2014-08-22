@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SavedSearchesTable.ascx.cs" Inherits="eStoreWeb.Controls.SavedSearchesTable" %>
-<%@ Import Namespace="eStoreWeb" %>
 
 <asp:ListView ID="savedSearchesItemLV" runat="server"
               DataSourceID="SavedSearchesODS"
@@ -20,20 +19,20 @@
             <asp:Label Visible="false" ID="HiddenIDLabel" runat="server" Text='<%#Eval("ID")%>' />
             <td valign="middle" style="text-align:center">     
                 <asp:LinkButton ID="DeleteLinkButton" runat="server" 
-		                CommandName="delete"
-		                CommandArgument='<%#Eval("ID")%>'>
-		                <asp:Image ID="DeleteImage" runat="server"
-		                           ImageUrl="~/Images/System/Delete.gif"/>
+                        CommandName="delete"
+                        CommandArgument='<%#Eval("ID")%>'>
+                        <asp:Image ID="DeleteImage" runat="server"
+                                   ImageUrl="~/Images/System/Delete.gif"/>
                 </asp:LinkButton>
             </td>
             <td><%#Eval("Name")%></td>
             <td><%#Eval("Criteria")%></td>
             <td valign="middle" style="text-align:center">
                 <asp:LinkButton ID="DoSearchLinkButton" runat="server" 
-		                CommandName="DoSearch"
-		                CommandArgument='<%#Eval("Criteria")%>'>
-		                <asp:Image ID="DoSearchImage" runat="server"
-		                           ImageUrl="~/Images/System/GoButton.gif"/>
+                        CommandName="DoSearch"
+                        CommandArgument='<%#Eval("Criteria")%>'>
+                        <asp:Image ID="DoSearchImage" runat="server"
+                                   ImageUrl="~/Images/System/GoButton.gif"/>
                 </asp:LinkButton>
             </td>
         </tr>

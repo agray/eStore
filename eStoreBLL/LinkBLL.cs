@@ -30,12 +30,12 @@ namespace eStoreBLL {
     [DataObject]
     public class LinksBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.LinksDataTable getLinks() {
+        public DAL.LinksDataTable GetLinks() {
             return BLLAdapter.Instance.LinkAdapter.GetLinks();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.LinksDataTable getLinksByType(string linkType) {
+        public DAL.LinksDataTable GetLinksByType(string linkType) {
             return BLLAdapter.Instance.LinkAdapter.GetLinkByType(linkType);
         }
     }

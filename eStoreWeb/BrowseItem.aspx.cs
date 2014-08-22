@@ -147,9 +147,9 @@ namespace eStoreWeb {
 
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         protected void AddToWishList(object sender, ImageClickEventArgs e) {
-            var userId = BaseUserControl.getUserID(this);
+            var userId = BaseUserControl.GetUserId(this);
             var wishListBll = new WishListsBLL();
-            var currentList = wishListBll.getWishListByUserID(userId);
+            var currentList = wishListBll.GetWishListByUserId(userId);
             var prodId = RequestHandler.Instance.ProductID;
             var colorId = GetColorIdFromPage();
             var sizeId = GetSizeIdFromPage();
@@ -157,10 +157,10 @@ namespace eStoreWeb {
 
             if(currentList.Rows.Count == 0 || !ExistsInWishList(currentList, prodId, colorId, sizeId)) {
                 //current list is empty OR list not empty but not in list
-                wishListBll.addItem(userId, prodId, quantity, colorId, sizeId);
+                wishListBll.AddItem(userId, prodId, quantity, colorId, sizeId);
             } else {
                 //item exists in list, increase quantity
-                wishListBll.increaseQuantity(userId, prodId, sizeId, colorId, quantity);
+                wishListBll.IncreaseQuantity(userId, prodId, sizeId, colorId, quantity);
             }
 
             //Go to WishList Page

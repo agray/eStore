@@ -8,7 +8,7 @@ using System.Web.Configuration;
 using System.Web.Hosting;
 using System.Web.SessionState;
 
-namespace Subtext.TestLibrary {
+namespace HttpSimulator {
     public enum HttpVerb {
         GET,
         HEAD,
@@ -24,18 +24,18 @@ namespace Subtext.TestLibrary {
     /// property is populated.
     /// </summary>
     public class HttpSimulator : IDisposable {
-        private const string defaultPhysicalAppPath = @"c:\InetPub\wwwRoot\";
-        private StringBuilder builder;
+        private const string DefaultPhysicalAppPath = @"c:\InetPub\wwwRoot\";
+        private StringBuilder _builder;
         private Uri _referer;
-        private NameValueCollection _formVars = new NameValueCollection();
-        private NameValueCollection _headers = new NameValueCollection();
+        private readonly NameValueCollection _formVars = new NameValueCollection();
+        private readonly NameValueCollection _headers = new NameValueCollection();
 
         public HttpSimulator()
-            : this("/", defaultPhysicalAppPath) {
+            : this("/", DefaultPhysicalAppPath) {
         }
 
         public HttpSimulator(string applicationPath)
-            : this(applicationPath, defaultPhysicalAppPath) {
+            : this(applicationPath, DefaultPhysicalAppPath) {
 
         }
 
@@ -113,8 +113,8 @@ namespace Subtext.TestLibrary {
             ParseRequestUrl(url);
 
             if(ResponseWriter == null) {
-                builder = new StringBuilder();
-                ResponseWriter = new StringWriter(builder);
+                _builder = new StringBuilder();
+                ResponseWriter = new StringWriter(_builder);
             }
 
             SetHttpRuntimeInternals();
@@ -130,13 +130,13 @@ namespace Subtext.TestLibrary {
             if(headers != null)
                 _headers.Add(headers);
 
-            workerRequest = new SimulatedHttpRequest(ApplicationPath, PhysicalApplicationPath, PhysicalPath, Page, query, this.ResponseWriter, host, port, httpVerb.ToString());
+            _workerRequest = new SimulatedHttpRequest(ApplicationPath, PhysicalApplicationPath, PhysicalPath, Page, query, ResponseWriter, _host, Port, httpVerb.ToString());
 
-            workerRequest.Form.Add(_formVars);
-            workerRequest.Headers.Add(_headers);
+            _workerRequest.Form.Add(_formVars);
+            _workerRequest.Headers.Add(_headers);
 
             if(_referer != null)
-                workerRequest.SetReferer(_referer);
+                _workerRequest.SetReferer(_referer);
 
             InitializeSession();
 
@@ -144,20 +144,22 @@ namespace Subtext.TestLibrary {
 
             #region Console Debug INfo
 
-            Console.WriteLine("host: " + host);
-            Console.WriteLine("virtualDir: " + applicationPath);
-            Console.WriteLine("page: " + localPath);
+            Console.WriteLine("host: " + _host);
+            Console.WriteLine("virtualDir: " + _applicationPath);
+            Console.WriteLine("page: " + LocalPath);
             Console.WriteLine("pathPartAfterApplicationPart: " + _page);
-            Console.WriteLine("appPhysicalDir: " + physicalApplicationPath);
-            Console.WriteLine("Request.Url.LocalPath: " + HttpContext.Current.Request.Url.LocalPath);
-            Console.WriteLine("Request.Url.Host: " + HttpContext.Current.Request.Url.Host);
-            Console.WriteLine("Request.FilePath: " + HttpContext.Current.Request.FilePath);
-            Console.WriteLine("Request.Path: " + HttpContext.Current.Request.Path);
-            Console.WriteLine("Request.RawUrl: " + HttpContext.Current.Request.RawUrl);
-            Console.WriteLine("Request.Url: " + HttpContext.Current.Request.Url);
-            Console.WriteLine("Request.Url.Port: " + HttpContext.Current.Request.Url.Port);
-            Console.WriteLine("Request.ApplicationPath: " + HttpContext.Current.Request.ApplicationPath);
-            Console.WriteLine("Request.PhysicalPath: " + HttpContext.Current.Request.PhysicalPath);
+            Console.WriteLine("appPhysicalDir: " + _physicalApplicationPath);
+            if(HttpContext.Current != null) {
+                Console.WriteLine("Request.Url.LocalPath: " + HttpContext.Current.Request.Url.LocalPath);
+                Console.WriteLine("Request.Url.Host: " + HttpContext.Current.Request.Url.Host);
+                Console.WriteLine("Request.FilePath: " + HttpContext.Current.Request.FilePath);
+                Console.WriteLine("Request.Path: " + HttpContext.Current.Request.Path);
+                Console.WriteLine("Request.RawUrl: " + HttpContext.Current.Request.RawUrl);
+                Console.WriteLine("Request.Url: " + HttpContext.Current.Request.Url);
+                Console.WriteLine("Request.Url.Port: " + HttpContext.Current.Request.Url.Port);
+                Console.WriteLine("Request.ApplicationPath: " + HttpContext.Current.Request.ApplicationPath);
+                Console.WriteLine("Request.PhysicalPath: " + HttpContext.Current.Request.PhysicalPath);
+            }
             Console.WriteLine("HttpRuntime.AppDomainAppPath: " + HttpRuntime.AppDomainAppPath);
             Console.WriteLine("HttpRuntime.AppDomainAppVirtualPath: " + HttpRuntime.AppDomainAppVirtualPath);
             Console.WriteLine("HostingEnvironment.ApplicationPhysicalPath: " + HostingEnvironment.ApplicationPhysicalPath);
@@ -175,15 +177,15 @@ namespace Subtext.TestLibrary {
         }
 
         private void InitializeSession() {
-            HttpContext.Current = new HttpContext(workerRequest);
+            HttpContext.Current = new HttpContext(_workerRequest);
             HttpContext.Current.Items.Clear();
-            var session = (HttpSessionState)ReflectionHelper.Instantiate(typeof(HttpSessionState), new Type[] { typeof(IHttpSessionState) }, new FakeHttpSessionState());
+            var session = (HttpSessionState)ReflectionHelper.Instantiate(typeof(HttpSessionState), new[] { typeof(IHttpSessionState) }, new FakeHttpSessionState());
 
             HttpContext.Current.Items.Add("AspSession", session);
         }
 
         public class FakeHttpSessionState : NameObjectCollectionBase, IHttpSessionState {
-            private object syncRoot = new Object();
+            private readonly object _syncRoot = new Object();
 
             public FakeHttpSessionState() {
                 SessionID = Guid.NewGuid().ToString();
@@ -387,7 +389,7 @@ namespace Subtext.TestLibrary {
             ///</returns>
             ///
             public object SyncRoot {
-                get { return syncRoot; }
+                get { return _syncRoot; }
             }
 
 
@@ -422,8 +424,8 @@ namespace Subtext.TestLibrary {
         /// <param name="referer"></param>
         /// <returns></returns>
         public HttpSimulator SetReferer(Uri referer) {
-            if(workerRequest != null)
-                workerRequest.SetReferer(referer);
+            if(_workerRequest != null)
+                _workerRequest.SetReferer(referer);
             _referer = referer;
             return this;
         }
@@ -436,7 +438,7 @@ namespace Subtext.TestLibrary {
         /// <returns></returns>
         public HttpSimulator SetFormVariable(string name, string value) {
             //TODO: Change this ordering requirement.
-            if(workerRequest != null)
+            if(_workerRequest != null)
                 throw new InvalidOperationException("Cannot set form variables after calling Simulate().");
 
             _formVars.Add(name, value);
@@ -452,7 +454,7 @@ namespace Subtext.TestLibrary {
         /// <returns></returns>
         public HttpSimulator SetHeader(string name, string value) {
             //TODO: Change this ordering requirement.
-            if(workerRequest != null)
+            if(_workerRequest != null)
                 throw new InvalidOperationException("Cannot set headers after calling Simulate().");
 
             _headers.Add(name, value);
@@ -463,11 +465,11 @@ namespace Subtext.TestLibrary {
         private void ParseRequestUrl(Uri url) {
             if(url == null)
                 return;
-            host = url.Host;
-            port = url.Port;
-            localPath = url.LocalPath;
+            _host = url.Host;
+            Port = url.Port;
+            LocalPath = url.LocalPath;
             _page = StripPrecedingSlashes(RightAfter(url.LocalPath, ApplicationPath));
-            physicalPath = Path.Combine(physicalApplicationPath, _page.Replace("/", @"\"));
+            _physicalPath = Path.Combine(_physicalApplicationPath, _page.Replace("/", @"\"));
         }
 
         static string RightAfter(string original, string search) {
@@ -479,26 +481,18 @@ namespace Subtext.TestLibrary {
             if(searchIndex < 0)
                 return original;
 
-            return original.Substring(original.IndexOf(search) + search.Length);
+            return original.Substring(original.IndexOf(search, StringComparison.Ordinal) + search.Length);
         }
 
         public string Host {
-            get { return host; }
+            get { return _host; }
         }
 
-        private string host;
+        private string _host;
 
-        public string LocalPath {
-            get { return localPath; }
-        }
+        public string LocalPath { get; private set; }
 
-        private string localPath;
-
-        public int Port {
-            get { return port; }
-        }
-
-        private int port;
+        public int Port { get; private set; }
 
         /// <summary>
         /// Portion of the URL after the application.
@@ -514,36 +508,36 @@ namespace Subtext.TestLibrary {
         /// what gets returned by Request.ApplicationPath.
         /// </summary>
         public string ApplicationPath {
-            get { return applicationPath; }
+            get { return _applicationPath; }
             set {
-                applicationPath = value ?? "/";
-                applicationPath = NormalizeSlashes(applicationPath);
+                _applicationPath = value ?? "/";
+                _applicationPath = NormalizeSlashes(_applicationPath);
             }
         }
-        private string applicationPath = "/";
+        private string _applicationPath = "/";
 
         /// <summary>
         /// Physical path to the application (used for simulation purposes).
         /// </summary>
         public string PhysicalApplicationPath {
-            get { return physicalApplicationPath; }
+            get { return _physicalApplicationPath; }
             set {
-                physicalApplicationPath = value ?? defaultPhysicalAppPath;
+                _physicalApplicationPath = value ?? DefaultPhysicalAppPath;
                 //strip trailing backslashes.
-                physicalApplicationPath = StripTrailingBackSlashes(physicalApplicationPath) + @"\";
+                _physicalApplicationPath = StripTrailingBackSlashes(_physicalApplicationPath) + @"\";
             }
         }
 
-        private string physicalApplicationPath = defaultPhysicalAppPath;
+        private string _physicalApplicationPath = DefaultPhysicalAppPath;
 
         /// <summary>
         /// Physical path to the requested file (used for simulation purposes).
         /// </summary>
         public string PhysicalPath {
-            get { return physicalPath; }
+            get { return _physicalPath; }
         }
 
-        private string physicalPath = defaultPhysicalAppPath;
+        private string _physicalPath = DefaultPhysicalAppPath;
 
         public TextWriter ResponseWriter { get; set; }
 
@@ -551,33 +545,30 @@ namespace Subtext.TestLibrary {
         /// Returns the text from the response to the simulated request.
         /// </summary>
         public string ResponseText {
-            get {return (builder ?? new StringBuilder()).ToString();}
+            get {return (_builder ?? new StringBuilder()).ToString();}
         }
 
         public SimulatedHttpRequest WorkerRequest {
-            get { return workerRequest; }
+            get { return _workerRequest; }
         }
 
-        private SimulatedHttpRequest workerRequest;
+        private SimulatedHttpRequest _workerRequest;
 
         private static string ExtractQueryStringPart(Uri url) {
             var query = url.Query ?? string.Empty;
-            if(query.StartsWith("?"))
-                return query.Substring(1);
-            return query;
+            return query.StartsWith("?") ? query.Substring(1) : query;
         }
 
         void SetHttpRuntimeInternals() {
             //We cheat by using reflection.
-
             // get singleton property value
             var runtime = ReflectionHelper.GetStaticFieldValue<HttpRuntime>("_theRuntime", typeof(HttpRuntime));
 
             // set app path property value
             ReflectionHelper.SetPrivateInstanceFieldValue("_appDomainAppPath", runtime, PhysicalApplicationPath);
             // set app virtual path property value
-            var vpathTypeName = "System.Web.VirtualPath, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
-            var virtualPath = ReflectionHelper.Instantiate(vpathTypeName, new Type[] { typeof(string) }, new object[] { ApplicationPath });
+            const string vpathTypeName = "System.Web.VirtualPath, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
+            var virtualPath = ReflectionHelper.Instantiate(vpathTypeName, new[] { typeof(string) }, new object[] { ApplicationPath });
             ReflectionHelper.SetPrivateInstanceFieldValue("_appDomainAppVPath", runtime, virtualPath);
 
             // set codegen dir property value
@@ -632,7 +623,7 @@ namespace Subtext.TestLibrary {
         #endregion
 
         internal class ConfigMapPath : IConfigMapPath {
-            private HttpSimulator _requestSimulation;
+            private readonly HttpSimulator _requestSimulation;
             public ConfigMapPath(HttpSimulator simulation) {
                 _requestSimulation = simulation;
             }
@@ -645,24 +636,24 @@ namespace Subtext.TestLibrary {
                 throw new NotImplementedException();
             }
 
-            public void GetPathConfigFilename(string siteID, string path, out string directory, out string baseName) {
+            public void GetPathConfigFilename(string siteId, string path, out string directory, out string baseName) {
                 throw new NotImplementedException();
             }
 
-            public void GetDefaultSiteNameAndID(out string siteName, out string siteID) {
+            public void GetDefaultSiteNameAndID(out string siteName, out string siteId) {
                 throw new NotImplementedException();
             }
 
-            public void ResolveSiteArgument(string siteArgument, out string siteName, out string siteID) {
+            public void ResolveSiteArgument(string siteArgument, out string siteName, out string siteId) {
                 throw new NotImplementedException();
             }
 
-            public string MapPath(string siteID, string path) {
+            public string MapPath(string siteId, string path) {
                 var page = StripPrecedingSlashes(RightAfter(path, _requestSimulation.ApplicationPath));
                 return Path.Combine(_requestSimulation.PhysicalApplicationPath, page.Replace("/", @"\"));
             }
 
-            public string GetAppPathForPath(string siteID, string path) {
+            public string GetAppPathForPath(string siteId, string path) {
                 return _requestSimulation.ApplicationPath;
             }
         }
@@ -672,9 +663,7 @@ namespace Subtext.TestLibrary {
         ///</summary>
         ///<filterpriority>2</filterpriority>
         public void Dispose() {
-            if(HttpContext.Current != null) {
-                HttpContext.Current = null;
-            }
+            HttpContext.Current = null;
         }
     }
 }

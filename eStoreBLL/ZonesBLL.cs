@@ -30,13 +30,13 @@ namespace eStoreBLL {
     [DataObject]
     public class ZonesBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.ZoneDataTable getZones() {
+        public DAL.ZoneDataTable GetZones() {
             return BLLAdapter.Instance.ZoneAdapter.GetZones();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.ZoneDataTable getZoneByID(int ID) {
-            return BLLAdapter.Instance.ZoneAdapter.GetZoneByID(ID);
+        public DAL.ZoneDataTable GetZoneById(int id) {
+            return BLLAdapter.Instance.ZoneAdapter.GetZoneByID(id);
         }
     }
 }

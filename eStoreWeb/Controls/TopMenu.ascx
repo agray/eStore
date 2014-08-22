@@ -6,6 +6,7 @@
                 <asp:Menu ID="NavBarTopMenu_SkipLink" runat="server" 
                           Enabled="True" 
                           Orientation="Horizontal"
+                          EnableTheming="True"
                           SkinID="TopMenu">
                     <Items>
                         <asp:MenuItem Selectable="false" Enabled="false" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />

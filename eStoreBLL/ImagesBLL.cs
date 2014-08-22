@@ -30,13 +30,13 @@ namespace eStoreBLL {
     [DataObject]
     public class ImagesBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.ProductImageDataTable getImagesByProductID(int productID) {
-            return BLLAdapter.Instance.ImageAdapter.GetImagesByProduct(productID);
+        public DAL.ProductImageDataTable GetImagesByProductId(int productId) {
+            return BLLAdapter.Instance.ImageAdapter.GetImagesByProduct(productId);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.ProductImageDataTable getImageByID(int ID) {
-            return BLLAdapter.Instance.ImageAdapter.GetProductImageByID(ID);
+        public DAL.ProductImageDataTable GetImageById(int id) {
+            return BLLAdapter.Instance.ImageAdapter.GetProductImageByID(id);
         }
     }
 }

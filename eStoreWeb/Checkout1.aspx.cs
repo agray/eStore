@@ -65,9 +65,9 @@ namespace eStoreWeb {
                     SetFormToBillingSessionDetails();
                 } else {
                     //See if customer has address stored
-                    var userId = BaseUserControl.getUserID(this);
+                    var userId = BaseUserControl.GetUserId(this);
                     var ca = new CustomerAddressBLL();
-                    var address = ca.getCustomerBillingAddress(userId);
+                    var address = ca.GetCustomerBillingAddress(userId);
                     if(address != null) {
                         CustomerFirstNameTextBox.Text = address.FirstName;
                         CustomerLastNameTextBox.Text = address.LastName;
@@ -114,7 +114,7 @@ namespace eStoreWeb {
 
             if(CurrentAddressCheckBox.Checked) {
                 var ca = new CustomerAddressBLL();
-                ca.saveBillingAddress(BaseUserControl.getUserID(this),
+                ca.SaveBillingAddress(BaseUserControl.GetUserId(this),
                                       CustomerFirstNameTextBox.Text,
                                       CustomerLastNameTextBox.Text,
                                       CustomerAddressTextBox.Text,
@@ -131,7 +131,7 @@ namespace eStoreWeb {
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         private static void GetBillingCurrencyDetails() {
             var currTableAdapter = new CurrenciesBLL();
-            var currRow = currTableAdapter.getCurrencyByBillingCountry(Int32.Parse(SessionHandler.Instance.BillingCountry))[0];
+            var currRow = currTableAdapter.GetCurrencyByBillingCountry(Int32.Parse(SessionHandler.Instance.BillingCountry))[0];
 
             SessionHandler.Instance.BillingCurrencyValue = currRow.Value;
             SessionHandler.Instance.BillingCurrencyId = currRow.ID.ToString(CultureInfo.InvariantCulture);
@@ -147,7 +147,7 @@ namespace eStoreWeb {
             SessionHandler.Instance.BillingStateRegion = CustomerStateTextBox.Text;
             SessionHandler.Instance.BillingPostcode = CustomerPostcodeTextBox.Text;
             SessionHandler.Instance.BillingCountry = countryDDL.SelectedValue;
-            SessionHandler.Instance.BillingCountryCode = new CountriesBLL().getCountryCode(Int32.Parse(SessionHandler.Instance.BillingCountry));
+            SessionHandler.Instance.BillingCountryCode = new CountriesBLL().GetCountryCode(Int32.Parse(SessionHandler.Instance.BillingCountry));
         }
 
         private void SetFormToBillingSessionDetails() {

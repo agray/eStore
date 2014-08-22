@@ -1,4 +1,5 @@
-﻿/*
+﻿#region Licence
+/*
  * The MIT License
  *
  * Copyright (c) 2008-2013, Andrew Gray
@@ -21,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#endregion
 using System;
 using System.Web;
 using phoenixconsulting.common.cart;
@@ -29,10 +31,11 @@ using phoenixconsulting.common.handlers;
 namespace phoenixconsulting.common.navigation {
     public class CameFrom {
         public static bool Checkout3Page() {
-            return HttpContext.Current.Request.UrlReferrer.ToString().Contains("Checkout3.aspx");
+            return HttpContext.Current.Request.UrlReferrer != null && 
+                   HttpContext.Current.Request.UrlReferrer.ToString().Contains("Checkout3.aspx");
         }
 
-        public static void handleNavigationRedirect(Uri referringPage) {
+        public static void HandleNavigationRedirect(Uri referringPage) {
             var sc = new ShoppingCart();
             if(SessionHandler.Instance.CartDataSet == null || sc.IsEmptyList()) {
                 GoTo.Instance.HomePage();

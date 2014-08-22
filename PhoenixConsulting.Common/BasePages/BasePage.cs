@@ -23,6 +23,9 @@
  * THE SOFTWARE.
  */
 #endregion
+using eStoreBLL;
+using phoenixconsulting.common.handlers;
+using PhoenixConsulting.Common.Properties;
 using System;
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
@@ -33,9 +36,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using eStoreBLL;
-using phoenixconsulting.common.handlers;
-using PhoenixConsulting.Common.Properties;
 
 namespace phoenixconsulting.common.basepages {
     public class BasePage : Page {
@@ -52,7 +52,7 @@ namespace phoenixconsulting.common.basepages {
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider")]
         public void SetCurrencyByCountry(int countryId) {
             var currTableAdapter = new CurrenciesBLL();
-            var row = currTableAdapter.getCurrencyByBillingCountry(countryId)[0];
+            var row = currTableAdapter.GetCurrencyByBillingCountry(countryId)[0];
             SessionHandler.Instance.SetCurrency(row.Value, row.ExchangeRate, row.ID.ToString(CultureInfo.InvariantCulture));
         }
 
@@ -76,7 +76,7 @@ namespace phoenixconsulting.common.basepages {
         #region metaTagsUtils
         protected void SetDepartmentMetaTags(int id) {
             var departmentBll = new DepartmentsBLL();
-            var al = departmentBll.getSEODetails(id);
+            var al = departmentBll.GetSeoDetails(id);
 
             AddMetaTagSet(al);
         }
@@ -84,7 +84,7 @@ namespace phoenixconsulting.common.basepages {
 
         protected void SetCategoryMetaTags(int id) {
             var categoryBll = new CategoriesBLL();
-            var al = categoryBll.getSEODetails(id);
+            var al = categoryBll.GetSeoDetails(id);
 
             AddMetaTagSet(al);
         }

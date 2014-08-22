@@ -23,29 +23,26 @@
  * THE SOFTWARE.
  */
 #endregion
+using eStoreDAL;
 using System;
 using System.ComponentModel;
-using eStoreDAL.DALTableAdapters;
-using eStoreDAL;
 
 namespace eStoreBLL {
     [DataObject]
     public class UserBLL {
-        
-
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public string getFullName(string emailAddress, string applicationName) {
+        public string GetFullName(string emailAddress, string applicationName) {
             return (string)BLLAdapter.Instance.UserAdapter.GetFullName(emailAddress, applicationName);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public string getUserIDByEmail(string emailAddress, string applicationName) {
+        public string GetUserIdByEmail(string emailAddress, string applicationName) {
             var o = BLLAdapter.Instance.UserAdapter.GetUserIDByEmail(emailAddress, applicationName);
             return o != null ? ((Guid)o).ToString() : (new Guid("00000000-0000-0000-0000-000000000000")).ToString();
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.UsersDataTable getUserByEmail(string emailAddress, string applicationName) {
+        public DAL.UsersDataTable GetUserByEmail(string emailAddress, string applicationName) {
             return BLLAdapter.Instance.UserAdapter.GetUserByEmail(emailAddress, applicationName);
         }
     }

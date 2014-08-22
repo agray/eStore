@@ -30,18 +30,18 @@ namespace eStoreBLL {
     [DataObject]
     public class CostsBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.ShipCostDataTable getCosts(int zoneID, int modeID) {
-            return BLLAdapter.Instance.CostAdapter.GetCostsByZoneAndMode(zoneID, modeID);
+        public DAL.ShipCostDataTable GetCosts(int zoneId, int modeId) {
+            return BLLAdapter.Instance.CostAdapter.GetCostsByZoneAndMode(zoneId, modeId);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.ShipCostDataTable getShippingCosts(int countryID, int modeID, double weight) {
-            return BLLAdapter.Instance.CostAdapter.GetShippingCosts(countryID, modeID, weight);
+        public DAL.ShipCostDataTable GetShippingCosts(int countryId, int modeId, double weight) {
+            return BLLAdapter.Instance.CostAdapter.GetShippingCosts(countryId, modeId, weight);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.ShipCostDataTable getCostByID(int ID) {
-            return BLLAdapter.Instance.CostAdapter.GetCostByID(ID);
+        public DAL.ShipCostDataTable GetCostById(int id) {
+            return BLLAdapter.Instance.CostAdapter.GetCostByID(id);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿/*
+﻿#region Licence
+/*
  * The MIT License
  *
  * Copyright (c) 2008-2013, Andrew Gray
@@ -21,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#endregion
 using phoenixconsulting.common.basepages;
 using phoenixconsulting.common.cart;
 using phoenixconsulting.common.handlers;
@@ -33,47 +35,47 @@ namespace phoenixconsulting.common.navigation {
 
     #region Page Methods
         public void HomePage() {
-            redirectBrowser(ROOT + "/Splash.aspx");
+            RedirectBrowser(ROOT + "/Splash.aspx");
         }
 
         public void Custom404Page() {
-            redirectBrowser(Pages.ERROR);
+            RedirectBrowser(Pages.ERROR);
         }
 
         public void AccountInfoPage() {
-            redirectBrowser(Pages.ACCOUNT_INFO);
+            RedirectBrowser(Pages.ACCOUNT_INFO);
         }
 
         public void RegisterPage() {
-            redirectBrowser(Pages.REGISTER);
+            RedirectBrowser(Pages.REGISTER);
         }
 
         public void WishListPage() {
-            redirectBrowser(Pages.WISHLIST);
+            RedirectBrowser(Pages.WISHLIST);
         }
 
         public void ContactUsSentPage() {
-            redirectBrowser(Pages.CONTACT_US_SENT);
+            RedirectBrowser(Pages.CONTACT_US_SENT);
         }
 
         public void SearchPage() {
-            redirectBrowser(Pages.SEARCH);
+            RedirectBrowser(Pages.SEARCH);
         }
 
         public void BrowseDepartmentPage(string qString) {
-            redirectBrowser(Pages.BROWSE_DEPARTMENT + qString);
+            RedirectBrowser(Pages.BROWSE_DEPARTMENT + qString);
         }
 
         public void BrowseCategoryPage(string qString) {
-            redirectBrowser(Pages.BROWSE_CATEGORY + qString);
+            RedirectBrowser(Pages.BROWSE_CATEGORY + qString);
         }
 
         public void BrowseItemPage(string qString) {
-            redirectBrowser(Pages.BROWSE_ITEM + qString);
+            RedirectBrowser(Pages.BROWSE_ITEM + qString);
         }
 
         public void ViewCartPage() {
-            redirectBrowser(Pages.VIEW_CART);
+            RedirectBrowser(Pages.VIEW_CART);
         }
 
         public void Checkout1Page() {
@@ -81,63 +83,63 @@ namespace phoenixconsulting.common.navigation {
             if(SessionHandler.Instance.CartDataSet == null || sc.IsEmptyList()) {
                 HomePage();
             } else {
-                redirectBrowser(Pages.CHECKOUT1);
+                RedirectBrowser(Pages.CHECKOUT1);
             }
         }
 
         public void Checkout2Page() {
-            redirectBrowser(Pages.CHECKOUT2);
+            RedirectBrowser(Pages.CHECKOUT2);
         }
 
         public void Checkout3Page() {
-            redirectBrowser(Pages.CHECKOUT3);
+            RedirectBrowser(Pages.CHECKOUT3);
         }
 
         public void Checkout4Page() {
-            redirectBrowser(Pages.CHECKOUT4);
+            RedirectBrowser(Pages.CHECKOUT4);
         }
 
         public void Checkout5Page() {
-            redirectBrowser(Pages.CHECKOUT5);
+            RedirectBrowser(Pages.CHECKOUT5);
         }
 
         public void OrderProcessingErrorPage() {
-            redirectBrowser(Pages.ORDER_PROCESSING_ERROR);
+            RedirectBrowser(Pages.ORDER_PROCESSING_ERROR);
         }
 
-        public void OrderHistoryDetailPage(int ID) {
-            redirectBrowser(Pages.ORDER_HISTORY_DETAIL + "?orderID=" + ID);
+        public void OrderHistoryDetailPage(int id) {
+            RedirectBrowser(Pages.ORDER_HISTORY_DETAIL + "?orderID=" + id);
         }
 
         public void SavedSearchPage() {
-            redirectBrowser(Pages.SAVED_SEARCH);
+            RedirectBrowser(Pages.SAVED_SEARCH);
         }
 
         public void AddSavedSearchPage() {
-            redirectBrowser(Pages.ADD_SAVED_SEARCH);
+            RedirectBrowser(Pages.ADD_SAVED_SEARCH);
         }
 
         public void CustomPage(string url) {
-            redirectBrowser(url);
+            RedirectBrowser(url);
         }
 
         public void ContinueShoppingPage() {
-            redirectBrowser(GetContinueShoppingUrl());   
+            RedirectBrowser(GetContinueShoppingUrl());   
         }
     #endregion
 
-        private string GetContinueShoppingUrl() {
-            string URL;
+        private static string GetContinueShoppingUrl() {
+            string url;
 
             if (String.IsNullOrEmpty(SessionHandler.Instance.PreviousPage)) {
-                URL = "/";
+                url = "/";
             } else {
-                URL = SessionHandler.Instance.PreviousPage + AddQueryString(SessionHandler.Instance.PreviousPage);
-                if (URL.Contains("Sentinel")) {
-                    URL = "/";
+                url = SessionHandler.Instance.PreviousPage + AddQueryString(SessionHandler.Instance.PreviousPage);
+                if (url.Contains("Sentinel")) {
+                    url = "/";
                 }
             }
-            return URL;
+            return url;
         }
 
         #region QueryStringUtils
@@ -178,9 +180,8 @@ namespace phoenixconsulting.common.navigation {
 
         #endregion
 
-        private void redirectBrowser(string url) {
+        private void RedirectBrowser(string url) {
             ResponseObject.Redirect(url);
-            return;
         }
     }
 }

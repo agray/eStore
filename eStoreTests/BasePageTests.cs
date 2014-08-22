@@ -1,23 +1,22 @@
 ﻿using NUnit.Framework;
 using phoenixconsulting.common.basepages;
 using phoenixconsulting.common.handlers; //HttpSimulator
-using Subtext.TestLibrary;
 
 namespace eStoreTests {
     [TestFixture]
     public class BasePageTests {
-        private BasePage mBP;
+        private BasePage _mBp;
 
         [SetUp]
-        public void SetUp() { mBP = new BasePage(); }
+        public void SetUp() { _mBp = new BasePage(); }
 
         [TearDown]
-        public void TearDown() { mBP = null; }
+        public void TearDown() { _mBp = null; }
 
         [Test]
-        public void setCurrencyByCountryTest() {
-            using(new HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
-                mBP.SetCurrencyByCountry(7); //Australia
+        public void SetCurrencyByCountryTest() {
+            using(new HttpSimulator.HttpSimulator("/", "c:\\inetpub\\").SimulateRequest()) {
+                _mBp.SetCurrencyByCountry(7); //Australia
 
                 Assert.AreEqual("1", SessionHandler.Instance.Currency);
                 Assert.AreEqual("AUD", SessionHandler.Instance.CurrencyValue);

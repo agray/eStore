@@ -26,6 +26,7 @@
 using System.Web.UI;
 
 namespace eStoreWeb.Controls {
+    [Themeable(true)]
     public partial class TopMenu : UserControl {
     }
 }

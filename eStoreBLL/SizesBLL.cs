@@ -30,13 +30,13 @@ namespace eStoreBLL {
     [DataObject]
     public class SizesBLL {
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public DAL.ProductSizeDataTable getSizesByProductID(int productID) {
-            return BLLAdapter.Instance.SizeAdapter.GetProductSizesByProduct(productID);
+        public DAL.ProductSizeDataTable GetSizesByProductId(int productId) {
+            return BLLAdapter.Instance.SizeAdapter.GetProductSizesByProduct(productId);
         }
 
         [DataObjectMethodAttribute(DataObjectMethodType.Select, false)]
-        public DAL.ProductSizeDataTable getSizeByID(int ID) {
-            return BLLAdapter.Instance.SizeAdapter.GetProductSizeByID(ID);
+        public DAL.ProductSizeDataTable GetSizeById(int id) {
+            return BLLAdapter.Instance.SizeAdapter.GetProductSizeByID(id);
         }
     }
 }
