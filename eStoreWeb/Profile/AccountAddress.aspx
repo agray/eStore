@@ -1,8 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/eStoreMaster.Master" AutoEventWireup="true" CodeBehind="AccountAddress.aspx.cs" Inherits="eStoreWeb.Profile.AccountAddress" %>
 <%@ MasterType VirtualPath="~/MasterPages/eStoreMaster.Master" %>
-<%@ Import Namespace="eStoreWeb"%>
-<%@ Import Namespace="com.phoenixconsulting.culture" %>
-<%@ Import Namespace="phoenixconsulting.common.handlers" %>
 <%@ Reference Control="~/Controls/CountryDDL.ascx" %>
 <%@ Reference Control="~/Controls/YesNoDDL.ascx" %>
 

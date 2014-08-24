@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="PetsPlayground" Language="C#" MasterPageFile="~/MasterPages/eStoreMaster.Master" AutoEventWireup="true" CodeBehind="BrowseItem.aspx.cs" Inherits="eStoreWeb.BrowseItem" %>
 <%@ MasterType VirtualPath="~/MasterPages/eStoreMaster.Master" %>
-<%@ Import Namespace="eStoreWeb" %>
 <%@ Import Namespace="com.phoenixconsulting.culture" %>
 <%@ Import Namespace="phoenixconsulting.common.handlers" %>
 

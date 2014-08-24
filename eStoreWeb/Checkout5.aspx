@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/CheckOutMaster.Master" AutoEventWireup="true" CodeBehind="Checkout5.aspx.cs" Inherits="eStoreWeb.Checkout5" %>
 <%@ MasterType VirtualPath="~/MasterPages/CheckOutMaster.Master" %>
-<%@ Import Namespace="eStoreWeb" %>
 <%@ Import Namespace="phoenixconsulting.common.handlers" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">

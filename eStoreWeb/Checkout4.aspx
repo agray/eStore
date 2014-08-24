@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/CheckOutMaster.Master" AutoEventWireup="true" CodeBehind="Checkout4.aspx.cs" Inherits="eStoreWeb.Checkout4" %>
 <%@ MasterType VirtualPath="~/MasterPages/CheckOutMaster.Master" %>
-<%@ Import Namespace="eStoreWeb" %>
 <%@ Import Namespace="phoenixconsulting.common.handlers" %>
 
 <%@ Reference Control="Controls/ReviewCartTable.ascx" %>

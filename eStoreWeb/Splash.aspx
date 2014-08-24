@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="PetsPlayground" Language="C#" MasterPageFile="~/MasterPages/eStoreMaster.Master" AutoEventWireup="true" CodeBehind="Splash.aspx.cs" Inherits="eStoreWeb.Splash" %>
 <%@ MasterType VirtualPath="~/MasterPages/eStoreMaster.Master" %>
-<%@ Import Namespace="eStoreWeb" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     

@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="Policies" Language="C#" MasterPageFile="~/MasterPages/eStoreMaster.Master" AutoEventWireup="true" CodeBehind="Policies.aspx.cs" Inherits="eStoreWeb.Policies" %>
 <%@ MasterType VirtualPath="~/MasterPages/eStoreMaster.Master" %>
 
-<%@ Import Namespace="eStoreWeb.Properties" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

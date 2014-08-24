@@ -1,8 +1,5 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/eStoreMaster.Master" AutoEventWireup="true" CodeBehind="RemindPassword.aspx.cs" Inherits="eStoreWeb.Home.RemindPassword" %>
 <%@ MasterType VirtualPath="~/MasterPages/eStoreMaster.Master" %>
-<%@ Import Namespace="eStoreWeb"%>
-<%@ Import Namespace="com.phoenixconsulting.culture" %>
-<%@ Import Namespace="phoenixconsulting.common.handlers" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>

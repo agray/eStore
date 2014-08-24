@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/eStoreMaster.Master" AutoEventWireup="true" CodeBehind="SavedSearches.aspx.cs" Inherits="eStoreWeb.Profile.SavedSearches" %>
 <%@ MasterType VirtualPath="~/MasterPages/eStoreMaster.Master" %>
-<%@ Import Namespace="eStoreWeb"%>
 <%@ Reference Control="../Controls/SavedSearchesTable.ascx" %>
 
 <%@ Register assembly="System.Web.Entity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" namespace="System.Web.UI.WebControls" tagprefix="asp" %>

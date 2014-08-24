@@ -1,8 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/eStoreMaster.Master" AutoEventWireup="true" CodeBehind="OrderHistoryDetail.aspx.cs" Inherits="eStoreWeb.Profile.OrderHistoryDetail" %>
 <%@ MasterType VirtualPath="~/MasterPages/eStoreMaster.Master" %>
-<%@ Import Namespace="eStoreWeb"%>
-<%@ Import Namespace="com.phoenixconsulting.culture" %>
-<%@ Import Namespace="phoenixconsulting.common.handlers" %>
 <%@ Reference Control="~/Controls/OrderHistoryDetailTable.ascx" %>
 
 <%@ Register assembly="System.Web.Entity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" namespace="System.Web.UI.WebControls" tagprefix="asp" %>
